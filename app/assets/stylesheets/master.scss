@@ -1,0 +1,221 @@
+/**********************************************************************************
+
+	Project Name: How to design and code a modern pricing table
+	Project Description: A video tutorial made exclusively for WebdesignTuts+
+	File Name: master.css
+	Author: Adi Purdila
+	Author URI: http://www.adipurdila.com
+	Version: 1.0.0
+	
+**********************************************************************************/
+
+
+
+.cl { clear: left; }
+
+
+
+/* ---------- Temporary (this is for the page wrapper only; delete this when 
+including the pricing table into your own website) ---------- */
+div#pageContainer {
+	width: 850px;
+	margin: 0 auto;
+}
+
+/* ---------- Price Container Styles ---------- */
+div.priceContainer {
+	margin: 0 auto;
+
+	font-family: "Oswald", "Arial", sans-serif;
+	color: #31b4b6;
+}
+
+	div.priceContainer span {
+		font-size: 18px;
+		color: #a1a7b0;
+	}
+	
+div.price1 {
+	background: image-url("price1BG.png") top center no-repeat;
+	width: 112px;
+	height: 112px;
+	
+	margin-top: 36px;
+	
+	font-size: 24px;
+}
+
+	div.price1 p { padding-top: 30px; }
+
+div.price2 {
+	background: image-url("price2BG.png") top center no-repeat;
+	width: 122px;
+	height: 122px;
+
+	margin-top: 10px;
+	
+	font-size: 28px;
+}
+
+	div.price2 p { padding-top: 40px;text-align:center; color:rgb(171, 143, 90);}
+
+div.price3 {
+	background: image-url("price3BG.png") top center no-repeat;
+	width: 132px;
+	height: 132px;
+
+	margin-top: 26px;
+	
+	font-size: 32px;
+}
+
+	div.price3 p { padding-top: 40px; }
+
+div.price4 {
+	background: image-url("price4BG.png") top center no-repeat;
+	width: 142px;
+	height: 142px;
+
+	margin-top: 21px;
+	
+	font-size: 36px;
+}
+
+	div.price4 p { padding-top: 45px; }
+
+
+
+
+
+/* ---------- Pricing Table Styles ---------- */
+div#tableContainer {
+	border: 1px solid #e2e7eb;
+	padding: 1px;
+	
+	background: image-url("tableBottomBG.png") left bottom repeat-x;
+}
+
+div.tableCell {
+	border-right: 1px solid #616365;
+	width: 281px;
+	float: left;
+	
+	text-align: center;	
+}
+
+table.pricingTableContent { width: 100%; }
+
+	td {
+		text-align: center;
+		vertical-align: middle;
+		width: 222px;
+		
+		border-right: 1px solid #e2e7eb;
+		
+		color: #77808a;
+	}
+	
+	.noBorder { border-right: none; }
+	
+div.tableHeading {
+	background: #3a3c3f image-url("headingPattern.png");
+	padding: 15px 0;
+}
+
+	div.tableHeading h2 {
+		font-family: "Oswald", "Arial", sans-serif;
+		font-size: 20px;
+		
+		color: white;
+	}
+
+table.pricingTableContent tr td { padding: 10px 0; }
+
+table.pricingTableContent tr.altRow td { background-color: #f5f5f5; }
+
+table.pricingTableContent tr.signUpRow td { padding: 15px 0; }
+
+table.pricingTableContent td strong { color: #424447; }
+
+
+table.pricingTableContent tfoot td {
+	border-top: 1px solid #e2e7eb;
+	padding: 25px 0;
+}
+
+	table.pricingTableContent tfoot td h4 {
+		color: #3a3c3f;
+		font-size: 18px;
+	}
+
+	table.pricingTableContent tfoot td span {
+		display: block;
+		font-size: 12px;
+		color: #a1a7b0;
+		margin-bottom: 15px;
+	}	
+
+
+
+
+
+/* ---------- Recommended Plan Styles ---------- */
+div.recommended .tableHeading, td.recommended {
+	background: #3a3c3f;
+	color: #b4bac4;
+}
+
+	div.recommended .tableHeading {
+		background: #3a3c3f image-url("recommendationBadge.png") top left no-repeat;
+		margin-top: -20px;
+		padding-top: 45px;
+	}
+	
+	table.pricingTableContent tr.altRow td.recommended { background-color: #46494c; }
+	
+	table.pricingTableContent td.recommended strong, table.pricingTableContent tfoot td.recommended h4 { color: white; }
+	
+	table.pricingTableContent tfoot td.recommended { border-top: 1px solid #4f5357; }
+	
+div.recommended .price1 { background: image-url("price1BGRecommended.png") top center no-repeat; }
+div.recommended .price2 { background: image-url("price2BGRecommended.png") top center no-repeat; }
+div.recommended .price3 { background: image-url("price3BGRecommended.png") top center no-repeat; }
+div.recommended .price4 { background: image-url("price4BGRecommended.png") top center no-repeat; }
+
+
+
+/* ---------- Button Styles ---------- */
+a.signUpButton {
+	color: white;
+	font-weight: bold;
+	
+ 	padding: 8px 20px;
+ 	
+ 	display: inline-block; 
+
+	background-color: rgb(51, 153, 255);
+}
+
+a.signUpButton:hover {
+	color: white;
+	background-color: #57ab87;
+}
+
+
+
+
+
+/* ---------- Browser Compatibility Fixes ---------- */
+.ie7 .price1 p { padding-top: 25px; }
+.ie7 .price2 p { padding-top: 30px; }
+.ie7 .price3 p { padding-top: 30px; }
+.ie7 .price4 p { padding-top: 35px; }
+
+.ie7 .priceContainer span { display: inline-block; }
+
+.ie7 div.recommended .tableHeading {
+	z-index: 100;
+	position: relative;
+}
+
+.ie7 table.pricingTableContent tr.signUpRow td.recommended { z-index: 10; }

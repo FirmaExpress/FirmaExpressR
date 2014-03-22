@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app="FEFront">
+<head>
+  <title>Firma Express - <%= yield :title %></title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic' %>
+  <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Yellowtail|Kaushan+Script|Damion' %>
+  <%= yield :styles %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "ga.js" %>
+  <%= csrf_meta_tags %>
+  <%= yield :js %>
+</head>
+<body>
+	<header>
+		<div id="logo">
+			<%= image_tag "FirmaExpress1.png", { height: 60, width: 321 } %>
+		</div>
+        <nav>
+            <ul>
+                <li><%= link_to '¡Registrate!', 'register' %></li>
+                <li><%= link_to 'Nosotros', 'about_us' %></li>
+                <li><%= link_to 'Planes', 'plans' %></li>
+                <li><%= link_to 'Contacto', 'contact' %></li>
+            </ul>
+        </nav>
+	</header>
+
+<%= yield %>
+
+</body>
+</html>
+<!--
+<body>
+    <header>
+        <div id="logo">
+            <a href="{{ route('home') }}"><img src="{{ asset('img/FirmaExpress2.png') }}" width="321" height="60"></a></div>
+            <nav>
+                <ul>
+                    @if(Auth::check())
+                    <li>{{ link_to('profile', 'Bienvenido ' . Auth::user()->first_name . ' ' . Auth::user()->last_name) }}</li>
+                    <li>{{ link_to('logout', 'Logout') }}</li>
+                    @else
+                    <li>{{ link_to('login', 'Login') }}</li>
+                    <li>{{ link_to_route('users.create', 'Registro') }}</li>
+                    <li>{{ link_to('about', 'Nosotros') }}</li>
+                    <li>{{ link_to('plans', 'Planes') }}</li>
+                    <li>{{ link_to('contact', 'Contacto') }}</li>
+                    @endif
+                </ul>
+            </nav>
+        </div>
+    </header>
+    @yield('content')
+</body>
+</html>-->

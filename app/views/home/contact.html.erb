@@ -1,0 +1,32 @@
+<% content_for :title do %>
+Contacto
+<% end %>
+<div id="container">
+	<div id="headline">
+		<h3>¡Comunícate con nosotros!</h3>
+	</div>
+	<div id="info">
+		<div id="mapa">
+			<iframe width="570" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.cl/?ie=UTF8&amp;ll=-33.668298,-70.363372&amp;spn=1.412668,2.584534&amp;t=m&amp;z=9&amp;output=embed"></iframe>
+			<br>
+			<small>
+				<a href="https://maps.google.cl/?ie=UTF8&amp;ll=-33.668298,-70.363372&amp;spn=1.412668,2.584534&amp;t=m&amp;z=9&amp;source=embed" style="color:#0000FF;text-align:left">Ver mapa más grande</a>
+			</small>
+		</div>
+		<br>
+		<br>
+		<form action="contacto.php" method="post">
+			<label for="nombre">Nombre:</label>
+			<input id="nombre" type="text" name="nombre" required="">
+			<label for="email">Email:</label>
+			<input id="email" type="email" name="email" required="">
+			<label for="mensaje">Mensaje:</label>
+			<textarea id="mensaje" name="mensaje" required=""></textarea>
+			<input id="submit" type="submit" name="submit" value="Enviar">
+		</form>
+	</div>
+</div>
+<footer>
+	<p class="left">Todos los Derechos Reservados a Firma Express 2013 / <a href="preguntasfrecuentes.html">Preguntas Frecuentes</a> / <a href="legal.html">Condiciones Legales</a>.</p>
+	<p class="right">Dirección: Av. Nombre Nº1234 / Teléfono: +56 2 2342567 / Mail: contacto@firmaexpress.cl</p>
+</footer>
