@@ -1,4 +1,5 @@
 FirmaExpressR::Application.routes.draw do
+  get "sessions/new"
   get "users/new"
   # You can have the root of your site routed with "root"
   root 'home#index'
