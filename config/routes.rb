@@ -1,9 +1,17 @@
 FirmaExpressR::Application.routes.draw do
+  root 'documents#new'
+  get "show" => "documents#show", :as => "show_document"
+  get "documents/new"
   get "sessions/new"
   get "users/new"
+  get "logout" => "sessions#destroy", :as => "logout"
+  get "login" => "sessions#new", :as => "login"
+  get "sign_up" => "users#new", :as => "sign_up"
+  resources :users
+  resources :sessions
+  resources :documents
   # You can have the root of your site routed with "root"
-  root 'home#index'
-  get "/login", to: "home#login" 
+  #get "/login", to: "home#login" 
   get "/register", to: "home#register"
   get "/about_us", to: "home#aboutus"
   get "/plans", to: "home#plans"

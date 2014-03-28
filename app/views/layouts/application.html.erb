@@ -14,43 +14,28 @@
 <body>
 	<header>
 		<div id="logo">
-			<%= image_tag "FirmaExpress1.png", { height: 60, width: 321 } %>
+			<a href="<%= root_url %>"><%= image_tag "FirmaExpress1.png", { height: 60, width: 321 } %></a>
 		</div>
         <nav>
             <ul>
+              <% if current_user %>
+                <li>Hola <%= current_user.first_name %></li>
+                <li><%= link_to "Logout", logout_path %></li>
+              <% else %>
                 <li><%= link_to '¡Registrate!', 'register' %></li>
                 <li><%= link_to 'Nosotros', 'about_us' %></li>
                 <li><%= link_to 'Planes', 'plans' %></li>
                 <li><%= link_to 'Contacto', 'contact' %></li>
+              <% end %>
             </ul>
         </nav>
 	</header>
 
 <%= yield %>
 
+<% flash.each do |name, msg| %>
+  <%= content_tag :div, msg, :id => "flash_#{name}" %>
+<% end %>
+
 </body>
 </html>
-<!--
-<body>
-    <header>
-        <div id="logo">
-            <a href="{{ route('home') }}"><img src="{{ asset('img/FirmaExpress2.png') }}" width="321" height="60"></a></div>
-            <nav>
-                <ul>
-                    @if(Auth::check())
-                    <li>{{ link_to('profile', 'Bienvenido ' . Auth::user()->first_name . ' ' . Auth::user()->last_name) }}</li>
-                    <li>{{ link_to('logout', 'Logout') }}</li>
-                    @else
-                    <li>{{ link_to('login', 'Login') }}</li>
-                    <li>{{ link_to_route('users.create', 'Registro') }}</li>
-                    <li>{{ link_to('about', 'Nosotros') }}</li>
-                    <li>{{ link_to('plans', 'Planes') }}</li>
-                    <li>{{ link_to('contact', 'Contacto') }}</li>
-                    @endif
-                </ul>
-            </nav>
-        </div>
-    </header>
-    @yield('content')
-</body>
-</html>-->

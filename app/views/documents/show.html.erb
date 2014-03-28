@@ -1,0 +1,56 @@
+<% content_for :title do %>
+	<%= @document.name %>
+<% end %>
+<% content_for :style do %>
+	<% stylesheet_link_tag "bootstrap-theme.css" %>
+	<% stylesheet_link_tag "bootstrap-modal.css" %>
+<% end %>
+<% content_for :js do %>
+	<% javascript_include_tag "bootstrap-modal.js" %>
+<% end %>
+<div id="containerdocumentos">
+	<div id="headline">
+		<h3>Gestión de Documentos</h3>
+	</div>
+	<div id="biblioteca">
+		<div id="itemactive"><h4>Subir Documento</h4></div>
+		<div id="item"><a href="documentoejemplo.html"><h4>Biblioteca</h4></a></div>
+		<div id="options"><input type="search" placeholder="Buscar" class="search">
+		<input type="submit" value="" class="submit"><%= image_tag "b.png", { height: 28, width: 28 } %><%= image_tag "bin.png", { height: 28, width: 28 } %></div>
+		<% @documents.each do |document|%>
+		<div id="item"><a href="<%= document.id %>"><p><strong><%= document.name %></strong> / <i>Progreso: 1 de 4</i></p></a></div>
+		<% end %>
+	</div>
+	<div id="optionsdocumento">
+		<ul>
+			<li>Firmar</li>
+			<li><a data-toggle="modal" data-target="#modal-panel-participants" name="button-participants" id="button-participants">Participantes</a></li>
+		</ul>
+	</div>
+	<div id="modal-panel-participants" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">Participantes</h4>
+				</div>
+				<div class="modal-body">
+					<ul>
+						<% @participants.each do |participant| %>
+							<li class="negro"><%= participant.first_name %> <%= participant.last_name %></li>
+						<% end %>
+					</ul>
+					<!-- Invitation Form -->
+				</div>
+				<div class="modal-footer">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<iframe id="documento2" src="../<%= @document.path %>"></iframe>
+	<div id="importante"><p class="datosextra">Solo se pueden subir documentos en PDF. Si no tienes tus archivos en este formato, utiliza nuestro conversor de Word a PDF <a href="conversor.html" style="color:#ab8f5a;font-weight:bolder;">aquí</a>.</p></div>
+</div>
+<footer>
+<p class="left">Todos los Derechos Reservados a Firma Express 2013 / <a href="preguntasfrecuentes.html">Preguntas Frecuentes</a> / <a href="legal.html">Condiciones Legales</a>.</p>
+<p class="right">Dirección: Av. Nombre Nº1234 / Teléfono: +56 2 2342567 / Mail: contacto@firmaexpress.cl</p>
+</footer>
