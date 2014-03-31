@@ -47,7 +47,7 @@ test:
   adapter: postgresql
   host: 54.225.119.229
   encoding: unicode
-  database: firmaexpress_development
+  database: firmaexpress_test
   pool: 5
   username: firmaexpress
   password: F1rm43xpr3$$
