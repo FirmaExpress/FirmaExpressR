@@ -258,6 +258,18 @@ img {
 .img-circle {
   border-radius: 50%;
 }
+.img-circle-border {
+  border-radius: 50%;
+  padding: 3px;
+  line-height: 1.428571429;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+}
 hr {
   margin-top: 20px;
   margin-bottom: 20px;

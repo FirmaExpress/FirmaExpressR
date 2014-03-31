@@ -5,6 +5,7 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic' %>
   <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Yellowtail|Kaushan+Script|Damion' %>
+  <% stylesheet_link_tag "bootstrap-modal.css" %>
   <%= yield :styles %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "ga.js" %>
@@ -20,6 +21,7 @@
             <ul>
               <% if current_user %>
                 <li>Hola <%= current_user.first_name %></li>
+                <li><img class="img-circle" style="margin-top: -5px; margin-left: 5px" src="<%= root_url + @current_user.avatar %>" width=30 height=30></li>
                 <li><%= link_to "Logout", logout_path %></li>
               <% else %>
                 <li><%= link_to '¡Registrate!', 'register' %></li>

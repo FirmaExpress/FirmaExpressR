@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
-	has_and_belongs_to_many :documents
+	#has_and_belongs_to_many :documents
+	has_many :participants
+	has_many :documents, through: :participants
+	has_many :roles, through: :participants
 
 	attr_accessor :password
 	before_save :encrypt_password
@@ -27,9 +30,9 @@ class User < ActiveRecord::Base
 	end
 
 	def encrypt_password
-	if password.present?
-		self.password_salt = BCrypt::Engine.generate_salt
-		self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
-	end
+		if password.present?
+			self.password_salt = BCrypt::Engine.generate_salt
+			self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
+		end
 	end
 end
