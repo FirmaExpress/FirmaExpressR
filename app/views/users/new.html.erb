@@ -7,17 +7,17 @@ Login
 	</div>
 	<div id="info">
 		<%= form_for @user do |f| %>
-			<%= f.label :avatar %>
+			<%= f.label :avatar, 'Imagen de Perfil' %>
 		    <%= f.file_field :avatar %>
-			<%= f.label :first_name %>
+			<%= f.label :first_name, 'Nombres' %>
 			<%= f.text_field :first_name %>
-			<%= f.label :last_name %>
+			<%= f.label :last_name, 'Apellidos' %>
 			<%= f.text_field :last_name %>
-			<%= f.label :email %>
+			<%= f.label :email, 'E-mail' %>
 			<%= f.text_field :email %>
-			<%= f.label :password %>
+			<%= f.label :password, 'Contraseña' %>
 			<%= f.password_field :password %>
-			<%= f.label :password_confirmation %>
+			<%= f.label :password_confirmation, 'Confirmar contraseña' %>
 			<%= f.password_field :password_confirmation %>
 			&nbsp;
 			<p>Informción importante sobre el registro, derechos, seguridad, etc. Informción importante sobre el registro, derechos, seguridad, etc.Informción importante sobre el registro, derechos, seguridad, etc.Informción importante sobre el registro, derechos, seguridad, etc.Informción importante sobre el registro, derechos, seguridad, etc.Informción importante sobre el registro, derechos, seguridad, etc.Informción importante sobre el registro, derechos, seguridad, etc.Informción importante sobre el registro, derechos, seguridad, etc.Informción importante sobre el registro, derechos, seguridad, etc..</p>
