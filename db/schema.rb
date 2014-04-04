@@ -23,6 +23,14 @@ ActiveRecord::Schema.define(version: 20140404030315) do
     t.datetime "updated_at"
   end
 
+  create_table "documents_users", id: false, force: true do |t|
+    t.integer "user_id",     null: false
+    t.integer "document_id", null: false
+  end
+
+  add_index "documents_users", ["document_id", "user_id"], name: "index_documents_users_on_document_id_and_user_id", using: :btree
+  add_index "documents_users", ["user_id", "document_id"], name: "index_documents_users_on_user_id_and_document_id", using: :btree
+
   create_table "participants", force: true do |t|
     t.integer "user_id",     null: false
     t.integer "document_id", null: false
