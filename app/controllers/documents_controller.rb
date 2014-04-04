@@ -13,11 +13,8 @@ class DocumentsController < ApplicationController
 		document = Document.new(name: uploaded_io.original_filename, path: document_path)
 		document.save
 		user = User.find(session[:user_id])
-		#user.documents << document
-		#user.roles << Role.find(1)
-		participant = Participant.new(document_id: document.id, role_id: 1, user_id: user.id)
+		participant = Participant.new(document_id: document.id, role_id: 1, user_id: user.id, signed: 'f')
 		participant.save
-		#document.users << user
 		FileUtils.mkdir_p('public/' + dir) unless File.directory?(dir)
 		File.open(Rails.root.join('public', dir, uploaded_io.original_filename), 'wb') do |file|
 			file.write(uploaded_io.read)
@@ -30,9 +27,20 @@ class DocumentsController < ApplicationController
 		user = User.find(session[:user_id])
 		@documents = user.documents
 		@participants = Document.joins(:participants, :users, :roles).select('"documents".*, "participants".*, "users".*, "roles".name as role').where('"users"."id" = ' + user.id.to_s + ' AND "documents"."id" = ' + @document.id.to_s)
+		@signed = Document.joins(:participants, :users, :roles).select('"participants"."signed"').where('"participants"."user_id" = ' + user.id.to_s + ' AND "documents"."id" = ' + @document.id.to_s).first
 		respond_to do |format|
 			format.html
 			format.json { render :json => [participants: @participants, document: @document] }
 		end
+	end
+
+	def sign
+		document_id = params[:id]
+		user = User.find(session[:user_id])
+		user_id = user.id.to_s
+		participant = Participant.where('"document_id" = ' + document_id + ' AND "user_id" = ' + user_id).first
+		participant.signed = 't'
+		participant.save
+		redirect_to "/documents/" + document_id
 	end
 end

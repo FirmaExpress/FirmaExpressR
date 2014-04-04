@@ -27,7 +27,9 @@
 	</div>
 	<div id="optionsdocumento">
 		<ul>
-			<li>Firmar</li>
+			<% if @signed == false %>
+				<li><%= link_to "Firmar", controller: 'documents', action: 'sign', id: @document %></li>
+			<% end %>
 			<li><a data-toggle="modal" data-target="#modal-panel-participants" name="button-participants" id="button-participants">Participantes</a></li>
 		</ul>
 	</div>
@@ -40,7 +42,12 @@
 				<div class="modal-body">
 					<ul>
 						<% @participants.each do |participant| %>
-							<li class="negro"><%= participant.first_name %> <%= participant.last_name %> - <%= participant.role %></li>
+							<% sign_state = if participant.signed
+								'Firmado'
+							else
+								'Sin Firmar'
+							end %>
+							<li class="negro"><%= participant.first_name %> <%= participant.last_name %> - <%= participant.role %> - <%= sign_state %></li>
 						<% end %>
 					</ul>
 					<!-- Invitation Form -->
