@@ -28,7 +28,7 @@
 	<div id="optionsdocumento">
 		<ul>
 			<% if @signed == false %>
-				<li><%= link_to "Firmar", controller: 'documents', action: 'sign', id: @document %></li>
+				<li><%= link_to "Firmar", controller: 'documents', action: 'sign', id: @document, data: { confirm: "¿Está seguro de firmar este documento?" } %></li>
 			<% end %>
 			<% if @current_user_role.id  == 1 %>
 				<li> <%= link_to "Eliminar", controller: 'documents', action: 'destroy', id: @document %></li>
