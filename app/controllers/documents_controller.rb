@@ -28,9 +28,10 @@ class DocumentsController < ApplicationController
 		@documents = user.documents
 		@participants = Document.joins(:participants, :users, :roles).select('"documents".*, "participants".*, "users".*, "roles".name as role').where('"users"."id" = ' + user.id.to_s + ' AND "documents"."id" = ' + @document.id.to_s)
 		@signed = Document.joins(:participants, :users, :roles).select('"participants"."signed"').where('"participants"."user_id" = ' + user.id.to_s + ' AND "documents"."id" = ' + @document.id.to_s).first
+		@signed= @signed.signed
 		respond_to do |format|
 			format.html
-			format.json { render :json => [participants: @participants, document: @document] }
+			format.json { render :json => [participants: @participants, document: @document, signed: @signed] }
 		end
 	end
 
