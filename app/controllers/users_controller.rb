@@ -4,15 +4,15 @@ class UsersController < ApplicationController
 	end
 
 	def create
-		#@user = User.new(params[:user])
 		uploaded_io = params[:user][:avatar]
 		first_name = params[:user][:first_name]
 		last_name = params[:user][:last_name]
 		email = params[:user][:email]
 		password = params[:user][:password]
 		password_confirmation = params[:user][:password_confirmation]
+		id_number = params[:user][:id_number]
 
-		@user = User.new(avatar: uploaded_io.original_filename, first_name: first_name, last_name: last_name, email: email, password: password, password_confirmation: password_confirmation)
+		@user = User.new(avatar: uploaded_io.original_filename, first_name: first_name, last_name: last_name, id_number: id_number, email: email, password: password, password_confirmation: password_confirmation)
 		if @user.save
 			dir = 'uploads/users/' + @user.id.to_s() + '/'
 			avatar_path = dir + uploaded_io.original_filename
