@@ -5,6 +5,34 @@
 	<% stylesheet_link_tag "bootstrap-theme.css" %>
 <% end %>
 <% content_for :js do %>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+	<script type="text/javascript">
+		var app = angular.module("FEFront", []);
+		app.directive('ngEnter', function () {
+		    return function (scope, element, attrs) {
+		        element.bind("keydown keypress", function (event) {
+		            if(event.which === 13) {
+		                scope.$apply(function (){
+		                    scope.$eval(attrs.ngEnter);
+		                });
+
+		                event.preventDefault();
+		            }
+		        });
+		    };
+		});
+		app.controller("InviteController", function($scope, $http){
+			$scope.invite = function(){
+				var emails = $scope.emails;
+				$scope.emails = undefined;
+				if(emails != undefined)
+					console.log(emails);
+			}
+			/*$http.get('/users/invite?emails=' + $scope.emails).success(function(data) {
+				console.log(data);
+			});*/
+		});
+	</script>
 	<% javascript_include_tag "bootstrap-modal.js" %>
 <% end %>
 <div id="containerdocumentos">
@@ -51,6 +79,7 @@
 						<% end %>
 					</ul>
 					<!-- Invitation Form -->
+					<input ng-controller="InviteController" ng-model="emails" ng-enter="invite()" type="text" placeholder="e-mails" id="invitees_emails" />
 				</div>
 				<div class="modal-footer">
 					
