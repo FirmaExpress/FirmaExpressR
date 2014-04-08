@@ -30,6 +30,9 @@ class UsersController < ApplicationController
 	end
 
 	def invite
-		
+		emails = params[:emails]
+		respond_to do |format|
+			format.json { render :json => [emails: emails] }
+		end
 	end
 end

@@ -42,9 +42,9 @@
 					if(valid_emails)
 					{
 						console.log(emails);
-						/*$http.get('/users/invite?emails=' + $scope.emails).success(function(data) {
+						$http.get('/users/invite?emails=' + emails).success(function(data) {
 							console.log(data);
-						});*/
+						});
 					}
 				}
 			}
