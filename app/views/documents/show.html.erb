@@ -22,15 +22,36 @@
 		    };
 		});
 		app.controller("InviteController", function($scope, $http){
+			$scope.message = "";
 			$scope.invite = function(){
 				var emails = $scope.emails;
 				$scope.emails = undefined;
 				if(emails != undefined)
-					console.log(emails);
+				{
+					emails = emails.replace(/ /g,'');
+					emails_arr = emails.split(",");
+					var valid_emails = true;
+					for(var index = 0; index < emails_arr.length; index++)
+					{
+						if($scope.validateEmail(emails_arr[index]) == false)
+						{
+							valid_emails = false;
+							break;
+						}
+					}
+					if(valid_emails)
+					{
+						console.log(emails);
+						/*$http.get('/users/invite?emails=' + $scope.emails).success(function(data) {
+							console.log(data);
+						});*/
+					}
+				}
 			}
-			/*$http.get('/users/invite?emails=' + $scope.emails).success(function(data) {
-				console.log(data);
-			});*/
+			$scope.validateEmail = function(email) { 
+				var re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+				return re.test(email);
+			}
 		});
 	</script>
 	<% javascript_include_tag "bootstrap-modal.js" %>
@@ -82,7 +103,10 @@
 						<% end %>
 					</ul>
 					<!-- Invitation Form -->
-					<input ng-controller="InviteController" ng-model="emails" ng-enter="invite()" type="text" placeholder="e-mails" id="invitees_emails" />
+					<div ng-controller="InviteController">
+						<input ng-model="emails" ng-enter="invite()" type="text" placeholder="e-mails" id="invitees_emails" />
+						<div>{{ message }}</div>
+					</div>
 				</div>
 				<div class="modal-footer">
 					
