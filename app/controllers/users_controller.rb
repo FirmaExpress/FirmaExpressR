@@ -13,6 +13,8 @@ class UsersController < ApplicationController
 		id_number = params[:user][:id_number]
 
 		@user = User.new(avatar: uploaded_io.original_filename, first_name: first_name, last_name: last_name, id_number: id_number, email: email, password: password, password_confirmation: password_confirmation)
+		type = UserType.find(3)
+		@user.user_type = type
 		if @user.save
 			dir = 'uploads/users/' + @user.id.to_s() + '/'
 			avatar_path = dir + uploaded_io.original_filename
@@ -23,7 +25,7 @@ class UsersController < ApplicationController
 			File.open(Rails.root.join('public', avatar_path), 'wb') do |file|
 				file.write(uploaded_io.read)
 			end
-			redirect_to root_url, :notice => "Signed up!"
+			redirect_to root_url, :notice => "Registrado!"
 		else
 			render "new"
 		end
@@ -31,8 +33,9 @@ class UsersController < ApplicationController
 
 	def invite
 		emails = params[:emails]
+		UserMailer.invitation_email(emails).deliver
 		respond_to do |format|
-			format.json { render :json => [emails: emails] }
+			format.json { render :json => [message: "Invitaciones enviadas a " + emails] }
 		end
 	end
 end

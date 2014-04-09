@@ -1,3 +1,7 @@
 class UserMailer < ActionMailer::Base
-  default from: "from@example.com"
+
+  def invitation_email(emails)
+  	@url = 'http://firmaexpress.com/register'
+  	mail(to: emails, subject: 'Invitación a Documento')
+  end
 end

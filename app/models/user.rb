@@ -30,6 +30,7 @@ class User < ActiveRecord::Base
 	has_many :participants
 	has_many :documents, through: :participants
 	has_many :roles, through: :participants
+	belongs_to :user_type
 
 	attr_accessor :password
 	before_save :encrypt_password
