@@ -5,6 +5,7 @@ FirmaExpressR::Application.routes.draw do
   get "sessions/new"
   get "users/new"
   get "users/invite", to: "users#invite", as: "invite"
+  get "users/contact", to: "users#contact", as: "contact"
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
   get "/register" => "users#new", :as => "sign_up"

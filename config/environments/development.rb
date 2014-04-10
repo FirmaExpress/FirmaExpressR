@@ -32,8 +32,8 @@ FirmaExpressR::Application.configure do
     address:              'smtp.gmail.com',
     port:                 587,
     domain:               'firmaexpress.com',
-    user_name:            'claudevandort',
-    password:             'pianoman88',
+    user_name:            'firmaexpress2014',
+    password:             'zaq12wsx@',
     authentication:       'plain',
     enable_starttls_auto: true  }
 end
