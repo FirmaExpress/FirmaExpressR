@@ -13,10 +13,10 @@
 <div id="perfil">
 <div id="perfildatos">
 <h5>Datos Personales</h5>
-<p>Nombre: </p>
-<p>Apellido: </p>
-<p>RUT: </p>
-<p>Mail: usuario@usuario.cl</p>
+<p>Nombre: <%= @current_user.first_name %> </p>
+<p>Apellido: <%= @current_user.last_name %> </p>
+<p>RUT: <%= @current_user.id_number %> </p>
+<p>Mail: <%= @current_user.email %></p>
 <br>
 <h5>Firmas</h5>
 <p>Nº de Firmas: 100</p>
