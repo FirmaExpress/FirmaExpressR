@@ -21,7 +21,7 @@
         <nav>
             <ul>
               <% if current_user %>
-                <li>Hola <%= current_user.first_name %></li>
+                <li>Hola<%= link_to current_user.first_name, '../users/profile' %>&nbsp;&nbsp;</li>
                 <li><img class="img-circle" style="margin-top: -5px; margin-left: 5px" src="<%= root_url + @current_user.avatar %>" width=30 height=30></li>
                 <li><%= link_to "Logout", logout_path %></li>
               <% else %>

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+	before_action :check_auth, only: [:profile]
 	def new
 		@user = User.new
 	end
@@ -45,5 +46,8 @@ class UsersController < ApplicationController
         message = params[:message]
         UserMailer.contact_email(name, email, message).deliver
         redirect_to root_url
+    end
+
+    def profile
     end
 end

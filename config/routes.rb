@@ -11,6 +11,7 @@ FirmaExpressR::Application.routes.draw do
   get "/register" => "users#new", :as => "sign_up"
   get "documents/sign/:id", to: "documents#sign"
   get "documents/destroy/:id", to: "documents#destroy"
+  get "users/profile", to: "users#profile", as:"profile"
   resources :users
   resources :sessions
   resources :documents
