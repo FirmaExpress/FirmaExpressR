@@ -38,4 +38,12 @@ class UsersController < ApplicationController
 			format.json { render :json => [message: "Invitaciones enviadas a " + emails] }
 		end
 	end
+
+	def contact
+        name = params[:name]
+        email = params[:email]
+        message = params[:message]
+        UserMailer.contact_email(name, email, message).deliver
+        redirect_to root_url
+    end
 end

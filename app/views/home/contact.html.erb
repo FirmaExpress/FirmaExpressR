@@ -13,17 +13,18 @@ Contacto
 				<a href="https://maps.google.cl/?ie=UTF8&amp;ll=-33.668298,-70.363372&amp;spn=1.412668,2.584534&amp;t=m&amp;z=9&amp;source=embed" style="color:#0000FF;text-align:left">Ver mapa más grande</a>
 			</small>
 		</div>
-		<br>
-		<br>
-		<form action="contacto.php" method="post">
-			<label for="nombre">Nombre:</label>
-			<input id="nombre" type="text" name="nombre" required="">
-			<label for="email">Email:</label>
-			<input id="email" type="email" name="email" required="">
-			<label for="mensaje">Mensaje:</label>
-			<textarea id="mensaje" name="mensaje" required=""></textarea>
-			<input id="submit" type="submit" name="submit" value="Enviar">
-		</form>
+		<%= form_tag({:controller => "users", :action => "contact" }, :method => "get") do %>
+	    	<%= label_tag "name", "Nombre" %>
+	   		<%= text_field_tag "name", "", :size => 5, :maxlenght => 5, :placeholder => "name", :required => "required" %>
+
+	   		<%= label_tag "email", "email" %>
+	   		<%= text_field_tag "email", "", :size => 5, :maxlenght => 5, :placeholder => "email", :required => "required" %>
+
+	   		<%= label_tag "message", "Mensaje" %>
+	   		<%= text_area_tag "message", "", :size => 5, :maxlenght => 5, :placeholder => "message", :required => "required" %>
+	   <br />
+	   	<%= submit_tag "Enviar", {id: 'submit'} %>
+		<% end %>
 	</div>
 </div>
 <footer>
