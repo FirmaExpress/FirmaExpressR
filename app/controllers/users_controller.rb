@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
 	def new
 		@user = User.new
+		user_id = params[:u]
+		if user_id
+			@user = User.find(user_id)
+		end
 	end
 
 	def create
@@ -21,7 +25,6 @@ class UsersController < ApplicationController
 			@user.avatar = avatar_path
 			@user.save
 			FileUtils.mkdir_p('public/' + dir) unless File.directory?(dir)
-			#@@my_logger ||= Logger.new("#{Rails.root}/log/#{today}/my.log")
 			File.open(Rails.root.join('public', avatar_path), 'wb') do |file|
 				file.write(uploaded_io.read)
 			end
@@ -32,10 +35,30 @@ class UsersController < ApplicationController
 	end
 
 	def invite
-		emails = params[:emails]
-		UserMailer.invitation_email(emails).deliver
+		emails = params[:e]
+		document_id = params[:d]
+		users = []
+		emails.split(',').each do |email|
+			user = User.where('"email" = \'' + email + '\'').first
+			if user == nil
+				#Pendiente: Implementar validación diferida según endpoint	
+				user = User.new(avatar: 'uploads/user.jpg', email: email, password: email, password_confirmation: email)
+				type = UserType.find(2)
+				user.user_type = type
+				user.save
+			end
+			document = Document.find(document_id)
+			if document
+				if Participant.where('"document_id" = ' + document.id.to_s + ' AND "user_id" = ' + user.id.to_s).exists? == false
+					participant = Participant.new(document_id: document.id, role_id: 2, user_id: user.id, signed: 'f')
+					participant.save
+					UserMailer.invitation_email(user, document).deliver
+				end
+			end
+			users << user
+		end
 		respond_to do |format|
-			format.json { render :json => [message: "Invitaciones enviadas a " + emails] }
+			format.json { render :json => [message: "Invitaciones enviadas a " + emails, users: users] }
 		end
 	end
 end
