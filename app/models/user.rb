@@ -14,7 +14,7 @@ class IdNumberValidator < ActiveModel::Validator
 	end
 	real_dv = 11 - real_dv % 11
 	if real_dv == 10
-		real_dv == 'k'
+		real_dv = 'k'
 	end
 	if real_dv == 11
 		real_dv = 0
@@ -43,15 +43,19 @@ class User < ActiveRecord::Base
 				uniqueness: true,
 				format: { with: /[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+\.[a-zA-Z]{2,4}/, message: "Formato de correo no es válido" }
 	validates :first_name,
-				presence: true
+				presence: true,
+				unless: Proc.new { |a| a.id_number.blank? }
 	validates :last_name,
-				presence: true
+				presence: true,
+				unless: Proc.new { |a| a.id_number.blank? }
 	validates :avatar,
 				presence: true
 	validates :id_number,
 				presence: true,
-				uniqueness: true
-	validates_with IdNumberValidator
+				uniqueness: true,
+				unless: Proc.new { |a| a.id_number.blank? }
+	validates_with IdNumberValidator,
+				unless: Proc.new { |a| a.id_number.blank? }
 
 	def self.authenticate(email, password)
 		user = find_by_email(email)

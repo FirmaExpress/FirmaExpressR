@@ -42,7 +42,7 @@
 					if(valid_emails)
 					{
 						console.log(emails);
-						$http.get('../users/invite.json?emails=' + emails).success(function(data) {
+						$http.get('../users/invite.json?d=<%= @document.id %>&e=' + emails).success(function(data) {
 							console.log(data);
 						});
 					}
@@ -76,7 +76,7 @@
 	</div>
 	<div id="optionsdocumento">
 		<ul>
-			<% if @signed == false %>
+			<% if @signed.signed == false %>
 				<li><%= link_to "Firmar", controller: 'documents', action: 'sign', id: @document, data: { confirm: "¿Está seguro de firmar este documento?" } %></li>
 			<% end %>
 			<% if @current_user_role.id  == 1 %>
@@ -103,8 +103,10 @@
 						<% end %>
 					</ul>
 					<!-- Invitation Form -->
+					<br />
+					<h4 class="negro">Invitar<h4/>
 					<div ng-controller="InviteController">
-						<input ng-model="emails" ng-enter="invite()" type="text" placeholder="e-mails" id="invitees_emails" />
+						<input ng-model="emails" ng-enter="invite()" type="text" placeholder="Ingresar emails separados por comas" id="invitees_emails" />
 						<div>{{ message }}</div>
 					</div>
 				</div>
