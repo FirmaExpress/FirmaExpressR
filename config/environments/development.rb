@@ -27,7 +27,7 @@ FirmaExpressR::Application.configure do
   config.action_mailer.perform_deliveries = true
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_options = {from: 'claudevandort@gmail.com'}
+  config.action_mailer.default_options = {from: 'firmaexpress2014@gmail.com'}
   config.action_mailer.smtp_settings = {
     address:              'smtp.gmail.com',
     port:                 587,
