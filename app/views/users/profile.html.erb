@@ -13,6 +13,7 @@
 <div id="perfil">
 <div id="perfildatos">
 <h5>Datos Personales</h5>
+<li><img class="img-circle" style="margin-top: -1px; margin-left: 30px" src="<%=root_url + @current_user.avatar %>" width=80 height=80></li>
 <p>Nombre: <%= @current_user.first_name %> </p>
 <p>Apellido: <%= @current_user.last_name %> </p>
 <p>RUT: <%= @current_user.id_number %> </p>

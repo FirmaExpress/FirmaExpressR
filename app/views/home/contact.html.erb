@@ -15,13 +15,13 @@ Contacto
 		</div>
 		<%= form_tag({:controller => "users", :action => "contact" }, :method => "get") do %>
 	    	<%= label_tag "name", "Nombre" %>
-	   		<%= text_field_tag "name", "", :size => 5, :maxlenght => 5, :placeholder => "name", :required => "required" %>
+	   		<%= text_field_tag "name", "", :size => 5, :maxlenght => 5, :placeholder => "Nombre", :required => "required" %>
 
 	   		<%= label_tag "email", "email" %>
-	   		<%= text_field_tag "email", "", :size => 5, :maxlenght => 5, :placeholder => "email", :required => "required" %>
+	   		<%= text_field_tag "email", "", :size => 5, :maxlenght => 5, :placeholder => "Correo Electrónico", :required => "required" %>
 
 	   		<%= label_tag "message", "Mensaje" %>
-	   		<%= text_area_tag "message", "", :size => 5, :maxlenght => 5, :placeholder => "message", :required => "required" %>
+	   		<%= text_area_tag "message", "", :size => 5, :maxlenght => 5, :placeholder => "Escribe Aquí tu mensaje.", :required => "required" %>
 	   <br />
 	   	<%= submit_tag "Enviar", {id: 'submit'} %>
 		<% end %>
