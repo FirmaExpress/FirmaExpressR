@@ -56,7 +56,7 @@ production:
   adapter: postgresql
   host: localhost
   encoding: unicode
-  database: firmaexpress_development
+  database: firmaexpress_production
   pool: 5
   username: firmaexpress
   password: F1rm43xpr3$$
