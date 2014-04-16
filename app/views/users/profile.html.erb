@@ -1,3 +1,18 @@
+<% content_for :js do %>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+	<script type="text/javascript">
+		var app = angular.module("FEFront", []);
+		app.controller("ProfileController", function($scope, $http){
+			$http.get('../users/profile.json').success(function(data) {
+				$scope.user = data;
+				console.log(data);
+			});
+		});
+	</script>
+<% end %>
+		
+
+
 <div id="containerdocumentos">
 <div id="headline">
 <h3>Configuración del Perfil</h3>
@@ -10,14 +25,14 @@
 <div id="item"><a href="nuevodocumento.html"><h4>Seguridad y Privacidad</h4></a></div>
 </div>
 <div id="optionsdocumento"></div>
-<div id="perfil">
+<div id="perfil" ng-controller="ProfileController">
 <div id="perfildatos">
 <h5>Datos Personales</h5>
 <li><img class="img-circle" style="margin-top: -1px; margin-left: 30px" src="<%=root_url + @current_user.avatar %>" width=80 height=80></li>
-<p>Nombre: <%= @current_user.first_name %> </p>
-<p>Apellido: <%= @current_user.last_name %> </p>
-<p>RUT: <%= @current_user.id_number %> </p>
-<p>Mail: <%= @current_user.email %></p>
+<p>Nombre: {{ user.first_name }} </p>
+<p>Apellido: {{ user.last_name }} </p>
+<p>RUT: {{ user.id_number }} </p>
+<p>Mail: {{ user.email }} </p>
 <br>
 <h5>Firmas</h5>
 <p>Nº de Firmas: 100</p>
