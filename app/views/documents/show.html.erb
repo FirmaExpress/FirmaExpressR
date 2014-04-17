@@ -73,6 +73,9 @@
 			<% end %>
 			<a href="<%= doc.id %>"><p><strong><%= doc.name %></strong> / <i>Progreso: 1 de 4</i></p></a></div>
 		<% end %>
+		<div id="item">
+			<a href=""><p><strong>Tiene <%= @invitations_left.count %> invitaciones disponibles</strong></p></a>
+		</div>
 	</div>
 	<div id="optionsdocumento">
 		<ul>

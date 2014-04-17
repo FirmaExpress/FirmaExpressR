@@ -11,8 +11,20 @@ Gestión de Documentos
 		<div id="options"><input type="search" placeholder="Buscar" class="search">
 		<input type="submit" value="" class="submit"><img src="img/b.png" width="28" height="28"><img src="img/bin.png" width="28" height="28"></div>
 		<% @documents.each do |document|%>
-		<div id="item"><a href="documents/<%= document.id %>"><p><strong><%= document.name %></strong> / <i>Progreso: 1 de 4</i></p></a></div>
+		<div id="item">
+			<a href="documents/<%= document.id %>">
+				<p>
+					<strong>
+						<%= document.name %>
+					</strong> / 
+					<i>Progreso: 1 de 4</i>
+				</p>
+			</a>
+		</div>
 		<% end %>
+		<div id="item">
+			<a href=""><p><strong>Tiene <%= @invitations_left.count %> invitaciones disponibles</strong></p></a>
+		</div>
 	</div>
 	<div id="optionsdocumento"></div>
 	<div id="documento">

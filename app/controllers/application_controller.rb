@@ -18,6 +18,12 @@ class ApplicationController < ActionController::Base
 	def check_auth
 		if current_user == nil
 			redirect_to '/login'
+		else
+			@invitations_left = current_user.invite_codes.where(available: true)
 		end
+	end
+
+	def invitations
+		@invitations ||= @current_user.invite_codes if @current_user
 	end
 end
