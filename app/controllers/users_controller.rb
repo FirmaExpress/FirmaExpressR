@@ -21,6 +21,9 @@ class UsersController < ApplicationController
 		type = UserType.find(3)
 		@user.user_type = type
 		if @user.save
+			3.times do
+				@user.invite_codes << InviteCode.create()
+			end
 			dir = 'uploads/users/' + @user.id.to_s() + '/'
 			avatar_path = dir + uploaded_io.original_filename
 			@user.avatar = avatar_path
