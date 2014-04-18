@@ -34,6 +34,7 @@ class User < ActiveRecord::Base
 	belongs_to :user_type
 
 	attr_accessor :password
+	attr_accessor :invite_code
 	before_save :encrypt_password
 
 	validates :password,
