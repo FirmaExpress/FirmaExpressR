@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_action :check_auth, only: [:profile]
+	before_action :check_auth, only: [:profile, :invite]
 	def new
 		@user = User.new
 		user_id = params[:u]
@@ -41,25 +41,34 @@ class UsersController < ApplicationController
 	def invite
 		emails = params[:e]
 		document_id = params[:d]
+		invitation_type = params[:t]
 		users = []
 		emails.split(',').each do |email|
-			user = User.where('"email" = \'' + email + '\'').first
-			if user == nil
-				#Pendiente: Implementar validación diferida según endpoint	
-				user = User.new(avatar: 'uploads/user.jpg', email: email, password: email, password_confirmation: email)
-				type = UserType.find(2)
-				user.user_type = type
-				user.save
-			end
-			document = Document.find(document_id)
-			if document
-				if Participant.where('"document_id" = ' + document.id.to_s + ' AND "user_id" = ' + user.id.to_s).exists? == false
-					participant = Participant.new(document_id: document.id, role_id: 2, user_id: user.id, signed: 'f')
-					participant.save
-					UserMailer.invitation_email(user, document).deliver
+			if invitation_type == 'participant'
+				user = User.where('"email" = \'' + email + '\'').first
+				if user == nil
+					#Pendiente: Implementar validación diferida según endpoint	
+					user = User.new(avatar: 'uploads/user.jpg', email: email, password: email, password_confirmation: email)
+					type = UserType.find(2)
+					user.user_type = type
+					user.save
+				end
+				document = Document.find(document_id)
+				if document
+					if Participant.where('"document_id" = ' + document.id.to_s + ' AND "user_id" = ' + user.id.to_s).exists? == false
+						participant = Participant.new(document_id: document.id, role_id: 2, user_id: user.id, signed: 'f')
+						participant.save
+						UserMailer.invitation_email(user, document).deliver
+					end
+				end
+				users << user
+			elsif invitation_type == 'free'
+				if @invitations_left.count > 0
+					@url = 'http://firmaexpress.com/register?c=' + @invitations_left.first.code
+					@code = @invitations_left.first.code
+					UserMailer.free_user_invitation_email(@current_user, email, @invitations_left.first).deliver
 				end
 			end
-			users << user
 		end
 		respond_to do |format|
 			format.json { render :json => [message: "Invitaciones enviadas a " + emails, users: users] }

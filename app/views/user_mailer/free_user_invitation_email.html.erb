@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hola!</h1>
+    <p>
+      <%= @user.first_name %> <%= @user.last_name %> te ha invitado para que pruebes Firma Express.<br>
+    </p>
+    <p>
+      Para aceptar puedes hacer click en tu codigo de invitación <a href="<%= @url %>"><%= @code %></a>.
+    </p>
+    <p>Muchas gracias!</p>
+  </body>
+</html>

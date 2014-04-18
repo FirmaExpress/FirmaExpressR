@@ -15,4 +15,11 @@ class UserMailer < ActionMailer::Base
   	mail(to: "firmaexpress2014@gmail.com", subject: 'Consulta sobre firmaexpress')
   end
 
+  def free_user_invitation_email(user, invitee_email, invitation)
+    @user = user
+    @url = 'http://firmaexpress.com/register?c=' + invitation.code
+    @code = invitation.code
+    mail(to: invitee_email, subject: user.first_name + ' te invita a Firma Express')
+  end
+
 end
