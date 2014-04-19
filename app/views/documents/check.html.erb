@@ -1,0 +1,21 @@
+<% content_for :title do %>
+	Verificar documento Folio <%= @document.id %>
+<% end %>
+<div id="containerdocumentos" class="negro">
+	<div id="headline">
+		<h3>Documento <%= @document.name %>, Folio n° <%= @document.id %></h3>
+	</div>
+	<ul>
+		<% @participants.each do |participant| %>
+			<% sign_state = if participant.signed
+				'Firmado'
+			else
+				'Sin Firmar'
+			end %>
+			<li class="negro"><%= participant.first_name %> <%= participant.last_name %> - <%= participant.role %> - <%= sign_state %></li>
+		<% end %>
+		<br />
+		<p>Sellado <%= @document.agreed_at %></p>
+		<img src="http://chart.apis.google.com/chart?chs=200x200&cht=qr&chl=http://firmaexpress.com/check_document/<%= @document.id %>&choe=ISO-8859-1">
+	</ul>
+</div>
