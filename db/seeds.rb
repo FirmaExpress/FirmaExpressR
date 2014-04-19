@@ -14,7 +14,8 @@ User.create([{
 	id_number: '17026575-0', 
 	email: 'claudevandort@gmail.com', 
 	password: '1234', 
-	password_confirmation: '1234' }])
+	password_confirmation: '1234',
+	user_type_id: 1 }])
 InviteCode.create([
 	{ code: '1', user_id: 1, available: true }, 
 	{ code: '2', user_id: 1, available: true }, 

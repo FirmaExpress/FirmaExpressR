@@ -73,7 +73,7 @@ class UsersController < ApplicationController
 				end
 				users << user
 			elsif invitation_type == 'free'
-				if @invitations_left.count > 0
+				if @invitations_left.count > 0 and !User.exists?(email: email)
 					@url = 'http://firmaexpress.com/register?c=' + @invitations_left.first.code
 					@code = @invitations_left.first.code
 					UserMailer.free_user_invitation_email(@current_user, email, @invitations_left.first).deliver
