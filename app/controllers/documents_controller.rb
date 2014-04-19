@@ -31,7 +31,7 @@ class DocumentsController < ApplicationController
 		@current_user_role = Document.joins(:participants, :users, :roles).select('"roles"."id","roles"."name"').where('"participants"."user_id" = ' + user.id.to_s + ' AND "documents"."id" = ' + @document.id.to_s).first
 		respond_to do |format|
 			format.html
-			format.json { render :json => [participants: @participants, document: @document, signed: @signed.signed, current_user_role: @current_user_role] }
+			format.json { render :json => [participants: @participants, document: @document, signed: @signed.signed, current_user_role: @current_user_role, to_sign: @document.to_sign, agreed: @document.agreed, agreed_at: @document.agreed_at] }
 		end
 	end
 
@@ -42,6 +42,11 @@ class DocumentsController < ApplicationController
 		participant = Participant.where('"document_id" = ' + document_id + ' AND "user_id" = ' + user_id).first
 		participant.signed = 't'
 		participant.save
+		document = Document.find(document_id)
+		if document.to_sign == 0
+			document.agreed_at = Time.now
+			document.save
+		end
 		redirect_to "/documents/" + document_id
 	end
 

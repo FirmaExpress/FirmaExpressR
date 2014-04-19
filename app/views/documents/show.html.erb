@@ -149,11 +149,17 @@
 					</ul>
 					<!-- Invitation Form -->
 					<br />
+					<% if @document.agreed %>
+					<!-- Show QR -->
+					<img src="http://chart.apis.google.com/chart?chs=200x200&cht=qr&chl=http://firmaexpress.com/check_document/<%= @document.id %>&choe=ISO-8859-1"><br />
+					<p class="negro">Sellado <%= @document.agreed_at %></p>
+					<% else %>
 					<h4 class="negro">Invitar<h4/>
 					<div ng-controller="InviteController">
 						<input ng-model="emails" ng-enter="invite()" type="text" placeholder="Ingresar emails separados por comas" id="invitees_emails" />
 						<div>{{ message }}</div>
 					</div>
+					<% end %>
 				</div>
 				<div class="modal-footer">
 					
