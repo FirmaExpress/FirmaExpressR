@@ -1,5 +1,5 @@
 class DocumentsController < ApplicationController
-	before_action :check_auth
+	before_action :check_auth, except: [:check]
 	def new
 		@document = Document.new
 		user = User.find(session[:user_id])
