@@ -31,8 +31,13 @@ class DocumentsController < ApplicationController
 		@current_user_role = Document.joins(:participants, :users, :roles).select('"roles"."id","roles"."name"').where('"participants"."user_id" = ' + user.id.to_s + ' AND "documents"."id" = ' + @document.id.to_s).first
 		respond_to do |format|
 			format.html
-			format.json { render :json => [participants: @participants, document: @document, signed: @signed.signed, current_user_role: @current_user_role, to_sign: @document.to_sign, agreed: @document.agreed, agreed_at: @document.agreed_at] }
+			format.json { render :json => [participants: @participants, document: @document, signed: @signed.signed, current_user_role: @current_user_role] }
 		end
+	end
+
+	def check
+		@document = Document.find(params[:id])
+		@participants = Document.joins(:participants, :users, :roles).select('"documents".*, "participants".*, "users".*, "roles".name as role').where('"documents"."id" = ' + @document.id.to_s)
 	end
 
 	def sign
