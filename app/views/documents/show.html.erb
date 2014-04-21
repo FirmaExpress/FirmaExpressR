@@ -22,8 +22,13 @@
 		        });
 		    };
 		});
+		app.filter('iif', function () {
+			return function(input, trueValue, falseValue) {
+				return input ? trueValue : falseValue;
+			};
+		});
 		app.controller("DocumentsListController", function($scope, $http){
-			$http.get('../documents/list').success(function(data) {
+			$http.get('../documents/list.json').success(function(data) {
 				console.log(data);
 				$scope.documents = data;
 			});
@@ -109,12 +114,15 @@
 	<div id="headline">
 		<h3>Gestión de Documentos</h3>
 	</div>
-	<div id="biblioteca">
+	<div id="biblioteca" ng-controller="DocumentsListController">
 		<div id="item"><a href="<%= root_url %>"><h4>Subir Documento</h4></a></div>
 		<div id="item"><a href=""><h4>Biblioteca</h4></a></div>
-		<div id="options"><input type="search" placeholder="Buscar" class="search">
-		<input type="submit" value="" class="submit"><%= image_tag "b.png", { height: 28, width: 28 } %><%= image_tag "bin.png", { height: 28, width: 28 } %></div>
-		<div ng-controller="DocumentsListController"></div>
+		<div id="options"><input type="search" placeholder="Buscar" class="search" ng-model="searchText">
+		<%= image_tag "b.png", { height: 28, width: 28 } %><%= image_tag "bin.png", { height: 28, width: 28 } %></div>
+		<div id="item{{ document.id == <%= @document.id %> | iif : 'active' : '' }}" ng-repeat="document in documents | filter:searchText">
+			<a class="negro" href="{{ document.id }}"><p><strong>{{document.name}}</strong> / <i>Progreso: 1 de 4</i></p></a>
+		</div>
+		<!--
 		<% @documents.each do |doc|%>
 			<% if doc.id == @document.id %>
 				<div id="itemactivo">
@@ -123,6 +131,7 @@
 			<% end %>
 			<a href="<%= doc.id %>"><p><strong><%= doc.name %></strong> / <i>Progreso: 1 de 4</i></p></a></div>
 		<% end %>
+		-->
 	</div>
 	<div id="optionsdocumento">
 		<ul>
