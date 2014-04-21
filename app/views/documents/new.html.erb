@@ -23,7 +23,7 @@ Gestión de Documentos
 		<div id="options"><input type="search" placeholder="Buscar" class="search" ng-model="searchText">
 		<%= image_tag "b.png", { height: 28, width: 28 } %><%= image_tag "bin.png", { height: 28, width: 28 } %></div>
 		<div id="item" ng-repeat="document in documents | filter:searchText">
-			<a href="documents/{{ document.id }}"><p><strong>{{document.name}}</strong> / <i>Progreso: 1 de 4</i></p></a></div>
+			<a href="documents/{{ document.id }}"><p><strong>{{document.name}}</strong> / <i>Progreso: 1 de 4</i></p></a>
 		</div>
 	</div>
 	<div id="optionsdocumento"></div>
