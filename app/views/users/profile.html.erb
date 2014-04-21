@@ -11,10 +11,10 @@
 				console.log(data);
 			});
 
-			$scope.updateprofile = function(){
-				$http.get('../users/update_profile.json').success(function(data) {
-					$scope.user = data;
+			$scope.updateprofile = function(campo, valor){
+				$http.get('../users/update_profile.json?campo='+campo+'&valor='+valor).success(function(data) {
 					console.log(data);
+
 				});
 			} 
 		});
@@ -55,7 +55,7 @@
 	        <input type="text" ng-model="user.first_name"/>
 	    </span>
 	    <button class="hiddable show">Editar</button>
-	    <button class="hiddable" ng-click="updateprofile()">Guardar</button><br>
+	    <button class="hiddable" ng-click="updateprofile('first_name', user.first_name)">Guardar</button><br>
     </div>
     <!--fin-->
     <div id="lastname">
@@ -66,7 +66,7 @@
 	        <input type="text" ng-model="user.last_name"/>
 	    </span>
 	    <button class="hiddable show">Editar</button>
-	    <button class="hiddable" ng-click="updateprofile()">Guardar</button><br>
+	    <button class="hiddable" ng-click="updateprofile('last_name', user.last_name)">Guardar</button><br>
 	</div>
     <!--fin-->
     <div id="email">
@@ -77,7 +77,7 @@
 	        <input type="text" ng-model="user.email"/>
 	    </span>
 	    <button class="hiddable show">Editar</button>
-	    <button class="hiddable" ng-click="updateprofile()">Guardar</button><br>
+	    <button class="hiddable" ng-click="updateprofile('email', user.email)">Guardar</button><br>
 	</div>
 	<br>
 	<h5>Firmas</h5>
