@@ -152,7 +152,7 @@
 					<br />
 					<% if @document.agreed %>
 					<!-- Show QR -->
-					<img src="http://chart.apis.google.com/chart?chs=200x200&cht=qr&chl=http://firmaenlinea.com/check_document/<%= @document.id %>&choe=ISO-8859-1"><br />
+					<img src="http://chart.apis.google.com/chart?chs=200x200&cht=qr&chl=http://<%= request.host %>/check_document/<%= @document.id %>&choe=ISO-8859-1"><br />
 					<p class="negro">Sellado <%= @document.agreed_at %></p>
 					<% else %>
 					<h4 class="negro">Invitar<h4/>
