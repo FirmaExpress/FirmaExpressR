@@ -27,11 +27,20 @@
 			$scope.invite = function(){
 				var emails = $scope.emails;
 				$scope.emails = undefined;
+				if($scope.validateEmails(emails))
+				{
+					console.log(emails);
+					$http.get('../users/invite.json?t=participant&d=<%= @document.id %>&e=' + emails).success(function(data) {
+						console.log(data);
+					});
+				}
+			}
+			$scope.validateEmails = function(emails){
+				var valid_emails = true;
 				if(emails != undefined)
 				{
 					emails = emails.replace(/ /g,'');
 					emails_arr = emails.split(",");
-					var valid_emails = true;
 					for(var index = 0; index < emails_arr.length; index++)
 					{
 						if($scope.validateEmail(emails_arr[index]) == false)
@@ -40,14 +49,47 @@
 							break;
 						}
 					}
-					if(valid_emails)
+				}
+				else
+					valid_emails = false;
+				return valid_emails;
+			}
+			$scope.validateEmail = function(email) { 
+				var re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+				return re.test(email);
+			}
+		});
+		app.controller("NewUserInviteController", function($scope, $http){
+			$scope.message = "";
+			$scope.invite = function(){
+				var emails = $scope.emails;
+				$scope.emails = undefined;
+				if($scope.validateEmails(emails))
+				{
+					console.log(emails);
+					$http.get('../users/invite.json?t=free&e=' + emails).success(function(data) {
+						console.log(data);
+					});
+				}
+			}
+			$scope.validateEmails = function(emails){
+				var valid_emails = true;
+				if(emails != undefined)
+				{
+					emails = emails.replace(/ /g,'');
+					emails_arr = emails.split(",");
+					for(var index = 0; index < emails_arr.length; index++)
 					{
-						console.log(emails);
-						$http.get('../users/invite.json?d=<%= @document.id %>&e=' + emails).success(function(data) {
-							console.log(data);
-						});
+						if($scope.validateEmail(emails_arr[index]) == false)
+						{
+							valid_emails = false;
+							break;
+						}
 					}
 				}
+				else
+					valid_emails = false;
+				return valid_emails;
 			}
 			$scope.validateEmail = function(email) { 
 				var re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
@@ -84,6 +126,9 @@
 				<li> <%= link_to "Eliminar", controller: 'documents', action: 'destroy', id: @document %></li>
             <% end %>
 			<li><a data-toggle="modal" data-target="#modal-panel-participants" name="button-participants" id="button-participants">Participantes</a></li>
+			<% if @invitations_left.count > 0 %>
+				<li style="width:150px"><a data-toggle="modal" data-target="#modal-panel-new-user-invite" name="button-new-user-invite" id="button-new-user-invite"><%= @invitations_left.count %> invitaciones disponibles</a></li>
+			<% end %>
 		</ul>
 	</div>
 	<div id="modal-panel-participants" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -105,8 +150,33 @@
 					</ul>
 					<!-- Invitation Form -->
 					<br />
+					<% if @document.agreed %>
+					<!-- Show QR -->
+					<img src="http://chart.apis.google.com/chart?chs=200x200&cht=qr&chl=http://firmaenlinea.com/check_document/<%= @document.id %>&choe=ISO-8859-1"><br />
+					<p class="negro">Sellado <%= @document.agreed_at %></p>
+					<% else %>
 					<h4 class="negro">Invitar<h4/>
 					<div ng-controller="InviteController">
+						<input ng-model="emails" ng-enter="invite()" type="text" placeholder="Ingresar emails separados por comas" id="invitees_emails" />
+						<div>{{ message }}</div>
+					</div>
+					<% end %>
+				</div>
+				<div class="modal-footer">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="modal-panel-new-user-invite" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">Invitar</h4>
+				</div>
+				<div class="modal-body">
+					<!-- Invitation Form -->
+					<div ng-controller="NewUserInviteController">
 						<input ng-model="emails" ng-enter="invite()" type="text" placeholder="Ingresar emails separados por comas" id="invitees_emails" />
 						<div>{{ message }}</div>
 					</div>

@@ -1,5 +1,5 @@
 class DocumentsController < ApplicationController
-	before_action :check_auth
+	before_action :check_auth, except: [:check]
 	def new
 		@document = Document.new
 		user = User.find(session[:user_id])
@@ -26,13 +26,18 @@ class DocumentsController < ApplicationController
 		@document = Document.find(params[:id])
 		user = User.find(session[:user_id])
 		@documents = user.documents
-		@participants = Document.joins(participants: [{ user: :roles }]).select('"documents".*, "participants".*, "users".*, "roles".name as role').where('"documents"."id" = ' + @document.id.to_s)
-		@signed = Document.joins(participants: [{ user: :roles }]).select('"participants"."signed"').where('"participants"."user_id" = ' + user.id.to_s + ' AND "documents"."id" = ' + @document.id.to_s).first
-		@current_user_role = Document.joins(participants: [{ user: :roles }]).select('"roles"."id","roles"."name"').where('"participants"."user_id" = ' + user.id.to_s + ' AND "documents"."id" = ' + @document.id.to_s).first
+		@participants = Document.joins(:participants, :users, :roles).select('"documents".*, "participants".*, "users".*, "roles".name as role').where('"documents"."id" = ' + @document.id.to_s)
+		@signed = Document.joins(:participants, :users, :roles).select('"participants"."signed"').where('"participants"."user_id" = ' + user.id.to_s + ' AND "documents"."id" = ' + @document.id.to_s).first
+		@current_user_role = Document.joins(:participants, :users, :roles).select('"roles"."id","roles"."name"').where('"participants"."user_id" = ' + user.id.to_s + ' AND "documents"."id" = ' + @document.id.to_s).first
 		respond_to do |format|
 			format.html
 			format.json { render :json => [participants: @participants, document: @document, signed: @signed.signed, current_user_role: @current_user_role] }
 		end
+	end
+
+	def check
+		@document = Document.find(params[:id])
+		@participants = Document.joins(:participants, :users, :roles).select('"documents".*, "participants".*, "users".*, "roles".name as role').where('"documents"."id" = ' + @document.id.to_s)
 	end
 
 	def sign
@@ -42,6 +47,11 @@ class DocumentsController < ApplicationController
 		participant = Participant.where('"document_id" = ' + document_id + ' AND "user_id" = ' + user_id).first
 		participant.signed = 't'
 		participant.save
+		document = Document.find(document_id)
+		if document.to_sign == 0
+			document.agreed_at = Time.now
+			document.save
+		end
 		redirect_to "/documents/" + document_id
 	end
 
