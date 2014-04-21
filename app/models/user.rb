@@ -72,7 +72,7 @@ class User < ActiveRecord::Base
 				unless: Proc.new { |a| a.id_number.blank? }
 	validates_with IdNumberValidator,
 				unless: Proc.new { |a| a.id_number.blank? }
-	validates_with InviteCodeValidator
+	validates_with InviteCodeValidator, on: :create
 
 	def self.authenticate(email, password)
 		user = find_by_email(email)
