@@ -35,6 +35,14 @@ class DocumentsController < ApplicationController
 		end
 	end
 
+	def list
+		user = User.find(session[:user_id])
+		documents = user.documents
+		respond_to do |format|
+			format.json { render :json => documents }
+		end
+	end
+
 	def check
 		@document = Document.find(params[:id])
 		@participants = Document.joins(:participants, :users, :roles).select('"documents".*, "participants".*, "users".*, "roles".name as role').where('"documents"."id" = ' + @document.id.to_s)

@@ -21,6 +21,12 @@
 		        });
 		    };
 		});
+		app.controller("DocumentsListController", function($scope, $http){
+			$http.get('../documents/list').success(function(data) {
+				console.log(data);
+				$scope.documents = data;
+			});
+		});
 		app.controller("InviteController", function($scope, $http){
 			$scope.message = "";
 			$scope.invite = function(){
@@ -107,6 +113,7 @@
 		<div id="item"><a href=""><h4>Biblioteca</h4></a></div>
 		<div id="options"><input type="search" placeholder="Buscar" class="search">
 		<input type="submit" value="" class="submit"><%= image_tag "b.png", { height: 28, width: 28 } %><%= image_tag "bin.png", { height: 28, width: 28 } %></div>
+		<div ng-controller="DocumentsListController"></div>
 		<% @documents.each do |doc|%>
 			<% if doc.id == @document.id %>
 				<div id="itemactivo">
