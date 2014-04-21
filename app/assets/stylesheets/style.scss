@@ -168,3 +168,10 @@ textarea {height:100px;}
 #info2 h3 {text-transform:uppercase;text-align:center;}
 .upload-button{position:relative;float:left;top:40%; background-image:image-url("backsubir.png"); background-size:154px 30px;width:154px;color:#FFF; background-repeat:no-repeat; background-position:center;text-align:center;left:40%;padding-top:10px;}
 .negro{	color: #000; }
+
+.hiddable {
+    display: none;
+}
+.show {
+    display: inline-block;
+}

@@ -12,6 +12,7 @@ FirmaExpressR::Application.routes.draw do
   get "documents/sign/:id", to: "documents#sign"
   get "documents/destroy/:id", to: "documents#destroy"
   get "users/profile", to: "users#profile", as:"profile"
+  get "users/update_profile", to: "users#update_profile", as:"update_profile"
   resources :users
   resources :sessions
   resources :documents
