@@ -86,6 +86,26 @@ class UsersController < ApplicationController
         redirect_to root_url
     end
 
+    def update_profile
+    	campo = params[:campo]
+		valor = params[:valor]
+		id = params[:id]
+		boolean = []
+		user = User.find(id)
+		case campo
+			when "first_name" 
+				user.first_name = valor
+			when "last_name"
+				user.last_name = valor
+			when "email"
+				user.email = valor
+		end
+		user.save
+		respond_to do |format|
+			format.json { render :json => user.errors }
+		end
+    end
+
     def profile
     	respond_to do |format|
 			format.html

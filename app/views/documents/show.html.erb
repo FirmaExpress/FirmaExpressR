@@ -5,6 +5,7 @@
 	<% stylesheet_link_tag "bootstrap-theme.css" %>
 <% end %>
 <% content_for :js do %>
+<%= javascript_include_tag "bootstrap-modal.js" %>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
 	<script type="text/javascript">
 		var app = angular.module("FEFront", []);
