@@ -10,7 +10,15 @@
 				$scope.user = data;
 				console.log(data);
 			});
+
+			$scope.updateprofile = function(){
+				$http.get('../users/update_profile.json').success(function(data) {
+					$scope.user = data;
+					console.log(data);
+				});
+			} 
 		});
+
 	$(document).on("ready", function () {
 		$("button").on("click", function () {
 		    var id = $(this).parent().attr('id');
@@ -47,7 +55,7 @@
 	        <input type="text" ng-model="user.first_name"/>
 	    </span>
 	    <button class="hiddable show">Editar</button>
-	    <button class="hiddable" ng-click="update_profile()">Guardar</button><br>
+	    <button class="hiddable" ng-click="updateprofile()">Guardar</button><br>
     </div>
     <!--fin-->
     <div id="lastname">
@@ -58,7 +66,7 @@
 	        <input type="text" ng-model="user.last_name"/>
 	    </span>
 	    <button class="hiddable show">Editar</button>
-	    <button class="hiddable" ng-click="update_profile()">Guardar</button><br>
+	    <button class="hiddable" ng-click="updateprofile()">Guardar</button><br>
 	</div>
     <!--fin-->
     <div id="email">
@@ -69,22 +77,22 @@
 	        <input type="text" ng-model="user.email"/>
 	    </span>
 	    <button class="hiddable show">Editar</button>
-	    <button class="hiddable" ng-click="update_profile()">Guardar</button><br>
+	    <button class="hiddable" ng-click="updateprofile()">Guardar</button><br>
 	</div>
-<br>
-<h5>Firmas</h5>
-<p>Nº de Firmas: 100</p>
-<br>
-<h5>Documentos</h5>
-<p>Nº de Documentos: 100</p>
-<br>
-<h5>Datos de Usuario</h5>
-<p>Usuario desde: 01/01/2014</p>
-<br>
-<h5>Otros Datos</h5>
-<p>Dato: Valor</p>
-<p>Dato: Valor</p>
-<p>Dato: Valor</p>
+	<br>
+	<h5>Firmas</h5>
+	<p>Nº de Firmas: 100</p>
+	<br>
+	<h5>Documentos</h5>
+	<p>Nº de Documentos: 100</p>
+	<br>
+	<h5>Datos de Usuario</h5>
+	<p>Usuario desde: 01/01/2014</p>
+	<br>
+	<h5>Otros Datos</h5>
+	<p>Dato: Valor</p>
+	<p>Dato: Valor</p>
+	<p>Dato: Valor</p>
 </div>
 <div id="perfilestadisticas">
 <h5>Estadísticas de Actividad</h5>
