@@ -25,6 +25,18 @@ class IdNumberValidator < ActiveModel::Validator
   end
 end
 
+class InviteCodeValidator < ActiveModel::Validator
+	def validate(record)
+		invitation = InviteCode.find_by(code: record.invite_code, available: true)
+		if record.user_type_id == 3 and invitation
+			record.errors[:base] << "Ingresa un codigo de invitación válido"
+		else
+			invitation.available = false
+			invitation.save
+		end
+	end
+end
+
 class User < ActiveRecord::Base
 	include ActiveModel::Validations
 	has_many :participants
@@ -58,6 +70,7 @@ class User < ActiveRecord::Base
 				unless: Proc.new { |a| a.id_number.blank? }
 	validates_with IdNumberValidator,
 				unless: Proc.new { |a| a.id_number.blank? }
+	validates_with InviteCodeValidator
 
 	def self.authenticate(email, password)
 		user = find_by_email(email)

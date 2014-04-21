@@ -22,29 +22,22 @@ class UsersController < ApplicationController
 		id_number = params[:user][:id_number]
 		invitation_code = params[:user][:invite_code]
 
-		invitation = InviteCode.find_by(code: invitation_code, available: true)
-		if invitation != nil
-			@user = User.new(avatar: uploaded_io.original_filename, first_name: first_name, last_name: last_name, id_number: id_number, email: email, password: password, password_confirmation: password_confirmation)
-			type = UserType.find(3)
-			@user.user_type = type
-			if @user.save
-				3.times do
-					@user.invite_codes << InviteCode.create()
-				end
-				dir = 'uploads/users/' + @user.id.to_s() + '/'
-				avatar_path = dir + uploaded_io.original_filename
-				@user.avatar = avatar_path
-				@user.save
-				FileUtils.mkdir_p('public/' + dir) unless File.directory?(dir)
-				File.open(Rails.root.join('public', avatar_path), 'wb') do |file|
-					file.write(uploaded_io.read)
-				end
-				invitation.available = false
-				invitation.save
-				redirect_to root_url, :notice => "Registrado!"
-			else
-				render "new"
+		@user = User.new(avatar: uploaded_io.original_filename, first_name: first_name, last_name: last_name, id_number: id_number, email: email, password: password, password_confirmation: password_confirmation, user_type_id: 3, invite_code: invitation_code)
+		if @user.save
+			3.times do
+				@user.invite_codes << InviteCode.create()
 			end
+			dir = 'uploads/users/' + @user.id.to_s() + '/'
+			avatar_path = dir + uploaded_io.original_filename
+			@user.avatar = avatar_path
+			@user.save
+			FileUtils.mkdir_p('public/' + dir) unless File.directory?(dir)
+			File.open(Rails.root.join('public', avatar_path), 'wb') do |file|
+				file.write(uploaded_io.read)
+			end
+			redirect_to root_url, :notice => "Registrado!"
+		else
+			render "new"
 		end
 	end
 
