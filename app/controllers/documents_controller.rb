@@ -54,18 +54,22 @@ class DocumentsController < ApplicationController
 		user_id = user.id.to_s
 		participant = Participant.where('"document_id" = ' + document_id + ' AND "user_id" = ' + user_id).first
 		participant.signed = 't'
-		participant.save
+		participant_save_status = participant.save
 		document = Document.find(document_id)
 		if document.to_sign == 0
 			document.agreed_at = Time.now
 			document.save
 		end
-		redirect_to "/documents/" + document_id
+		respond_to do |format|
+			format.json { render :json => [status: participant_save_status, ] }
+		end	
 	end
 
 	def destroy
     	@document = Document.find(params[:id])
-		@document.destroy
-		redirect_to root_url	
+		status = @document.destroy
+		respond_to do |format|
+			format.json { render :json => status }
+		end
     end
 end
