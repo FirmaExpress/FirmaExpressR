@@ -32,6 +32,9 @@ Gestión de Documentos
 			<%= f.file_field :path %>
 			<%= submit_tag "Subir", { class: 'loginboton upload-button' } %>
 		<% end %>
+		<%= debug @document %>
+		<%= debug @document.errors %>
+		<%= debug @participant.inspect %>
 	</div>
 	<div id="importante"><p class="datosextra">Solo se pueden subir documentos en PDF. Si no tienes tus archivos en este formato, utiliza nuestro conversor de Word a PDF <a href="conversor.html" style="color:#ab8f5a;font-weight:bolder;">aquí</a>.</p></div>
 </div>

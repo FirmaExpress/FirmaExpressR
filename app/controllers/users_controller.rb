@@ -49,12 +49,15 @@ class UsersController < ApplicationController
 		emails.split(',').each do |email|
 			if invitation_type == 'participant'
 				user = User.where('"email" = \'' + email + '\'').first
-				if user == nil
+				unless user
 					#Pendiente: Implementar validación diferida según endpoint	
 					user = User.new(avatar: 'uploads/user.jpg', email: email, password: email, password_confirmation: email)
 					type = UserType.find(2)
 					user.user_type = type
 					user.save
+					respond_to do |format|
+						format.json { render :json => [message: "Invitaciones enviadas a " + emails, users: user.errors] }
+					end
 				end
 				document = Document.find(document_id)
 				if document
@@ -72,9 +75,6 @@ class UsersController < ApplicationController
 					UserMailer.free_user_invitation_email(@current_user, email, @invitations_left.first).deliver
 				end
 			end
-		end
-		respond_to do |format|
-			format.json { render :json => [message: "Invitaciones enviadas a " + emails, users: users] }
 		end
 	end
 

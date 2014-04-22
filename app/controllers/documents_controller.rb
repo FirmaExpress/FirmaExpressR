@@ -8,18 +8,23 @@ class DocumentsController < ApplicationController
 
 	def create
 		uploaded_io = params[:document][:path]
-		dir = 'uploads/users/' + session[:user_id].to_s() + '/documents/'
-		document_path = dir + uploaded_io.original_filename
-		document = Document.new(name: uploaded_io.original_filename, path: document_path)
-		document.save
-		user = User.find(session[:user_id])
-		participant = Participant.new(document_id: document.id, role_id: 1, user_id: user.id, signed: 'f')
-		participant.save
-		FileUtils.mkdir_p('public/' + dir) unless File.directory?(dir)
-		File.open(Rails.root.join('public', dir, uploaded_io.original_filename), 'wb') do |file|
-			file.write(uploaded_io.read)
+		#dir = 'uploads/users/' + session[:user_id].to_s() + '/documents/'
+		#document_path = dir + uploaded_io.original_filename
+		@document = Document.new(file: uploaded_io, user_id: session[:user_id])
+		if @document.save
+			@participant = Participant.new(document_id: @document.id, role_id: 1, user_id: session[:user_id], signed: 'f')
+			if @participant.save
+				redirect_to root_url
+			else
+				render "new"
+			end
+		else
+			render "new"
 		end
-		redirect_to root_url
+		#FileUtils.mkdir_p('public/' + dir) unless File.directory?(dir)
+		#File.open(Rails.root.join('public', dir, uploaded_io.original_filename), 'wb') do |file|
+		#	file.write(uploaded_io.read)
+		#end
 	end
 
 	def show
