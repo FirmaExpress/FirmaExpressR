@@ -1,28 +1,30 @@
 class IdNumberValidator < ActiveModel::Validator
-  def validate(record)
-    rut, dv = record.id_number.split('-')
-	rut = rut.delete "."
-	rut_reverse = rut.reverse
-	multiplier = 2
-	real_dv = 0
-	for digit in rut_reverse.each_char
-		if multiplier > 7
+	def validate(record)
+		if record.user_type_id == 3
+			rut, dv = record.id_number.split('-')
+			rut = rut.delete "."
+			rut_reverse = rut.reverse
 			multiplier = 2
+			real_dv = 0
+			for digit in rut_reverse.each_char
+				if multiplier > 7
+					multiplier = 2
+				end
+				real_dv += digit.to_i * multiplier
+				multiplier += 1
+			end
+			real_dv = 11 - real_dv % 11
+			if real_dv == 10
+				real_dv = 'k'
+			end
+			if real_dv == 11
+				real_dv = 0
+			end
+			if real_dv.to_s != dv
+				record.errors[:base] << "RUT inválido"
+			end
 		end
-		real_dv += digit.to_i * multiplier
-		multiplier += 1
 	end
-	real_dv = 11 - real_dv % 11
-	if real_dv == 10
-		real_dv = 'k'
-	end
-	if real_dv == 11
-		real_dv = 0
-	end
-	if real_dv.to_s != dv
-		record.errors[:base] << "RUT inválido"
-	end
-  end
 end
 
 class InviteCodeValidator < ActiveModel::Validator
