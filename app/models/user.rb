@@ -31,8 +31,10 @@ class InviteCodeValidator < ActiveModel::Validator
 		if record.user_type_id == 3 and invitation
 			record.errors[:base] << "Ingresa un codigo de invitación válido"
 		else
-			invitation.available = false
-			invitation.save
+			if invitation
+				invitation.available = false
+				invitation.save
+			end
 		end
 	end
 end
@@ -69,9 +71,8 @@ class User < ActiveRecord::Base
 	validates :id_number,
 				presence: true,
 				uniqueness: true,
-				unless: Proc.new { |a| a.id_number.blank? }
-	validates_with IdNumberValidator,
-				unless: Proc.new { |a| a.id_number.blank? }
+				on: :create
+	validates_with IdNumberValidator, on: :create
 	validates_with InviteCodeValidator, on: :create
 
 	def self.authenticate(email, password)
