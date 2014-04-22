@@ -55,9 +55,6 @@ class UsersController < ApplicationController
 					type = UserType.find(2)
 					user.user_type = type
 					user.save
-					respond_to do |format|
-						format.json { render :json => [message: "Invitaciones enviadas a " + emails, users: user.errors] }
-					end
 				end
 				document = Document.find(document_id)
 				if document
@@ -74,6 +71,9 @@ class UsersController < ApplicationController
 					@code = @invitations_left.first.code
 					UserMailer.free_user_invitation_email(@current_user, email, @invitations_left.first).deliver
 				end
+			end
+			respond_to do |format|
+				format.json { render :json => [message: "Invitaciones enviadas a " + emails, users: users] }
 			end
 		end
 	end
