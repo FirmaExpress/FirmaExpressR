@@ -1,11 +1,11 @@
 <% content_for :js do %>
 <%= javascript_include_tag "angular.min.js" %>
 	<script type="text/javascript">
-	/* Se inicializa la aplicación y la almacena en app*/
+		/* Se inicializa la aplicación y la almacena en app*/
 		var app = angular.module("FEFront", []);
-	/* Crea el controlador llamado "ProfileController"*/
+		/* Crea el controlador llamado "ProfileController"*/
 		app.controller("ProfileController", function($scope, $http){
-	/*Llamamos a users controller metodo profile*/		
+		/*Llamamos a users controller metodo profile*/		
 			$http.get('../users/profile.json').success(function(data) {
 				$scope.user = data;
 				console.log(data);
@@ -19,13 +19,13 @@
 			} 
 		});
 
-	$(document).on("ready", function () {
-		$("button").on("click", function () {
-		    var id = $(this).parent().attr('id');
-		    console.log('#' + id + " .hiddable");
-		    $('#' + id + " .hiddable").toggleClass("show");
+		$(document).on("ready", function () {
+			$("button").on("click", function () {
+			    var id = $(this).parent().attr('id');
+			    console.log('#' + id + " .hiddable");
+			    $('#' + id + " .hiddable").toggleClass("show");
+			});
 		});
-	});
 	</script>
 <% end %>
 		
@@ -47,7 +47,10 @@
 <div id="perfildatos">
 <h5>Datos Personales</h5>
 	<img class="img-circle" style="margin-top: -1px; margin-left: 30px" src="<%=root_url + @current_user.avatar %>" width=80 height=80>
-	<div id="first_name">
+	<p><span class="hiddable show" >
+	    Rut: {{user.id_number}}
+	 </span></p>
+	<p id="first_name">
 		<span class="hiddable show">
 	        Nombre: {{user.first_name}}
 	    </span>
@@ -56,9 +59,9 @@
 	    </span>
 	    <button class="hiddable show">Editar</button>
 	    <button class="hiddable" ng-click="updateprofile('first_name', user.first_name)">Guardar</button><br>
-    </div>
+    </p>
     <!--fin-->
-    <div id="lastname">
+    <p id="lastname">
 		<span class="hiddable show">
 	        Apellido: {{user.last_name}}
 	    </span>
@@ -67,18 +70,18 @@
 	    </span>
 	    <button class="hiddable show">Editar</button>
 	    <button class="hiddable" ng-click="updateprofile('last_name', user.last_name)">Guardar</button><br>
-	</div>
+	</p>
     <!--fin-->
-    <div id="email">
+    <p id="email">
 	    <span class="hiddable show">
 	        Email: {{user.email}}
 	    </span>
 	    <span class="hiddable">
 	        <input type="text" ng-model="user.email"/>
 	    </span>
-	    <button class="hiddable show">Editar</button>
+	    <button align="right" class="hiddable show">Editar</button>
 	    <button class="hiddable" ng-click="updateprofile('email', user.email)">Guardar</button><br>
-	</div>
+	</p>
 	<br>
 	<h5>Firmas</h5>
 	<p>Nº de Firmas: 100</p>
