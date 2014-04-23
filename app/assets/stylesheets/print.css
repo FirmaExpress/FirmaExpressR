@@ -1,0 +1,24 @@
+@media print{
+	@page { margin: 0; }
+	body { margin: 1.6cm; }
+	body header{
+		display: none;
+	}
+	body #containerdocumentos{
+		display: none;
+	}
+	body footer{
+		display: none;
+	}
+	.print{
+		margin: 40px auto;
+		color: black;
+		display: block;
+		text-align: center;
+	}
+}
+@media screen{
+	.print{
+		display: none;
+	}
+}

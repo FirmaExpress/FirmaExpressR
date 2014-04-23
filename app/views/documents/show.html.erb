@@ -3,6 +3,7 @@
 <% end %>
 <% content_for :style do %>
 	<% stylesheet_link_tag "bootstrap-theme.css" %>
+	<% stylesheet_link_tag "print.css" %>
 <% end %>
 <% content_for :js do %>
 <%= javascript_include_tag "bootstrap-modal.js" %>
@@ -129,6 +130,7 @@
 			$scope.destroy = function(){
 				$http.get('../documents/destroy/' + $scope.document_id + '.json').success(function(data) {
 					console.log(data);
+					window.location.href = "http://<%= request.host %>"
 				});
 			}
 		});
@@ -160,6 +162,9 @@
 	</div>
 	<div id="optionsdocumento" ng-controller="DocumentOptionsController">
 		<ul>
+			<% if @document.agreed %>
+				<li><a href="" onclick="window.print();">Imprimir</a></li>
+			<% end %>
 			<% if @signed.signed == false %>
 				<li><a href="" confirmed-click="sign()" 
     ng-confirm-click="¿Está seguro de firmar este documento?">Firmar</a></li>
@@ -178,7 +183,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">Participantes</h4>
+					<h4 class="modal-title" id="myModalLabel"><%= @document.name %></h4>
 				</div>
 				<div class="modal-body">
 					<ul>
@@ -237,3 +242,22 @@
 <p class="left">Todos los Derechos Reservados a Firma Express 2013 / <a href="preguntasfrecuentes.html">Preguntas Frecuentes</a> / <a href="legal.html">Condiciones Legales</a>.</p>
 <p class="right">Dirección: Av. Nombre Nº1234 / Teléfono: +56 2 2342567 / Mail: contacto@firmaexpress.cl</p>
 </footer>
+<div class="print">
+	<% if @document.agreed %>
+	<h2><%= @document.name %></h2><br /><br />
+	<h3>Folio: <%= @document.id %></h3><br />
+	<ul>
+		<% @participants.each do |participant| %>
+			<% sign_state = if participant.signed
+				'Firmado'
+			else
+				'Sin Firmar'
+			end %>
+			<li><%= participant.first_name %> <%= participant.last_name %> - <%= participant.role %> - <%= sign_state %></li>
+		<% end %>
+	</ul>
+	<!-- Show QR -->
+	<img src="http://chart.apis.google.com/chart?chs=200x200&cht=qr&chl=http://<%= request.host %>/check_document/<%= @document.id %>&choe=ISO-8859-1">
+	<p class="print">Sellado <%= @document.agreed_at %></p>
+	<% end %>
+</div>
