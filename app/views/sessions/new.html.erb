@@ -49,6 +49,15 @@ Login
 			</div>
 		</div>
 	</div>
+	<section id="slide-1" class="homeSlide">
+		<div class="bcg skrollable skrollable-before" data-center="background-position: 50% 0px;" data-top-bottom="background-position: 50% -100px;" data-anchor-target="#slide-1" style="background-position: 50% 0px;">
+			<div class="hsContainer">
+				<div class="hsContent skrollable skrollable-before" data-center="bottom: 200px; opacity: 1" data-top="bottom: 1200px; opacity: 0" data-anchor-target="#slide-1 h2" style="bottom: 200px; opacity: 1;">
+					<h2>Simple parallax scrolling is...</h2>
+				</div>
+			</div>
+		</div>
+	</section>
 	<div id="info3">
 		<div id="bio2">
 			<div id="wrapbio">
@@ -58,6 +67,15 @@ Login
 			</div>
 		</div>
 	</div>
+	<section id="slide-2">
+		<div class="bcg skrollable skrollable-before" data-center="background-position: 50% 0px;" data-top-bottom="background-position: 50% -100px;" data-anchor-target="#slide-1" style="background-position: 50% 0px;">
+			<div class="hsContainer">
+				<div class="hsContent skrollable skrollable-before" data-center="bottom: 200px; opacity: 1" data-top="bottom: 1200px; opacity: 0" data-anchor-target="#slide-1 h2" style="bottom: 200px; opacity: 1;">
+					<h2>Simple parallax scrolling is...</h2>
+				</div>
+			</div>
+		</div>
+	</section>
 	<div id="info4">
 		<div id="bio2">
 			<div id="wrapbio">
@@ -67,6 +85,15 @@ Login
 			</div>
 		</div>
 	</div>
+	<section id="slide-3">
+		<div class="bcg skrollable skrollable-before" data-center="background-position: 50% 0px;" data-top-bottom="background-position: 50% -100px;" data-anchor-target="#slide-1" style="background-position: 50% 0px;">
+			<div class="hsContainer">
+				<div class="hsContent skrollable skrollable-before" data-center="bottom: 200px; opacity: 1" data-top="bottom: 1200px; opacity: 0" data-anchor-target="#slide-1 h2" style="bottom: 200px; opacity: 1;">
+					<h2>Simple parallax scrolling is...</h2>
+				</div>
+			</div>
+		</div>
+	</section>
 	<div id="info5">
 		<div id="bio2">
 			<div id="wrapbio">
@@ -76,7 +103,27 @@ Login
 			</div>
 		</div>
 	</div>
+	<section id="slide-4">
+		<div class="bcg skrollable skrollable-before" data-center="background-position: 50% 0px;" data-top-bottom="background-position: 50% -100px;" data-anchor-target="#slide-1" style="background-position: 50% 0px;">
+			<div class="hsContainer">
+				<div class="hsContent skrollable skrollable-before" data-center="bottom: 200px; opacity: 1" data-top="bottom: 1200px; opacity: 0" data-anchor-target="#slide-1 h2" style="bottom: 200px; opacity: 1;">
+					<h2>Simple parallax scrolling is...</h2>
+				</div>
+			</div>
+		</div>
+	</section>
 </div>
 <footer>
 	<p class="center">Todos los Derechos Reservados a Firma Express 2013: Av. Nombre Nº1234 / +56 2 2342567 / contacto@firmaexpress.cl / <a href="preguntasfrecuentes.html">Preguntas Frecuentes</a> / <a href="legal.html">Condiciones Legales</a></p>
 </footer>
+<script type="text/javascript">
+( function( $ ) {
+    // Init Skrollr
+    var s = skrollr.init({
+        render: function(data) {
+            //Debugging - Log the current scroll position.
+            console.log(data.curTop);
+        }
+    });
+} )( jQuery );
+</script>
