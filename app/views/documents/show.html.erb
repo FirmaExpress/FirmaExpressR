@@ -144,10 +144,11 @@
 	<div id="biblioteca" ng-controller="DocumentsListController">
 		<div id="item"><a href="<%= root_url %>"><h4>Subir Documento</h4></a></div>
 		<div id="item"><a href=""><h4>Biblioteca</h4></a></div>
-		<div id="options"><input type="search" placeholder="Buscar" class="search" ng-model="searchText">
-		<%= image_tag "b.png", { height: 28, width: 28 } %><%= image_tag "bin.png", { height: 28, width: 28 } %></div>
+		<div id="options">
+			<input type="search" placeholder="Buscar" class="search" ng-model="searchText">
+		</div>
 		<div id="item{{ document.id == <%= @document.id %> | iif : 'activo' : '' }}" ng-repeat="document in documents | filter:searchText">
-			<a href="{{ document.id }}"><p><strong>{{document.name}}</strong> / <i>Progreso: 1 de 4</i></p></a>
+			<a href="{{ document.id }}"><p><strong>{{document.name}}</strong></p></a>
 		</div>
 		<!--
 		<% @documents.each do |doc|%>
@@ -173,7 +174,7 @@
 				<li><a href="" confirmed-click="destroy()" 
     ng-confirm-click="¿Está seguro de eliminar este documento?">Eliminar</a></li>
             <% end %>
-			<li><a data-toggle="modal" data-target="#modal-panel-participants" name="button-participants" id="button-participants">Participantes</a></li>
+			<li><a data-toggle="modal" data-target="#modal-panel-participants" name="button-participants" id="button-participants">Compartir</a></li>
 			<% if @invitations_left.count > 0 %>
 				<li style="width:150px"><a data-toggle="modal" data-target="#modal-panel-new-user-invite" name="button-new-user-invite" id="button-new-user-invite"><%= @invitations_left.count %> invitaciones disponibles</a></li>
 			<% end %>

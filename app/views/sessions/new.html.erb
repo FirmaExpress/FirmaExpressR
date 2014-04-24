@@ -4,8 +4,6 @@ Login
 <div id="containerhome">
 	<div id="login">
 		<div id="slider">
-			<h1>100% Online</h1>
-			<h2>Crea y firma tus documentos</h2>
 		</div>
 		<div id="formulariologin">
 			<%= form_tag sessions_path do %>
@@ -17,20 +15,21 @@ Login
 		<%= image_tag "login.png", { height: 400, width: 533, class: 'imagenlogin' } %>
 	</div>
 	<div id="headline">
-		<div id="box_1_3">
-			<h3>Fácil</h3>
-		</div>
-		<div id="box_1_3">
-			<h3>Rápido</h3>
-		</div>
-		<div id="box_1_3">
-			<h3>Seguro</h3>
+		<div id="insideheadline">
+			<div id="box_1_3">
+				<h3>Fácil</h3>
+			</div>
+			<div id="box_1_3">
+				<h3>Rápido</h3>
+			</div>
+			<div id="box_1_3">
+				<h3>Seguro</h3>
+			</div>
 		</div>
 	</div>
 	<div id="servicios">
 		<div id="box_1_3">
-			<p>Registrate como usuario en nuestro sitio, sube todos los documentos que quieras y luego firmalos para validarlos o enviarlos a tus contactos. Todo 100% online.</p>
-		</div>
+			<p>Registrate como usuario en nuestro sitio, sube todos los documentos que quieras y luego firmalos para validarlos o enviarlos a tus contactos. Todo 100% online.</p></div>
 		<div id="box_1_3">
 			<p>Sube tus documentos en segundos, firmalos de inmediato sin trámites ni interrupciones, sin viajes ni pérdidas de tiempo. Con tan solo un click valida lo que quieras.</p>
 		</div>
@@ -38,33 +37,46 @@ Login
 			<p>Contamos con un sistema preparado para proteger los datos personales de nuestros clientes y mantener la confidencialidad de todos sus documentos.</p>
 		</div>
 	</div>
-	<div id="headline">
+	<div id="headline2">
 		<h3>Pasos a seguir</h3>
 	</div>
 	<div id="info2">
-		<h3>1. Registrate</h3>
-		<br>
 		<div id="bio2">
-			<%= image_tag "paso1.png", { width: 450, class: 'imagenpasos' } %>
-			<p>Ingresa a nuestro sitio web, crea un nuevo usuario con tus datos personales y podrás comenzar a utilizar nuestro servicio inmediatamente.</p>
+			<div id="wrapbio">
+				<h3>Registrate</h3>
+				<p>Ingresa a nuestro sitio web, crea un nuevo usuario con tus datos personales y podrás comenzar a utilizar nuestro servicio inmediatamente.</p>
+				<%= image_tag "registrar.jpg", { width: 450, style: 'margin-left:20px;' } %>
+			</div>
 		</div>
-		<h3>2. Sube tu documento</h3>
-		<br>
+	</div>
+	<div id="info3">
 		<div id="bio2">
-			<%= image_tag "paso1.png", { width: 450, class: 'imagenpasos' } %>
-			<p>A través de nuestro administrador sube todos los documentos que necesites firmar y almacénalos en tu biblioteca virtual.</p>
+			<div id="wrapbio">
+				<h3>Sube tu documento</h3>
+				<p>A través de nuestro administrador sube todos los documentos que necesites firmar y almacénalos en tu biblioteca virtual.</p>
+				<%= image_tag "subelo.jpg", { width: 450, style: 'margin-left:20px;' } %>
+			</div>
 		</div>
-		<h3>3. Firmalo</h3>
-		<br>
+	</div>
+	<div id="info4">
 		<div id="bio2">
-			<%= image_tag "paso1.png", { width: 450, class: 'imagenpasos' } %>
-			<p>Escoge de tu biblioteca el documento a firmar, ingresa tus datos de seguridad para verificar tu identidad y firma de manera segura y confiable.</p>
+			<div id="wrapbio">
+				<h3>Firmalo</h3>
+				<p>Escoge de tu biblioteca el documento a firmar, ingresa tus datos de seguridad para verificar tu identidad y firma de manera segura y confiable.</p>
+				<%= image_tag "firmalo.jpg", { width: 450, style: 'margin-left:20px;' } %>
+			</div>
 		</div>
-		<h3>4. Envíalo</h3>
-		<br>
+	</div>
+	<div id="info5">
 		<div id="bio2">
-			<%= image_tag "paso1.png", { width: 450, class: 'imagenpasos' } %>
-			<p>Cuando hayas realizado el proceso de firma, podrás enviar el documento a todos los usuarios que quieras enviándoles una invitación a compartir el documento. Invitándolos así a firmar en conjunto.</p>
+			<div id="wrapbio">
+				<h3>Envíalo</h3>
+				<p>Cuando hayas realizado el proceso de firma, podrás enviar el documento a todos los usuarios que quieras enviándoles una invitación a compartir el documento. Invitándolos así a firmar en conjunto.</p>
+				<%= image_tag "envialo.jpg", { width: 450, style: 'margin-left:20px;' } %>
+			</div>
 		</div>
 	</div>
 </div>
+<footer>
+	<p class="center">Todos los Derechos Reservados a Firma Express 2013: Av. Nombre Nº1234 / +56 2 2342567 / contacto@firmaexpress.cl / <a href="preguntasfrecuentes.html">Preguntas Frecuentes</a> / <a href="legal.html">Condiciones Legales</a></p>
+</footer>

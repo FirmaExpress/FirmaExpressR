@@ -20,10 +20,11 @@ Gestión de Documentos
 	<div id="biblioteca" ng-controller="DocumentsListController">
 		<div id="itemactive"><a href="<%= root_url %>"><h4>Subir Documento</h4></a></div>
 		<div id="item"><a href=""><h4>Biblioteca</h4></a></div>
-		<div id="options"><input type="search" placeholder="Buscar" class="search" ng-model="searchText">
-		<%= image_tag "b.png", { height: 28, width: 28 } %><%= image_tag "bin.png", { height: 28, width: 28 } %></div>
+		<div id="options">
+			<input type="search" placeholder="Buscar" class="search" ng-model="searchText">
+		</div>
 		<div id="item" ng-repeat="document in documents | filter:searchText">
-			<a href="documents/{{ document.id }}"><p><strong>{{document.name}}</strong> / <i>Progreso: 1 de 4</i></p></a>
+			<a href="documents/{{ document.id }}"><p><strong>{{document.name}}</strong></p></a>
 		</div>
 	</div>
 	<div id="optionsdocumento"></div>
@@ -32,9 +33,6 @@ Gestión de Documentos
 			<%= f.file_field :path %>
 			<%= submit_tag "Subir", { class: 'loginboton upload-button' } %>
 		<% end %>
-		<%= debug @document %>
-		<%= debug @document.errors %>
-		<%= debug @participant.inspect %>
 	</div>
 	<div id="importante"><p class="datosextra">Solo se pueden subir documentos en PDF. Si no tienes tus archivos en este formato, utiliza nuestro conversor de Word a PDF <a href="conversor.html" style="color:#ab8f5a;font-weight:bolder;">aquí</a>.</p></div>
 </div>
