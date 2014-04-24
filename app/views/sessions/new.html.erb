@@ -7,7 +7,7 @@ Login
 		</div>
 		<div id="formulariologin">
 			<%= form_tag sessions_path do %>
-    			<%= text_field_tag :email, params[:email], { placeholder: 'E-mail', class: 'inputhome'} %>
+    			<%= text_field_tag :email, params[:email], { placeholder: 'E-mail', class: 'inputhome', autofocus: 'true'} %>
     			<%= password_field_tag :password, nil, { placeholder: 'Password', class: 'inputhome'} %>
     			<%= submit_tag "Login", { class: 'loginboton' } %>
 			<% end %>
