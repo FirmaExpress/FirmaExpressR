@@ -27,10 +27,10 @@
                 <li><img class="img-circle" style="margin-top: -5px; margin-left: 5px" src="<%= root_url + current_user.avatar.to_s %>" width=30 height=30></li>
                 <li><%= link_to("Logout", destroy_user_session_path, :method => :delete) %></li>
               <% else %>
-                <li><%= link_to '¡Registrate!', 'register' %></li>
-                <li><%= link_to 'Nosotros', 'about_us' %></li>
-                <li><%= link_to 'Planes', 'plans' %></li>
-                <li><%= link_to 'Contacto', 'contact' %></li>
+                <li><%= link_to '¡Registrate!', new_user_registration_path %></li>
+                <li><%= link_to 'Nosotros', about_us_path %></li>
+                <li><%= link_to 'Planes', plans_path %></li>
+                <li><%= link_to 'Contacto', contact_form_path %></li>
               <% end %>
             </ul>
         </nav>

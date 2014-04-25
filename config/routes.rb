@@ -26,7 +26,7 @@ FirmaExpressR::Application.routes.draw do
   #get "/login", to: "home#login" 
   get "/about_us", to: "home#aboutus"
   get "/plans", to: "home#plans"
-  get "/contact", to: "home#contact"
+  get "/contact", to: "home#contact", as: "contact_form"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
