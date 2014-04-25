@@ -1,4 +1,5 @@
 FirmaExpressR::Application.routes.draw do
+  devise_for :users
   root 'documents#new'
   get "show" => "documents#show", :as => "show_document"
   get "documents/new"
