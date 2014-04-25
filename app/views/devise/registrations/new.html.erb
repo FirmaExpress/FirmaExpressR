@@ -1,18 +1,43 @@
-<h2>Sign up</h2>
-
+<% content_for :title do %>
+Login
+<% end %>
+<div id="container">
+	<div id="headline">
+		<h3>Registrate con nosotros</h3>
+	</div>
+	<div id="info">
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+	<%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, autofocus: true %></div>
+	<%= f.label :avatar, 'Imagen de Perfil' %>
+	<%= f.file_field :avatar %>
+	<%= f.label :first_name, 'Nombres' %>
+	<%= f.text_field :first_name %>
+	<%= f.label :last_name, 'Apellidos' %>
+	<%= f.text_field :last_name %>
+	<%= f.label :id_number, 'RUT' %>
+	<%= f.text_field :id_number %>
+	<%= f.label :email, 'E-mail' %>
+	<%= f.email_field :email, autofocus: true %>
+	<%= f.label :password, 'Contraseña' %>
+	<%= f.password_field :password, autocomplete: "off" %>
+	<%= f.label :password_confirmation, 'Confirmar contraseña' %>
+	<%= f.password_field :password_confirmation, autocomplete: "off" %>
+	<%= f.label :invite_code, 'Codigo de invitación' %>
+	<%= f.text_field :invite_code %>
 
-  <div><%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %></div>
 
-  <div><%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
 
-  <div><%= f.submit "Sign up" %></div>
+<%= f.submit "Registrarme", {id: 'submit'} %>
 <% end %>
 
 <%= render "devise/shared/links" %>
+		<p class="datosextra">*Datos importantes sobre el registro.<br>
+		*Datos importantes sobre el registro.<br>
+		*Datos importantes sobre el registro.</p>
+	</div>
+</div>
+<footer>
+	<p class="left">Todos los Derechos Reservados a Firma Express 2013 / <a href="preguntasfrecuentes.html">Preguntas Frecuentes</a> / <a href="legal.html">Condiciones Legales</a>.</p>
+	<p class="right">Dirección: Av. Nombre Nº1234 / Teléfono: +56 2 2342567 / Mail: contacto@firmaexpress.cl</p>
+</footer>
