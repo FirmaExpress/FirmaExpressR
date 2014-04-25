@@ -1,5 +1,8 @@
 FirmaExpressR::Application.routes.draw do
   devise_for :users
+  devise_scope :user do 
+    match '/sessions/user', to: 'devise/sessions#create', via: :post
+  end
   root 'documents#new'
   get "show" => "documents#show", :as => "show_document"
   get "documents/new"

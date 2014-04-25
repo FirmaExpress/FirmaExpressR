@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-	before_action :check_auth, only: [:profile, :invite]
+	before_action :authenticate_user!
+	#before_action :check_auth, only: [:profile, :invite]
 	def new
 		@user = User.new
 		user_id = params[:u]

@@ -16,7 +16,3 @@ User.create([{
 	password: '1234', 
 	password_confirmation: '1234',
 	user_type_id: 1 }])
-InviteCode.create([
-	{ code: '1', user_id: 1, available: true }, 
-	{ code: '2', user_id: 1, available: true }, 
-	{ code: '3', user_id: 1, available: true }])

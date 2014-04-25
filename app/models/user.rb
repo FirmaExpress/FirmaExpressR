@@ -51,9 +51,9 @@ class User < ActiveRecord::Base
 	has_many :invite_codes
 	belongs_to :user_type
 
-	attr_accessor :password
+	#attr_accessor :password, :password_confirmation, :current_password
 	attr_accessor :invite_code
-	before_save :encrypt_password
+	#before_save :encrypt_password
 
 	validates :password,
 				presence: true,
@@ -70,8 +70,8 @@ class User < ActiveRecord::Base
 	validates :last_name,
 				presence: true,
 				unless: Proc.new { |a| a.id_number.blank? }
-	validates :avatar,
-				presence: true
+	#validates :avatar,
+	#			presence: true
 	validates :id_number,
 				presence: true,
 				uniqueness: true,
@@ -89,10 +89,11 @@ class User < ActiveRecord::Base
 		end
 	end
 
-	def encrypt_password
+=begin def encrypt_password
 		if password.present?
 			self.password_salt = BCrypt::Engine.generate_salt
 			self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
 		end
 	end
+=end
 end
