@@ -8,11 +8,11 @@
 Role.create([{ name: 'Dueño' }, { name: 'Pendiente' }, { name: 'Invitado' }])
 UserType.create([{ name: 'Master' }, { name: 'Invitado' }, { name: 'Free' }])
 User.create([{ 
-	avatar: 'uploads/user.jpg', 
+	avatar: nil, 
 	first_name: 'Claudio', 
 	last_name: 'Guerra', 
 	id_number: '17026575-0', 
 	email: 'claudevandort@gmail.com', 
-	password: '1234', 
-	password_confirmation: '1234',
+	password: '12345678', 
+	password_confirmation: '12345678',
 	user_type_id: 1 }])

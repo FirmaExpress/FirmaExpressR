@@ -19,6 +19,7 @@ FirmaExpressR::Application.routes.draw do
   get "check_document/:id", to: "documents#check"
   get "/profile", to: "users#profile", as:"profile"
   get "users/update_profile", to: "users#update_profile", as:"update_profile"
+  default_url_options :host => "Firmaexpress.dev"
   resources :users
   resources :sessions
   resources :documents
