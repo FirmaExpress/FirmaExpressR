@@ -28,7 +28,7 @@ end
 class InviteCodeValidator < ActiveModel::Validator
 	def validate(record)
 		invitation = InviteCode.find_by(code: record.invite_code, available: true)
-		if record.user_type_id == 3 and invitation
+		if record.user_type_id == 3 and invitation == nil
 			record.errors[:base] << "Ingresa un codigo de invitación válido"
 		else
 			if invitation
@@ -40,6 +40,10 @@ class InviteCodeValidator < ActiveModel::Validator
 end
 
 class User < ActiveRecord::Base
+	# Include default devise modules. Others available are:
+	# :confirmable, :lockable, :timeoutable and :omniauthable
+	devise :database_authenticatable, :registerable,
+	:recoverable, :rememberable, :trackable, :validatable
 	include ActiveModel::Validations
 	has_many :participants
 	has_many :documents, through: :participants
@@ -47,9 +51,14 @@ class User < ActiveRecord::Base
 	has_many :invite_codes
 	belongs_to :user_type
 
-	attr_accessor :password
+	has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
+	validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+
+	#attr_accessor :password, :password_confirmation, :current_password
 	attr_accessor :invite_code
-	before_save :encrypt_password
+	before_validation :set_user_id
+	after_save :generate_codes, on: :create
+	#before_save :encrypt_password
 
 	validates :password,
 				presence: true,
@@ -66,8 +75,8 @@ class User < ActiveRecord::Base
 	validates :last_name,
 				presence: true,
 				unless: Proc.new { |a| a.id_number.blank? }
-	validates :avatar,
-				presence: true
+	#validates :avatar,
+	#			presence: true
 	validates :id_number,
 				presence: true,
 				uniqueness: true,
@@ -76,19 +85,22 @@ class User < ActiveRecord::Base
 				unless: Proc.new { |a| a.id_number.blank? }
 	validates_with InviteCodeValidator, on: :create
 
+	def generate_codes
+		3.times do
+			self.invite_codes << InviteCode.create()
+		end
+	end
+
+	def set_user_id
+		self.user_type_id = 3 if self.user_type_id.blank?
+	end
+
 	def self.authenticate(email, password)
 		user = find_by_email(email)
 		if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
 			user
 		else
 			nil
-		end
-	end
-
-	def encrypt_password
-		if password.present?
-			self.password_salt = BCrypt::Engine.generate_salt
-			self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
 		end
 	end
 end

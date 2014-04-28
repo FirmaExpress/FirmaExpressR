@@ -1,18 +1,20 @@
 class DocumentsController < ApplicationController
-	before_action :check_auth, except: [:check]
+	before_action :authenticate_user!
+	before_action :invitations, :invitations_left
+	#before_action :check_auth, except: [:check]
 	def new
 		@document = Document.new
-		user = User.find(session[:user_id])
+		user = User.find(current_user.id)
 		@documents = user.documents
 	end
 
 	def create
 		uploaded_io = params[:document][:path]
-		#dir = 'uploads/users/' + session[:user_id].to_s() + '/documents/'
+		#dir = 'uploads/users/' + current_user.to_s() + '/documents/'
 		#document_path = dir + uploaded_io.original_filename
-		@document = Document.new(file: uploaded_io, user_id: session[:user_id])
+		@document = Document.new(file: uploaded_io, user_id: current_user.id)
 		if @document.save
-			@participant = Participant.new(document_id: @document.id, role_id: 1, user_id: session[:user_id], signed: 'f')
+			@participant = Participant.new(document_id: @document.id, role_id: 1, user_id: current_user.id, signed: 'f')
 			if @participant.save
 				redirect_to root_url
 			else
@@ -29,7 +31,7 @@ class DocumentsController < ApplicationController
 
 	def show
 		@document = Document.find(params[:id])
-		user = User.find(session[:user_id])
+		user = User.find(current_user.id)
 		@documents = user.documents
 		@participants = Document.joins(:participants, :users, :roles).select('"documents".*, "participants".*, "users".*, "roles".name as role').where('"documents"."id" = ' + @document.id.to_s)
 		@signed = Document.joins(:participants, :users, :roles).select('"participants"."signed"').where('"participants"."user_id" = ' + user.id.to_s + ' AND "documents"."id" = ' + @document.id.to_s).first
@@ -41,7 +43,7 @@ class DocumentsController < ApplicationController
 	end
 
 	def list
-		user = User.find(session[:user_id])
+		user = User.find(current_user)
 		documents = user.documents
 		respond_to do |format|
 			format.json { render :json => documents }
@@ -55,7 +57,7 @@ class DocumentsController < ApplicationController
 
 	def sign
 		document_id = params[:id]
-		user = User.find(session[:user_id])
+		user = User.find(current_user.id)
 		user_id = user.id.to_s
 		participant = Participant.where('"document_id" = ' + document_id + ' AND "user_id" = ' + user_id).first
 		participant.signed = 't'

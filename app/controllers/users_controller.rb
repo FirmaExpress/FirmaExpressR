@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-	before_action :check_auth, only: [:profile, :invite]
+	before_action :authenticate_user!
+	#before_action :check_auth, only: [:profile, :invite]
 	def new
 		@user = User.new
 		user_id = params[:u]
@@ -89,7 +90,7 @@ class UsersController < ApplicationController
     def update_profile
     	campo = params[:campo]
 		valor = params[:valor]
-		id = session[:user_id]
+		id = current_user.id
 		boolean = []
 		user = User.find(id)
 		case campo
@@ -109,7 +110,7 @@ class UsersController < ApplicationController
     def profile
     	respond_to do |format|
 			format.html
-			format.json { render :json => @current_user }
+			format.json { render :json => current_user }
 		end
     end
 end

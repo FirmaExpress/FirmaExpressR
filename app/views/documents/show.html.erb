@@ -170,7 +170,7 @@
 				<li><a href="" confirmed-click="sign()" 
     ng-confirm-click="¿Está seguro de firmar este documento?">Firmar</a></li>
 			<% end %>
-			<% if @current_user_role.id  == 1 %>
+			<% if @current_user_role.id  == 1 and !@document.agreed %>
 				<li><a href="" confirmed-click="destroy()" 
     ng-confirm-click="¿Está seguro de eliminar este documento?">Eliminar</a></li>
             <% end %>

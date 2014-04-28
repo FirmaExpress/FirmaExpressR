@@ -6,7 +6,7 @@
 		/* Crea el controlador llamado "ProfileController"*/
 		app.controller("ProfileController", function($scope, $http){
 		/*Llamamos a users controller metodo profile*/		
-			$http.get('../users/profile.json').success(function(data) {
+			$http.get('../profile.json').success(function(data) {
 				$scope.user = data;
 				console.log(data);
 			});
@@ -46,7 +46,7 @@
 <div id="perfil" ng-controller="ProfileController">
 <div id="perfildatos">
 <h5>Datos Personales</h5>
-	<img class="img-circle" style="margin-top: -1px; margin-left: 30px" src="<%=root_url + @current_user.avatar %>" width=80 height=80>
+	<img class="img-circle" style="margin-top: -1px; margin-left: 30px" src="<%=root_url + current_user.avatar.to_s %>" width=80 height=80>
 	<p><span class="hiddable show" >
 	    Rut: {{user.id_number}}
 	 </span></p>
