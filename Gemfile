@@ -35,7 +35,11 @@ end
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+#divais
 gem 'devise'
+
+#peiper clipz
+gem 'paperclip', github: 'thoughtbot/paperclip'
 
 # Use unicorn as the app server
 # gem 'unicorn'

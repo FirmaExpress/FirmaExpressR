@@ -23,7 +23,7 @@
         <nav>
             <ul>
               <% if current_user %>
-                <li><%= link_to 'Bienvenido ' + current_user.first_name.to_s, '../users/profile' %></li>
+                <li><%= link_to 'Bienvenido ' + current_user.first_name.to_s, profile_path %></li>
                 <li><img class="img-circle" style="margin-top: -5px; margin-left: 5px" src="<%= root_url + current_user.avatar.to_s %>" width=30 height=30></li>
                 <li><%= link_to("Logout", destroy_user_session_path, :method => :delete) %></li>
               <% else %>

@@ -36,4 +36,5 @@ FirmaExpressR::Application.configure do
     password:             'zaq12wsx@',
     authentication:       'plain',
     enable_starttls_auto: true  }
+    Paperclip.options[:command_path] = "/usr/bin/convert"
 end

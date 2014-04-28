@@ -6,7 +6,7 @@
 		/* Crea el controlador llamado "ProfileController"*/
 		app.controller("ProfileController", function($scope, $http){
 		/*Llamamos a users controller metodo profile*/		
-			$http.get('../users/profile.json').success(function(data) {
+			$http.get('../profile.json').success(function(data) {
 				$scope.user = data;
 				console.log(data);
 			});

@@ -40,16 +40,18 @@ class InviteCodeValidator < ActiveModel::Validator
 end
 
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+	# Include default devise modules. Others available are:
+	# :confirmable, :lockable, :timeoutable and :omniauthable
+	devise :database_authenticatable, :registerable,
+	:recoverable, :rememberable, :trackable, :validatable
 	include ActiveModel::Validations
 	has_many :participants
 	has_many :documents, through: :participants
 	has_many :roles, through: :participants
 	has_many :invite_codes
 	belongs_to :user_type
+	has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
+	validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
 	#attr_accessor :password, :password_confirmation, :current_password
 	attr_accessor :invite_code
@@ -88,12 +90,4 @@ class User < ActiveRecord::Base
 			nil
 		end
 	end
-
-=begin def encrypt_password
-		if password.present?
-			self.password_salt = BCrypt::Engine.generate_salt
-			self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
-		end
-	end
-=end
 end

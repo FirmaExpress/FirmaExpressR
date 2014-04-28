@@ -90,7 +90,7 @@ class UsersController < ApplicationController
     def update_profile
     	campo = params[:campo]
 		valor = params[:valor]
-		id = session[:user_id]
+		id = current_user.id
 		boolean = []
 		user = User.find(id)
 		case campo
@@ -110,7 +110,7 @@ class UsersController < ApplicationController
     def profile
     	respond_to do |format|
 			format.html
-			format.json { render :json => @current_user }
+			format.json { render :json => current_user }
 		end
     end
 end
