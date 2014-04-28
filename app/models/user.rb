@@ -28,7 +28,7 @@ end
 class InviteCodeValidator < ActiveModel::Validator
 	def validate(record)
 		invitation = InviteCode.find_by(code: record.invite_code, available: true)
-		if record.user_type_id == 3 and invitation
+		if record.user_type_id == 3 and invitation == nil
 			record.errors[:base] << "Ingresa un codigo de invitación válido"
 		else
 			if invitation
@@ -50,11 +50,14 @@ class User < ActiveRecord::Base
 	has_many :roles, through: :participants
 	has_many :invite_codes
 	belongs_to :user_type
+
 	has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
 	validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
 	#attr_accessor :password, :password_confirmation, :current_password
 	attr_accessor :invite_code
+	before_validation :set_user_id
+	after_save :generate_codes, on: :create
 	#before_save :encrypt_password
 
 	validates :password,
@@ -81,6 +84,16 @@ class User < ActiveRecord::Base
 	validates_with IdNumberValidator,
 				unless: Proc.new { |a| a.id_number.blank? }
 	validates_with InviteCodeValidator, on: :create
+
+	def generate_codes
+		3.times do
+			self.invite_codes << InviteCode.create()
+		end
+	end
+
+	def set_user_id
+		self.user_type_id = 3 if self.user_type_id.blank?
+	end
 
 	def self.authenticate(email, password)
 		user = find_by_email(email)
