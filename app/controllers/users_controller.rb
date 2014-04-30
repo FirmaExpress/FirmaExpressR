@@ -52,7 +52,7 @@ class UsersController < ApplicationController
 				user = User.where('"email" = \'' + email + '\'').first
 				unless user
 					#Pendiente: Implementar validación diferida según endpoint	
-					user = User.new(avatar: 'uploads/user.jpg', email: email, password: email, password_confirmation: email)
+					user = User.new(email: email, password: email, password_confirmation: email)
 					type = UserType.find(2)
 					user.user_type = type
 					user.save

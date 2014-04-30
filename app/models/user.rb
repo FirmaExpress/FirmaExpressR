@@ -86,8 +86,10 @@ class User < ActiveRecord::Base
 	validates_with InviteCodeValidator, on: :create
 
 	def generate_codes
-		3.times do
-			self.invite_codes << InviteCode.create()
+		unless self.invite_codes
+			3.times do
+				self.invite_codes << InviteCode.create()
+			end
 		end
 	end
 
