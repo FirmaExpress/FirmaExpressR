@@ -33,9 +33,21 @@ class DocumentsController < ApplicationController
 		@document = Document.find(params[:id])
 		user = User.find(current_user.id)
 		@documents = user.documents
-		@participants = Document.joins(:participants, :users, :roles).select('"documents".*, "participants".*, "users".*, "roles".name as role').where('"documents"."id" = ' + @document.id.to_s)
-		@signed = Document.joins(:participants, :users, :roles).select('"participants"."signed"').where('"participants"."user_id" = ' + user.id.to_s + ' AND "documents"."id" = ' + @document.id.to_s).first
-		@current_user_role = Document.joins(:participants, :users, :roles).select('"roles"."id","roles"."name"').where('"participants"."user_id" = ' + user.id.to_s + ' AND "documents"."id" = ' + @document.id.to_s).first
+		#@participants = Document.joins(participants: [{ user: :roles }]).select('"documents".*, "participants".*, "users".*, "roles".namea as role').where('"documents"."id" = ' + @document.id.to_s)
+		@participants = Document.joins('INNER JOIN "participants" ON "participants"."document_id" = "documents"."id" 
+			INNER JOIN "users" ON "users"."id" = "participants"."user_id" 
+			INNER JOIN "roles" ON "roles"."id" = "participants"."role_id" 
+			WHERE ("documents"."id" = ' + @document.id.to_s + ')').select('"documents".*, "participants".*, "users".*, "roles".name as role')
+		#@signed = Document.joins(:participants, :users, :roles).select('"participants"."signed"').where('"participants"."user_id" = ' + user.id.to_s + ' AND "documents"."id" = ' + @document.id.to_s).first
+		@signed = Document.joins('INNER JOIN "participants" ON "participants"."document_id" = "documents"."id" 
+			INNER JOIN "users" ON "users"."id" = "participants"."user_id" 
+			INNER JOIN "roles" ON "roles"."id" = "participants"."role_id" 
+			WHERE ("participants"."user_id" = ' + user.id.to_s + ' AND "documents"."id" = ' + @document.id.to_s + ')').select('"documents".*, "participants".*, "users".*, "roles".name as role').first
+		#@current_user_role = Document.joins(:participants, :users, :roles).select('"roles"."id","roles"."name"').where('"participants"."user_id" = ' + user.id.to_s + ' AND "documents"."id" = ' + @document.id.to_s).first
+		@current_user_role = Document.joins('INNER JOIN "participants" ON "participants"."document_id" = "documents"."id" 
+			INNER JOIN "users" ON "users"."id" = "participants"."user_id" 
+			INNER JOIN "roles" ON "roles"."id" = "participants"."role_id" 
+			WHERE ("participants"."user_id" = ' + user.id.to_s + ' AND "documents"."id" = ' + @document.id.to_s + ')').select('"roles"."id","roles"."name"').first
 		respond_to do |format|
 			format.html
 			format.json { render :json => [participants: @participants, document: @document, signed: @signed.signed, current_user_role: @current_user_role] }
