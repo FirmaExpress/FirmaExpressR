@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 	before_action :authenticate_user!, except: [:complete_invitee_profile]
+	before_action :invitations, :invitations_left
 	#before_action :check_auth, only: [:profile, :invite]
 	def new
 		@user = User.new
