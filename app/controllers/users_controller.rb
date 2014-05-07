@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_action :authenticate_user!
+	before_action :authenticate_user!, except: [:complete_invitee_profile]
 	#before_action :check_auth, only: [:profile, :invite]
 	def new
 		@user = User.new
@@ -25,9 +25,9 @@ class UsersController < ApplicationController
 
 		@user = User.new(avatar: uploaded_io.original_filename, first_name: first_name, last_name: last_name, id_number: id_number, email: email, password: password, password_confirmation: password_confirmation, user_type_id: 3, invite_code: invitation_code)
 		if @user.save
-			3.times do
-				@user.invite_codes << InviteCode.create()
-			end
+			#3.times do
+			#	@user.invite_codes << InviteCode.create()
+			#end
 			dir = 'uploads/users/' + @user.id.to_s() + '/'
 			avatar_path = dir + uploaded_io.original_filename
 			@user.avatar = avatar_path
@@ -77,6 +77,38 @@ class UsersController < ApplicationController
 				format.json { render :json => [message: "Invitaciones enviadas a " + emails, users: users] }
 			end
 		end
+	end
+
+	def complete_invitee_profile
+		user_id = params[:u] #user_id
+		user = nil
+		if user_id
+			user = User.find(user_id)
+			@user_email = user.email
+		else
+			avatar = params[:avatar]
+			first_name = params[:first_name]
+			last_name = params[:last_name]
+			email = params[:email]
+			password = params[:password]
+			password_confirmation = params[:password_confirmation]
+			id_number = params[:id_number]
+			user = User.find_by email: email
+			if user
+				user.avatar = avatar
+				user.first_name = first_name
+				user.last_name = last_name
+				user.email = email
+				user.password = password
+				user.id_number = id_number
+				user.save
+			end
+		end
+	end
+
+	def complete_invitee_profile_save
+#=begin
+#=end
 	end
 
 	def contact
