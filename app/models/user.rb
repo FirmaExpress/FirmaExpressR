@@ -25,6 +25,7 @@ class IdNumberValidator < ActiveModel::Validator
   end
 end
 
+=begin
 class InviteCodeValidator < ActiveModel::Validator
 	def validate(record)
 		invitation = InviteCode.find_by(code: record.invite_code, available: true)
@@ -38,6 +39,7 @@ class InviteCodeValidator < ActiveModel::Validator
 		end
 	end
 end
+=end
 
 class User < ActiveRecord::Base
 	# Include default devise modules. Others available are:
@@ -57,7 +59,7 @@ class User < ActiveRecord::Base
 	#attr_accessor :password, :password_confirmation, :current_password
 	attr_accessor :invite_code
 	before_validation :set_user_id
-	after_save :generate_codes, on: :create
+	#after_save :generate_codes, on: :create
 	#before_save :encrypt_password
 
 	validates :password,
@@ -83,8 +85,9 @@ class User < ActiveRecord::Base
 				unless: Proc.new { |a| a.id_number.blank? }
 	validates_with IdNumberValidator,
 				unless: Proc.new { |a| a.id_number.blank? }
-	validates_with InviteCodeValidator, on: :create
+	#validates_with InviteCodeValidator, on: :create
 
+=begin
 	def generate_codes
 		unless self.invite_codes
 			3.times do
@@ -92,6 +95,7 @@ class User < ActiveRecord::Base
 			end
 		end
 	end
+=end
 
 	def set_user_id
 		self.user_type_id = 3 if self.user_type_id.blank?

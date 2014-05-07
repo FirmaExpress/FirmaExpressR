@@ -175,7 +175,7 @@
     ng-confirm-click="¿Está seguro de eliminar este documento?">Eliminar</a></li>
 			<li><a data-toggle="modal" data-target="#modal-panel-participants" name="button-participants" id="button-participants">Compartir</a></li>
             <% end %>
-			<% if @invitations_left.count > 0 %>
+			<% if false #@invitations_left.count > 0 %>
 				<li style="width:150px"><a data-toggle="modal" data-target="#modal-panel-new-user-invite" name="button-new-user-invite" id="button-new-user-invite"><%= @invitations_left.count %> invitaciones disponibles</a></li>
 			<% end %>
 		</ul>
