@@ -30,6 +30,7 @@ class DocumentsController < ApplicationController
 	end
 
 	def show
+		json_response = nil
 		if Document.exists?(id: params[:id])
 			@document = Document.where(id: params[:id]).first
 			user = User.find(current_user.id)
@@ -49,12 +50,13 @@ class DocumentsController < ApplicationController
 				INNER JOIN "users" ON "users"."id" = "participants"."user_id" 
 				INNER JOIN "roles" ON "roles"."id" = "participants"."role_id" 
 				WHERE ("participants"."user_id" = ' + user.id.to_s + ' AND "documents"."id" = ' + @document.id.to_s + ')').select('"roles"."id","roles"."name"').first
+			json_response = [participants: @participants, document: @document, signed: @signed.signed, current_user_role: @current_user_role]
 		else
-			redirect_to root_url
+			json_response = [message: 'El documento no existe']
 		end
 		respond_to do |format|
 			format.html
-			format.json { render :json => [participants: @participants, document: @document, signed: @signed.signed, current_user_role: @current_user_role] }
+			format.json { render json: json_response }
 		end
 	end
 
