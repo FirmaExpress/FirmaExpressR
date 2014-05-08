@@ -170,12 +170,12 @@
 				<li><a href="" confirmed-click="sign()" 
     ng-confirm-click="¿Está seguro de firmar este documento?">Firmar</a></li>
 			<% end %>
-			<% if @current_user_role.id  == 1 and !@document.agreed %>
+			<% if @current_user_role.id == 1 and !@document.agreed %>
 				<li><a href="" confirmed-click="destroy()" 
     ng-confirm-click="¿Está seguro de eliminar este documento?">Eliminar</a></li>
 				<li><a data-toggle="modal" data-target="#modal-panel-participants" name="button-participants" id="button-participants">Compartir</a></li>
             <% end %>
-            <% if @current_user_role.id  == 1 and @document.agreed %>
+            <% if @document.agreed or (@current_user_role.id != 1 and !@document.agreed) %>
             	<li><a data-toggle="modal" data-target="#modal-panel-participants" name="button-participants" id="button-participants">Ver firmas</a></li>
             <% end %>
 			<% if false #@invitations_left.count > 0 %>
@@ -203,15 +203,17 @@
 					<!-- Invitation Form -->
 					<br />
 					<% if @document.agreed %>
-					<!-- Show QR -->
-					<img src="http://chart.apis.google.com/chart?chs=200x200&cht=qr&chl=http://<%= request.host %>/check_document/<%= @document.id %>&choe=ISO-8859-1"><br />
-					<p class="negro">Sellado <%= @document.agreed_at %></p>
+						<!-- Show QR -->
+						<img src="http://chart.apis.google.com/chart?chs=200x200&cht=qr&chl=http://<%= request.host %>/check_document/<%= @document.id %>&choe=ISO-8859-1"><br />
+						<p class="negro">Sellado <%= @document.agreed_at %></p>
 					<% else %>
-					<h4 class="negro">Invitar<h4/>
-					<div ng-controller="InviteController">
-						<input ng-model="emails" ng-enter="invite()" type="text" placeholder="Ingresar emails separados por comas" id="invitees_emails" />
-						<div>{{ message }}</div>
-					</div>
+						<% if @current_user_role.id  == 1 %>
+							<h4 class="negro">Invitar<h4/>
+							<div ng-controller="InviteController">
+								<input ng-model="emails" ng-enter="invite()" type="text" placeholder="Ingresar emails separados por comas" id="invitees_emails" />
+								<div>{{ message }}</div>
+							</div>
+						<% end %>
 					<% end %>
 				</div>
 				<div class="modal-footer">
