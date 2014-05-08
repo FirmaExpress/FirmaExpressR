@@ -2,9 +2,9 @@ class UserMailer < ActionMailer::Base
 
   def invitation_email(user, document)
     @url = if user.id_number
-    	'http://firmaexpress.com/users/complete_invitee_profile?u=' + user.id.to_s
-    else
       'http://firmaexpress.com'
+    else
+    	'http://firmaexpress.com/users/complete_invitee_profile?u=' + user.id.to_s
     end
   	@user = user
   	@document = document
