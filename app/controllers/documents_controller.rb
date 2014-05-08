@@ -30,8 +30,8 @@ class DocumentsController < ApplicationController
 	end
 
 	def show
-		@document = Document.where(id: params[:id]).first
-		if @document
+		if Document.exists?(id: params[:id])
+			@document = Document.where(id: params[:id]).first
 			user = User.find(current_user.id)
 			@documents = user.documents
 			#@participants = Document.joins(participants: [{ user: :roles }]).select('"documents".*, "participants".*, "users".*, "roles".namea as role').where('"documents"."id" = ' + @document.id.to_s)
