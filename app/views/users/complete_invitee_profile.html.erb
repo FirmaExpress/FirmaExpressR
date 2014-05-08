@@ -6,9 +6,7 @@ Completar Perfil
 		<h3>Completar Perfil</h3>
 	</div>
 	<div id="info">
-		<%= form_tag(url: users_complete_invitee_profile_path, method: 'post', multipart: true) do %>
-			<%= label_tag(:avatar, 'Imagen de Perfil') %>
-		    <%= file_field_tag :avatar %>
+		<%= form_tag(url: users_complete_invitee_profile_path, method: 'post') do %>
 			<%= label_tag(:first_name, 'Nombres') %>
 			<%= text_field_tag :first_name %>
 			<%= label_tag(:last_name, 'Apellidos') %>
@@ -18,9 +16,9 @@ Completar Perfil
 			<%= label_tag(:email, 'E-mail') %>
 			<%= text_field_tag :email, @user_email, readonly: true %>
 			<%= label_tag(:password, 'Contraseña') %>
-			<%= password_field_tag :password %>
+			<%= password_field_tag :password, autocomplete: "off" %>
 			<%= label_tag(:password_confirmation, 'Confirmar contraseña') %>
-			<%= password_field_tag :password_confirmation %>
+			<%= password_field_tag :password_confirmation, autocomplete: "off" %>
 			<%= submit_tag("Registrarme", { id: 'submit' }) %>
 		<% end %>
 	</div>

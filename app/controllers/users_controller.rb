@@ -87,7 +87,7 @@ class UsersController < ApplicationController
 			user = User.find(user_id)
 			@user_email = user.email
 		else
-			avatar = params[:avatar]
+			#avatar = params[:avatar]
 			first_name = params[:first_name]
 			last_name = params[:last_name]
 			email = params[:email]
@@ -96,13 +96,14 @@ class UsersController < ApplicationController
 			id_number = params[:id_number]
 			user = User.find_by email: email
 			if user
-				user.avatar = avatar
+				#user.avatar = avatar
 				user.first_name = first_name
 				user.last_name = last_name
 				user.email = email
 				user.password = password
 				user.id_number = id_number
 				user.save
+				redirect_to root_url
 			end
 		end
 	end
