@@ -31,6 +31,7 @@ class DocumentsController < ApplicationController
 
 	def show
 		@document = Document.where(id: params[:id]).first
+		redirect_to root_url
 		unless @document
 			redirect_to root_url
 		end
