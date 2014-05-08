@@ -8,7 +8,7 @@ Completar Perfil
 	<div id="info">
 		<%= form_tag(url: users_complete_invitee_profile_path, method: 'post', multipart: true) do %>
 			<%= label_tag(:avatar, 'Imagen de Perfil') %>
-		    <%= file_field_tag 'avatar' %>
+		    <%= file_field_tag :avatar %>
 			<%= label_tag(:first_name, 'Nombres') %>
 			<%= text_field_tag :first_name %>
 			<%= label_tag(:last_name, 'Apellidos') %>
