@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
 	has_many :invite_codes
 	belongs_to :user_type
 
-	has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
+	has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "uploads/user.jpg"
 	validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
 	#attr_accessor :password, :password_confirmation, :current_password
