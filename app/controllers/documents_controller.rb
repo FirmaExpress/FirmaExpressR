@@ -30,7 +30,10 @@ class DocumentsController < ApplicationController
 	end
 
 	def show
-		@document = Document.find(params[:id])
+		@document = Document.exists?(id: params[:id])
+		unless @document
+			redirect_to root_url
+		end
 		user = User.find(current_user.id)
 		@documents = user.documents
 		#@participants = Document.joins(participants: [{ user: :roles }]).select('"documents".*, "participants".*, "users".*, "roles".namea as role').where('"documents"."id" = ' + @document.id.to_s)
