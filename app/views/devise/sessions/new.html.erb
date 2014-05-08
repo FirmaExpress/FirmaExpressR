@@ -13,11 +13,12 @@ Login
 				<% if devise_mapping.rememberable? -%>
 					 <%= f.label :remember_me, 'Recuérdame' %> <%= f.check_box :remember_me %>
   				<% end -%>
+				<%= render "devise/shared/links" %>
+				<%= render "layouts/alerts" %>
 			<% end %>
 		</div>
 		<%= image_tag "login.png", { height: 400, width: 533, class: 'imagenlogin' } %>
 	</div>
-	<%= render "devise/shared/links" %>
     <div id="headline">
 		<div id="insideheadline">
 			<div id="box_1_3">

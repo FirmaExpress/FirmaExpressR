@@ -25,9 +25,11 @@
               <% if current_user %>
                 <li><%= link_to 'Bienvenido ' + current_user.first_name.to_s, profile_path %></li>
                 <li><img class="img-circle" style="margin-top: -5px; margin-left: 5px" src="<%= root_url + current_user.avatar.to_s %>" width=30 height=30></li>
+                <% if current_user.user_type_id == 1 %>
+                  <li><%= link_to 'Registrar usuario', new_user_registration_path %></li>
+                <% end %>
                 <li><%= link_to("Logout", destroy_user_session_path, :method => :delete) %></li>
               <% else %>
-                <li><%= link_to '¡Registrate!', new_user_registration_path %></li>
                 <li><%= link_to 'Nosotros', about_us_path %></li>
                 <li><%= link_to 'Planes', plans_path %></li>
                 <li><%= link_to 'Contacto', contact_form_path %></li>
@@ -38,16 +40,6 @@
 	</header>
 
 <%= yield %>
-
-<% flash.each do |name, msg| %>
-  <%= content_tag :div, msg, :id => "flash_#{name}" %>
-<% end %>
-<% if notice %>
-  <p class="alert alert-success"><%= notice %></p>
-<% end %>
-<% if alert %>
-  <p class="alert alert-danger"><%= alert %></p>
-<% end %>
 
 </body>
 </html>
