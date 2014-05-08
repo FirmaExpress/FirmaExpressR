@@ -30,7 +30,7 @@ class DocumentsController < ApplicationController
 	end
 
 	def show
-		unless document.exists?(id: params[:id])
+		unless Document.exists?(id: params[:id])
 			redirect_to root_url
 		end
 		@document = Document.where(id: params[:id]).first
