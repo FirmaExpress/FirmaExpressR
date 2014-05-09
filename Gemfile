@@ -39,7 +39,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'devise'
 
 #peiper clipz
-gem 'paperclip', github: 'thoughtbot/paperclip'
+gem "paperclip", "~> 4.1"
+#gem 'paperclip', github: 'thoughtbot/paperclip'
 
 # Use unicorn as the app server
 # gem 'unicorn'

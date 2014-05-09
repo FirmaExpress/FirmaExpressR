@@ -134,6 +134,7 @@
 				});
 			}
 		});
+		
 	</script>
 	<% javascript_include_tag "bootstrap-modal.js" %>
 <% end %>
@@ -187,8 +188,10 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
+					<button style="float: right; border: 0px none;" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					<h4 class="modal-title" id="myModalLabel"><%= @document.name %></h4>
 				</div>
+			
 				<div class="modal-body">
 					<ul>
 						<% @participants.each do |participant| %>
