@@ -70,7 +70,11 @@ class DocumentsController < ApplicationController
 
 	def check
 		@document = Document.find(params[:id])
-		@participants = Document.joins(:participants, :users, :roles).select('"documents".*, "participants".*, "users".*, "roles".name as role').where('"documents"."id" = ' + @document.id.to_s)
+		#@participants = Document.joins(:participants, :users, :roles).select('"documents".*, "participants".*, "users".*, "roles".name as role').where('"documents"."id" = ' + @document.id.to_s)
+		@participants = Document.joins('INNER JOIN "participants" ON "participants"."document_id" = "documents"."id" 
+				INNER JOIN "users" ON "users"."id" = "participants"."user_id" 
+				INNER JOIN "roles" ON "roles"."id" = "participants"."role_id" 
+				WHERE ("documents"."id" = ' + @document.id.to_s + ')').select('"documents".*, "participants".*, "users".*, "roles".name as role')
 	end
 
 	def sign
