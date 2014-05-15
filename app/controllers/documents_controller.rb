@@ -1,5 +1,5 @@
 class DocumentsController < ApplicationController
-	before_action :authenticate_user!
+	before_action :authenticate_user!, except: [:check]
 	before_action :invitations, :invitations_left
 	#before_action :check_auth, except: [:check]
 	def new
