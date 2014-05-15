@@ -213,7 +213,7 @@
 						<% if @current_user_role.id  == 1 %>
 							<h4 class="negro">Invitar<h4/>
 							<div ng-controller="InviteController">
-								<input ng-model="emails" ng-enter="invite()" type="text" placeholder="Ingresar emails separados por comas" id="invitees_emails" />
+								<input ng-model="emails"  ng-enter="invite()" type="text" placeholder="Ingresar emails separados por comas" id="invitees_emails" />
 								<div>{{ message }}</div>
 							</div>
 						<% end %>
