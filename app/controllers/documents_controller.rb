@@ -9,10 +9,13 @@ class DocumentsController < ApplicationController
 	end
 
 	def create
-		uploaded_io = params[:document][:path]
+		unless params[:document][:path]
+			redirect_to "new"
+		end
+		file = params[:document][:path]
 		#dir = 'uploads/users/' + current_user.to_s() + '/documents/'
 		#document_path = dir + uploaded_io.original_filename
-		@document = Document.new(file: uploaded_io, user_id: current_user.id)
+		@document = Document.new(file: file, user_id: current_user.id)
 		if @document.save
 			@participant = Participant.new(document_id: @document.id, role_id: 1, user_id: current_user.id, signed: 'f')
 			if @participant.save
