@@ -9,7 +9,7 @@ class DocumentsController < ApplicationController
 	end
 
 	def create
-		unless params[:document]
+		unless params.has_key?(:document)
 			redirect_to "new"
 		end
 		file = params[:document][:path]
