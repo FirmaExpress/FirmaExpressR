@@ -9,9 +9,6 @@ class DocumentsController < ApplicationController
 	end
 
 	def create
-		unless params.has_key?(:document)
-			redirect_to "new"
-		end
 		file = params[:document][:path]
 		#dir = 'uploads/users/' + current_user.to_s() + '/documents/'
 		#document_path = dir + uploaded_io.original_filename
