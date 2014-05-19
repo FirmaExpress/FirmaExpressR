@@ -159,7 +159,28 @@ background-color: #3399ff;
 border: 1px solid #3079ED;
 margin-bottom:8px;
 }
-
+#btn-blue {
+width:70px;
+position:relative;
+margin-left:10px;
+display:block;
+color:#FFF;
+font-family: 'Lato', sans-serif;
+height: 24px;
+padding:0 5px 3px 5px;
+vertical-align: middle;
+cursor: pointer;
+font-size: 11px;
+font-weight: bold;
+text-align: center;
+white-space: nowrap;
+line-height: 27px;
+border-radius: 2px;
+box-shadow: none;
+background-color: #3399ff;
+border: 1px solid #3079ED;
+margin-bottom:8px;
+}
 /* --------------Perfil-------------- */
 
 #perfil {position:relative;float:left;width:62%;display:block;clear:both;height:450px;border:1px solid #999;margin-top:45px;margin-left:370px;min-width:600px;font-family: 'Lato', sans-serif;color: #1b1b1b;font-weight:lighter;line-height:1.5;overflow:hidden;}
