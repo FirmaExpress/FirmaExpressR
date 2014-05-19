@@ -125,6 +125,7 @@
 			$scope.sign = function(){
 				$http.get('../documents/sign/' + $scope.document_id + '.json').success(function(data) {
 					console.log(data);
+					location.reload(true);
 				});
 			}
 			$scope.destroy = function(){
