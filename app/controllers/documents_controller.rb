@@ -84,10 +84,22 @@ class DocumentsController < ApplicationController
 		participant = Participant.where('"document_id" = ' + document_id + ' AND "user_id" = ' + user_id).first
 		participant.signed = 't'
 		participant_save_status = participant.save
+
 		document = Document.find(document_id)
+
+		owner_relation = Participant.where('"document_id" = ' + document_id + ' AND "role_id" = 1').first
+		owner = User.where('"id" = ' + owner_relation.user_id.to_s).first
+
+		participants = Document.joins('INNER JOIN "participants" ON "participants"."document_id" = "documents"."id" 
+				INNER JOIN "users" ON "users"."id" = "participants"."user_id" 
+				INNER JOIN "roles" ON "roles"."id" = "participants"."role_id" 
+				WHERE ("documents"."id" = ' + document.id.to_s + ')').select('"documents".*, "participants".*, "users".*, "roles".name as role')
 		if document.to_sign == 0
 			document.agreed_at = Time.now
 			document.save
+			DocumentMailer.everybody_signed(document, participants).deliver
+		else
+			DocumentMailer.signed_by(owner, participant, document).deliver
 		end
 		respond_to do |format|
 			format.json { render :json => [status: participant_save_status, ] }
