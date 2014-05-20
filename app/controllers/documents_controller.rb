@@ -90,6 +90,8 @@ class DocumentsController < ApplicationController
 		owner_relation = Participant.where('"document_id" = ' + document_id + ' AND "role_id" = 1').first
 		owner = User.where('"id" = ' + owner_relation.user_id.to_s).first
 
+		signer = User.where('"id" = ' + participant.user_id.to_s).first
+
 		participants = Document.joins('INNER JOIN "participants" ON "participants"."document_id" = "documents"."id" 
 				INNER JOIN "users" ON "users"."id" = "participants"."user_id" 
 				INNER JOIN "roles" ON "roles"."id" = "participants"."role_id" 
@@ -99,10 +101,10 @@ class DocumentsController < ApplicationController
 			document.save
 			DocumentMailer.everybody_signed(document, participants).deliver
 		else
-			DocumentMailer.signed_by(owner, participant, document).deliver
+			DocumentMailer.signed_by(owner, signer, document).deliver
 		end
 		respond_to do |format|
-			format.json { render :json => [status: participant_save_status, ] }
+			format.json { render :json => [status: participant_save_status, signer: signer ] }
 		end	
 	end
 
