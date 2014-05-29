@@ -20,7 +20,7 @@
 		});
 
 		$(document).on("ready", function () {
-			$("button").on("click", function () {
+			$("img.hiddable").on("click", function () {
 			    var id = $(this).parent().attr('id');
 			    console.log('#' + id + " .hiddable");
 			    $('#' + id + " .hiddable").toggleClass("show");
@@ -57,9 +57,9 @@
 	    <span class="hiddable">
 	        <input type="text" ng-model="user.first_name"/>
 	    </span>
-	    <button class="hiddable show">Editar</button>
-	    <button class="hiddable" ng-click="updateprofile('first_name', user.first_name)">Guardar</button><br>
-    </p>
+	    <%= image_tag("iconoeditar.png", class: "hiddable show", size: "36x30", :align=> "right")%>
+	    <%= image_tag("iconoguardar.png", class: "hiddable", size: "36x30", "ng-click" => "updateprofile('first_name', user.first_name)", :align=> "right") %>    
+    </p><br>
     <!--fin-->
     <p id="lastname">
 		<span class="hiddable show">
@@ -68,9 +68,9 @@
 	    <span class="hiddable">
 	        <input type="text" ng-model="user.last_name"/>
 	    </span>
-	    <button class="hiddable show">Editar</button>
-	    <button class="hiddable" ng-click="updateprofile('last_name', user.last_name)">Guardar</button><br>
-	</p>
+	    <%= image_tag("iconoeditar.png", class: "hiddable show", size: "36x30", :align=> "right") %>
+	    <%= image_tag("iconoguardar.png", class: "hiddable", size: "36x30", "ng-click" => "updateprofile('first_name', user.first_name)", :align=> "right") %> 
+	</p><br>
     <!--fin-->
     <p id="email">
 	    <span class="hiddable show">
@@ -79,8 +79,8 @@
 	    <span class="hiddable">
 	        <input type="text" ng-model="user.email"/>
 	    </span>
-	    <button align="right" class="hiddable show">Editar</button>
-	    <button class="hiddable" ng-click="updateprofile('email', user.email)">Guardar</button><br>
+		<%= image_tag("iconoeditar.png", class: "hiddable show", size: "36x30", :align=> "right") %>
+	    <%= image_tag("iconoguardar.png", class: "hiddable", size: "36x30", "ng-click" => "updateprofile('first_name', user.first_name)", :align=> "right") %> <br>
 	</p>
 	<br>
 	<h5>Firmas</h5>
