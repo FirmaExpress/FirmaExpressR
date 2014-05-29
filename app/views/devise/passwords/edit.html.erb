@@ -1,0 +1,26 @@
+<% content_for :title do %>
+Login
+<% end %>
+<div id="container">
+	<div id="headline">
+		<h3>Cambia tu Password</h3>
+	</div>
+	<div id="info">
+		<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+  		<%= devise_error_messages! %>
+  		<%= f.hidden_field :reset_password_token %>
+		<%= f.label :password, "New password" %>
+    	<%= f.password_field :password, autofocus: true, autocomplete: "off" %>
+		<%= f.label :password_confirmation, "Confirm new password" %>
+    	<%= f.password_field :password_confirmation, autocomplete: "off" %>
+		<%= f.submit "Cambiar mi password", {id: 'submit'} %>
+<% end %>
+		
+		<%= render "devise/shared/links" %>
+		<p class="datosextra">Ingresa tu nueva Password<br>
+	</div>
+</div>
+<footer>
+	<p class="left">Todos los Derechos Reservados a Firma Express 2013 / <a href="preguntasfrecuentes.html">Preguntas Frecuentes</a> / <a href="legal.html">Condiciones Legales</a>.</p>
+	<p class="right">Dirección: Av. Nombre Nº1234 / Teléfono: +56 2 2342567 / Mail: contacto@firmaexpress.cl</p>
+</footer>

@@ -1,10 +1,16 @@
 class UsersController < ApplicationController
-	before_action :check_auth, only: [:profile]
+	before_action :authenticate_user!, except: [:complete_invitee_profile]
+	before_action :invitations, :invitations_left
+	#before_action :check_auth, only: [:profile, :invite]
 	def new
 		@user = User.new
 		user_id = params[:u]
+		code = params[:c]
 		if user_id
 			@user = User.find(user_id)
+		end
+		if code
+			@user.invite_code = code
 		end
 	end
 
@@ -16,11 +22,13 @@ class UsersController < ApplicationController
 		password = params[:user][:password]
 		password_confirmation = params[:user][:password_confirmation]
 		id_number = params[:user][:id_number]
+		invitation_code = params[:user][:invite_code]
 
-		@user = User.new(avatar: uploaded_io.original_filename, first_name: first_name, last_name: last_name, id_number: id_number, email: email, password: password, password_confirmation: password_confirmation)
-		type = UserType.find(3)
-		@user.user_type = type
+		@user = User.new(avatar: uploaded_io.original_filename, first_name: first_name, last_name: last_name, id_number: id_number, email: email, password: password, password_confirmation: password_confirmation, user_type_id: 3, invite_code: invitation_code)
 		if @user.save
+			#3.times do
+			#	@user.invite_codes << InviteCode.create()
+			#end
 			dir = 'uploads/users/' + @user.id.to_s() + '/'
 			avatar_path = dir + uploaded_io.original_filename
 			@user.avatar = avatar_path
@@ -38,29 +46,71 @@ class UsersController < ApplicationController
 	def invite
 		emails = params[:e]
 		document_id = params[:d]
+		invitation_type = params[:t]
 		users = []
 		emails.split(',').each do |email|
-			user = User.where('"email" = \'' + email + '\'').first
-			if user == nil
-				#Pendiente: Implementar validación diferida según endpoint	
-				user = User.new(avatar: 'uploads/user.jpg', email: email, password: email, password_confirmation: email)
-				type = UserType.find(2)
-				user.user_type = type
-				user.save
-			end
-			document = Document.find(document_id)
-			if document
-				if Participant.where('"document_id" = ' + document.id.to_s + ' AND "user_id" = ' + user.id.to_s).exists? == false
-					participant = Participant.new(document_id: document.id, role_id: 2, user_id: user.id, signed: 'f')
-					participant.save
-					UserMailer.invitation_email(user, document).deliver
+			if invitation_type == 'participant'
+				user = User.where('"email" = \'' + email + '\'').first
+				unless user
+					#Pendiente: Implementar validación diferida según endpoint	
+					user = User.new(email: email, password: email, password_confirmation: email)
+					type = UserType.find(2)
+					user.user_type = type
+					user.save
+				end
+				document = Document.find(document_id)
+				if document
+					if Participant.where('"document_id" = ' + document.id.to_s + ' AND "user_id" = ' + user.id.to_s).exists? == false
+						participant = Participant.new(document_id: document.id, role_id: 2, user_id: user.id, signed: 'f')
+						participant.save
+						UserMailer.invitation_email(user, document).deliver
+					end
+				end
+				users << user
+			elsif invitation_type == 'free'
+				if @invitations_left.count > 0 and !User.exists?(email: email)
+					@url = 'http://firmaexpress.com/register?c=' + @invitations_left.first.code
+					@code = @invitations_left.first.code
+					UserMailer.free_user_invitation_email(@current_user, email, @invitations_left.first).deliver
 				end
 			end
-			users << user
+			respond_to do |format|
+				format.json { render :json => [message: "Invitaciones enviadas a " + emails, users: users] }
+			end
 		end
-		respond_to do |format|
-			format.json { render :json => [message: "Invitaciones enviadas a " + emails, users: users] }
+	end
+
+	def complete_invitee_profile
+		user_id = params[:u] #user_id
+		user = nil
+		if user_id
+			user = User.find(user_id)
+			@user_email = user.email
+		else
+			#avatar = params[:avatar]
+			first_name = params[:first_name]
+			last_name = params[:last_name]
+			email = params[:email]
+			password = params[:password]
+			password_confirmation = params[:password_confirmation]
+			id_number = params[:id_number]
+			user = User.find_by email: email
+			if user
+				#user.avatar = avatar
+				user.first_name = first_name
+				user.last_name = last_name
+				user.email = email
+				user.password = password
+				user.id_number = id_number
+				user.save
+				redirect_to root_url
+			end
 		end
+	end
+
+	def complete_invitee_profile_save
+#=begin
+#=end
 	end
 
 	def contact
@@ -71,10 +121,30 @@ class UsersController < ApplicationController
         redirect_to root_url
     end
 
+    def update_profile
+    	campo = params[:campo]
+		valor = params[:valor]
+		id = current_user.id
+		boolean = []
+		user = User.find(id)
+		case campo
+			when "first_name" 
+				user.first_name = valor
+			when "last_name"
+				user.last_name = valor
+			when "email"
+				user.email = valor
+		end
+		save_status = user.save
+		respond_to do |format|
+			format.json { render :json => [errors: user.errors, save_status: save_status] }
+		end
+    end
+
     def profile
     	respond_to do |format|
 			format.html
-			format.json { render :json => @current_user }
+			format.json { render :json => current_user }
 		end
     end
 end

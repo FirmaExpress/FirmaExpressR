@@ -1,7 +1,11 @@
 class UserMailer < ActionMailer::Base
 
   def invitation_email(user, document)
-  	@url = 'http://firmaexpress.com/register?u=' + user.id.to_s
+    @url = if user.id_number
+      'http://firmaexpress.com/documents/' + document.id.to_s
+    else
+    	'http://firmaexpress.com/users/complete_invitee_profile?u=' + user.id.to_s
+    end
   	@user = user
   	@document = document
   	mail(to: user.email, subject: 'Invitación a Documento ' + document.name)
@@ -12,7 +16,14 @@ class UserMailer < ActionMailer::Base
   	@name = name
   	@email = email
   	@message = message
-  	mail(to: "firmaexpress2014@gmail.com", subject: 'Consulta sobre firmaexpress')
+  	mail(to: "firmaexpress2014@gmail.com, claudevandort@gmail.com, patricioalfredo18@gmail.com, danielveram@gmail.com", subject: 'Consulta sobre firmaexpress')
+  end
+
+  def free_user_invitation_email(user, invitee_email, invitation)
+    @user = user
+    @url = 'http://firmaexpress.com/register?c=' + invitation.code
+    @code = invitation.code
+    mail(to: invitee_email, subject: user.first_name + ' te invita a Firma Express')
   end
 
 end

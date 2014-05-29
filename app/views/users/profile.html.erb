@@ -1,11 +1,29 @@
 <% content_for :js do %>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+<%= javascript_include_tag "angular.min.js" %>
 	<script type="text/javascript">
+		/* Se inicializa la aplicación y la almacena en app*/
 		var app = angular.module("FEFront", []);
+		/* Crea el controlador llamado "ProfileController"*/
 		app.controller("ProfileController", function($scope, $http){
-			$http.get('../users/profile.json').success(function(data) {
+		/*Llamamos a users controller metodo profile*/		
+			$http.get('../profile.json').success(function(data) {
 				$scope.user = data;
 				console.log(data);
+			});
+
+			$scope.updateprofile = function(campo, valor){
+				$http.get('../users/update_profile.json?campo='+campo+'&valor='+valor).success(function(data) {
+					console.log(data);
+
+				});
+			} 
+		});
+
+		$(document).on("ready", function () {
+			$("img.hiddable").on("click", function () {
+			    var id = $(this).parent().attr('id');
+			    console.log('#' + id + " .hiddable");
+			    $('#' + id + " .hiddable").toggleClass("show");
 			});
 		});
 	</script>
@@ -28,25 +46,56 @@
 <div id="perfil" ng-controller="ProfileController">
 <div id="perfildatos">
 <h5>Datos Personales</h5>
-<li><img class="img-circle" style="margin-top: -1px; margin-left: 30px" src="<%=root_url + @current_user.avatar %>" width=80 height=80></li>
-<p>Nombre: {{ user.first_name }} </p>
-<p>Apellido: {{ user.last_name }} </p>
-<p>RUT: {{ user.id_number }} </p>
-<p>Mail: {{ user.email }} </p>
-<br>
-<h5>Firmas</h5>
-<p>Nº de Firmas: 100</p>
-<br>
-<h5>Documentos</h5>
-<p>Nº de Documentos: 100</p>
-<br>
-<h5>Datos de Usuario</h5>
-<p>Usuario desde: 01/01/2014</p>
-<br>
-<h5>Otros Datos</h5>
-<p>Dato: Valor</p>
-<p>Dato: Valor</p>
-<p>Dato: Valor</p>
+	<img class="img-circle" style="margin-top: -1px; margin-left: 30px" src="<%=root_url + current_user.avatar.to_s %>" width=80 height=80>
+	<p><span class="hiddable show" >
+	    Rut: {{user.id_number}}
+	 </span></p>
+	<p id="first_name">
+		<span class="hiddable show">
+	        Nombre: {{user.first_name}}
+	    </span>
+	    <span class="hiddable">
+	        <input type="text" ng-model="user.first_name"/>
+	    </span>
+	    <%= image_tag("iconoeditar.png", class: "hiddable show", size: "36x30", :align=> "right")%>
+	    <%= image_tag("iconoguardar.png", class: "hiddable", size: "36x30", "ng-click" => "updateprofile('first_name', user.first_name)", :align=> "right") %>    
+    </p><br>
+    <!--fin-->
+    <p id="lastname">
+		<span class="hiddable show">
+	        Apellido: {{user.last_name}}
+	    </span>
+	    <span class="hiddable">
+	        <input type="text" ng-model="user.last_name"/>
+	    </span>
+	    <%= image_tag("iconoeditar.png", class: "hiddable show", size: "36x30", :align=> "right") %>
+	    <%= image_tag("iconoguardar.png", class: "hiddable", size: "36x30", "ng-click" => "updateprofile('first_name', user.first_name)", :align=> "right") %> 
+	</p><br>
+    <!--fin-->
+    <p id="email">
+	    <span class="hiddable show">
+	        Email: {{user.email}}
+	    </span>
+	    <span class="hiddable">
+	        <input type="text" ng-model="user.email"/>
+	    </span>
+		<%= image_tag("iconoeditar.png", class: "hiddable show", size: "36x30", :align=> "right") %>
+	    <%= image_tag("iconoguardar.png", class: "hiddable", size: "36x30", "ng-click" => "updateprofile('first_name', user.first_name)", :align=> "right") %> <br>
+	</p>
+	<br>
+	<h5>Firmas</h5>
+	<p>Nº de Firmas: 100</p>
+	<br>
+	<h5>Documentos</h5>
+	<p>Nº de Documentos: 100</p>
+	<br>
+	<h5>Datos de Usuario</h5>
+	<p>Usuario desde: 01/01/2014</p>
+	<br>
+	<h5>Otros Datos</h5>
+	<p>Dato: Valor</p>
+	<p>Dato: Valor</p>
+	<p>Dato: Valor</p>
 </div>
 <div id="perfilestadisticas">
 <h5>Estadísticas de Actividad</h5>

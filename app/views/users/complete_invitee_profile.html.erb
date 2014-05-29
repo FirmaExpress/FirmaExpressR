@@ -1,0 +1,29 @@
+<% content_for :title do %>
+Completar Perfil
+<% end %>
+<div id="container">
+	<div id="headline">
+		<h3>Completar Perfil</h3>
+	</div>
+	<div id="info">
+		<%= form_tag(url: users_complete_invitee_profile_path, method: 'post') do %>
+			<%= label_tag(:first_name, 'Nombres') %>
+			<%= text_field_tag :first_name %>
+			<%= label_tag(:last_name, 'Apellidos') %>
+			<%= text_field_tag :last_name %>
+			<%= label_tag(:id_number, 'RUT') %>
+			<%= text_field_tag :id_number %>
+			<%= label_tag(:email, 'E-mail') %>
+			<%= text_field_tag :email, @user_email, readonly: true %>
+			<%= label_tag(:password, 'Contraseña') %>
+			<%= password_field_tag :password, autocomplete: "off" %>
+			<%= label_tag(:password_confirmation, 'Confirmar contraseña') %>
+			<%= password_field_tag :password_confirmation, autocomplete: "off" %>
+			<%= submit_tag("Registrarme", { id: 'submit' }) %>
+		<% end %>
+	</div>
+</div>
+<footer>
+	<p class="left">Todos los Derechos Reservados a Firma Express 2013 / <a href="preguntasfrecuentes.html">Preguntas Frecuentes</a> / <a href="legal.html">Condiciones Legales</a>.</p>
+	<p class="right">Dirección: Av. Nombre Nº1234 / Teléfono: +56 2 2342567 / Mail: contacto@firmaexpress.cl</p>
+</footer>

@@ -1,24 +1,37 @@
 <% content_for :title do %>
 Gestión de Documentos
 <% end %>
+<% content_for :js do %>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+	<script type="text/javascript">
+		var app = angular.module("FEFront", []);
+		app.controller("DocumentsListController", function($scope, $http){
+			$http.get('/documents/list.json').success(function(data) {
+				console.log(data);
+				$scope.documents = data;
+			});
+		});
+	</script>
+<% end %>
 <div id="containerdocumentos">
 	<div id="headline">
 		<h3>Gestión de Documentos</h3>
 	</div>
-	<div id="biblioteca">
+	<div id="biblioteca" ng-controller="DocumentsListController">
 		<div id="itemactive"><a href="<%= root_url %>"><h4>Subir Documento</h4></a></div>
 		<div id="item"><a href=""><h4>Biblioteca</h4></a></div>
-		<div id="options"><input type="search" placeholder="Buscar" class="search">
-		<input type="submit" value="" class="submit"><img src="img/b.png" width="28" height="28"><img src="img/bin.png" width="28" height="28"></div>
-		<% @documents.each do |document|%>
-		<div id="item"><a href="documents/<%= document.id %>"><p><strong><%= document.name %></strong> / <i>Progreso: 1 de 4</i></p></a></div>
-		<% end %>
+		<div id="options">
+			<input type="search" placeholder="Buscar" class="search" ng-model="searchText">
+		</div>
+		<div id="item" ng-repeat="document in documents | filter:searchText">
+			<a href="documents/{{ document.id }}"><p><strong>{{document.name}}</strong></p></a>
+		</div>
 	</div>
 	<div id="optionsdocumento"></div>
 	<div id="documento">
 		<%= form_for @document, html: { style: "margin-top: 150px" } do |f| %>
 			<%= f.file_field :path %>
-			<%= submit_tag "Subir", { class: 'loginboton upload-button' } %>
+			<%= submit_tag "Subir",{id: 'submit'} %>
 		<% end %>
 	</div>
 	<div id="importante"><p class="datosextra">Solo se pueden subir documentos en PDF. Si no tienes tus archivos en este formato, utiliza nuestro conversor de Word a PDF <a href="conversor.html" style="color:#ab8f5a;font-weight:bolder;">aquí</a>.</p></div>

@@ -1,0 +1,24 @@
+<% content_for :title do %>
+Login
+<% end %>
+<div id="container">
+	<div id="headline">
+		<h3>¿Olvidaste tu password?</h3>
+	</div>
+	<div id="info">
+		<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+	  		<%= devise_error_messages! %>
+			<%= f.label :Email %>
+	  		<%= f.email_field :email, autofocus: true %>
+			<%= f.submit "Send me reset password ", {id: 'submit'}%>
+			<% # Ruta al controlador de devise para cambiar el redireccionamiento al log-in :  .rvm/gems/ruby-2.1.0/gems/devise-3.2.4/app/controllers/devise %>
+		<% end %>
+
+		<%= render "devise/shared/links" %>
+		<p class="datosextra">Ingresa tu Dirección de Correo electronico y te enviaremos un Email para realizar el cambio de tu Password.<br>
+	</div>
+</div>
+<footer>
+	<p class="left">Todos los Derechos Reservados a Firma Express 2013 / <a href="preguntasfrecuentes.html">Preguntas Frecuentes</a> / <a href="legal.html">Condiciones Legales</a>.</p>
+	<p class="right">Dirección: Av. Nombre Nº1234 / Teléfono: +56 2 2342567 / Mail: contacto@firmaexpress.cl</p>
+</footer>

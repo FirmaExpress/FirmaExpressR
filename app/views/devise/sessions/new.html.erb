@@ -1,0 +1,134 @@
+<% content_for :title do %>
+Login
+<% end %>
+<div id="containerhome">
+	<div id="login">
+		<div id="slider">
+		</div>
+		<div id="formulariologin">
+			<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+				<%= f.email_field :email, { placeholder: 'E-mail', class: 'inputhome', autofocus: 'true'} %>
+				<%= f.password_field :password, { placeholder: 'Password', class: 'inputhome'}%>
+				<%= f.submit "Ingresar", { class: 'loginboton' }%>
+				<% if devise_mapping.rememberable? -%>
+					 <%= f.label :remember_me, 'Recuérdame' %> <%= f.check_box :remember_me %>
+  				<% end -%>
+				<%= render "devise/shared/links" %>
+				<%= render "layouts/alerts" %>
+			<% end %>
+		</div>
+		<%= image_tag "login.png", { height: 400, width: 533, class: 'imagenlogin' } %>
+	</div>
+    <div id="headline">
+		<div id="insideheadline">
+			<div id="box_1_3">
+				<h3>Fácil</h3>
+			</div>
+			<div id="box_1_3">
+				<h3>Rápido</h3>
+			</div>
+			<div id="box_1_3">
+				<h3>Seguro</h3>
+			</div>
+		</div>
+	</div>
+	<div id="servicios">
+		<div id="box_1_3">
+			<p>Registrate como usuario en nuestro sitio, sube todos los documentos que quieras y luego firmalos para validarlos o enviarlos a tus contactos. Todo 100% online.</p></div>
+		<div id="box_1_3">
+			<p>Sube tus documentos en segundos, firmalos de inmediato sin trámites ni interrupciones, sin viajes ni pérdidas de tiempo. Con tan solo un click valida lo que quieras.</p>
+		</div>
+		<div id="box_1_3">
+			<p>Contamos con un sistema preparado para proteger los datos personales de nuestros clientes y mantener la confidencialidad de todos sus documentos.</p>
+		</div>
+	</div>
+	<div id="headline2">
+		<h3>Pasos a seguir</h3>
+	</div>
+	<div id="info2">
+		<div id="bio2">
+			<div id="wrapbio">
+				<h3>Registrate</h3>
+				<p>Ingresa a nuestro sitio web, crea un nuevo usuario con tus datos personales y podrás comenzar a utilizar nuestro servicio inmediatamente.</p>
+				<%= image_tag "registrar.jpg", { width: 450, style: 'margin-left:20px;' } %>
+			</div>
+		</div>
+	</div>
+	<section id="slide-1" class="homeSlide">
+		<div class="bcg skrollable skrollable-before" data-center="background-position: 50% 0px;" data-top-bottom="background-position: 50% -100px;" data-anchor-target="#slide-1" style="background-position: 50% 0px;">
+			<div class="hsContainer">
+				<div class="hsContent skrollable skrollable-before" data-center="bottom: 200px; opacity: 1" data-top="bottom: 1200px; opacity: 0" data-anchor-target="#slide-1 h2" style="bottom: 200px; opacity: 1;">
+					<h2>Simple parallax scrolling is...</h2>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div id="info3">
+		<div id="bio2">
+			<div id="wrapbio">
+				<h3>Sube tu documento</h3>
+				<p>A través de nuestro administrador sube todos los documentos que necesites firmar y almacénalos en tu biblioteca virtual.</p>
+				<%= image_tag "subelo.jpg", { width: 450, style: 'margin-left:20px;' } %>
+			</div>
+		</div>
+	</div>
+	<section id="slide-2">
+		<div class="bcg skrollable skrollable-before" data-center="background-position: 50% 0px;" data-top-bottom="background-position: 50% -100px;" data-anchor-target="#slide-2" style="background-position: 50% 0px;">
+			<div class="hsContainer">
+				<div class="hsContent skrollable skrollable-before" data-center="bottom: 200px; opacity: 1" data-top="bottom: 1200px; opacity: 0" data-anchor-target="#slide-1 h2" style="bottom: 200px; opacity: 1;">
+					<h2>Simple parallax scrolling is...</h2>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div id="info4">
+		<div id="bio2">
+			<div id="wrapbio">
+				<h3>Firmalo</h3>
+				<p>Escoge de tu biblioteca el documento a firmar, ingresa tus datos de seguridad para verificar tu identidad y firma de manera segura y confiable.</p>
+				<%= image_tag "firmalo.jpg", { width: 450, style: 'margin-left:20px;' } %>
+			</div>
+		</div>
+	</div>
+	<section id="slide-3">
+		<div class="bcg skrollable skrollable-before" data-center="background-position: 50% 0px;" data-top-bottom="background-position: 50% -100px;" data-anchor-target="#slide-3" style="background-position: 50% 0px;">
+			<div class="hsContainer">
+				<div class="hsContent skrollable skrollable-before" data-center="bottom: 200px; opacity: 1" data-top="bottom: 1200px; opacity: 0" data-anchor-target="#slide-1 h2" style="bottom: 200px; opacity: 1;">
+					<h2>Simple parallax scrolling is...</h2>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div id="info5">
+		<div id="bio2">
+			<div id="wrapbio">
+				<h3>Envíalo</h3>
+				<p>Cuando hayas realizado el proceso de firma, podrás enviar el documento a todos los usuarios que quieras enviándoles una invitación a compartir el documento. Invitándolos así a firmar en conjunto.</p>
+				<%= image_tag "envialo.jpg", { width: 450, style: 'margin-left:20px;' } %>
+			</div>
+		</div>
+	</div>
+	<section id="slide-4">
+		<div class="bcg skrollable skrollable-before" data-center="background-position: 50% 0px;" data-top-bottom="background-position: 50% -100px;" data-anchor-target="#slide-1" style="background-position: 50% 0px;">
+			<div class="hsContainer">
+				<div class="hsContent skrollable skrollable-before" data-center="bottom: 200px; opacity: 1" data-top="bottom: 1200px; opacity: 0" data-anchor-target="#slide-1 h2" style="bottom: 200px; opacity: 1;">
+					<h2>Simple parallax scrolling is...</h2>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+<footer>
+	<p class="center">Todos los Derechos Reservados a Firma Express 2013: Av. Nombre Nº1234 / +56 2 2342567 / contacto@firmaexpress.cl / <a href="preguntasfrecuentes.html">Preguntas Frecuentes</a> / <a href="legal.html">Condiciones Legales</a></p>
+</footer>
+<script type="text/javascript">
+( function( $ ) {
+    // Init Skrollr
+    var s = skrollr.init({
+        render: function(data) {
+            //Debugging - Log the current scroll position.
+            //console.log(data.curTop);
+        }
+    });
+} )( jQuery );
+</script>

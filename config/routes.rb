@@ -1,17 +1,28 @@
 FirmaExpressR::Application.routes.draw do
+  devise_for :users
+  devise_scope :user do 
+    match '/sessions/user', to: 'devise/sessions#create', via: :post
+  end
   root 'documents#new'
   get "show" => "documents#show", :as => "show_document"
   get "documents/new"
   get "sessions/new"
   get "users/new"
   get "users/invite", to: "users#invite", as: "invite"
-  get "users/contact", to: "users#contact", as: "contact"
+  get "/contact", to: "home#contact", as: "contact_form"
+  post "users/contact", to: "users#contact", as: "contact"
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
   get "/register" => "users#new", :as => "sign_up"
   get "documents/sign/:id", to: "documents#sign"
   get "documents/destroy/:id", to: "documents#destroy"
-  get "users/profile", to: "users#profile", as:"profile"
+  get "documents/list", to: "documents#list"
+  get "check_document/:id", to: "documents#check"
+  get "/profile", to: "users#profile", as:"profile"
+  get "users/update_profile", to: "users#update_profile", as:"update_profile"
+  get "users/complete_invitee_profile", to: "users#complete_invitee_profile"
+  post "users/complete_invitee_profile", to: "users#complete_invitee_profile"
+  default_url_options :host => "Firmaexpress.dev"
   resources :users
   resources :sessions
   resources :documents
@@ -19,7 +30,6 @@ FirmaExpressR::Application.routes.draw do
   #get "/login", to: "home#login" 
   get "/about_us", to: "home#aboutus"
   get "/plans", to: "home#plans"
-  get "/contact", to: "home#contact"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
