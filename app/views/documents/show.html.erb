@@ -120,7 +120,7 @@
 				return re.test(email);
 			}
 		});
-		app.controller("DocumentOptionsController", function($scope, $http){
+		app.controller("DocumentSignController", function($scope, $http){
 			$scope.document_id = <%= @document.id %>;
 			$scope.sign = function(){
 				$http.get('../documents/sign/' + $scope.document_id + '.json').success(function(data) {
@@ -128,6 +128,9 @@
 					location.reload(true);
 				});
 			}
+		});
+		app.controller("DocumentOptionsController", function($scope, $http){
+			$scope.document_id = <%= @document.id %>;
 			$scope.destroy = function(){
 				$http.get('../documents/destroy/' + $scope.document_id + '.json').success(function(data) {
 					console.log(data);
@@ -169,8 +172,7 @@
 				<li><a href="" onclick="window.print();">Imprimir</a></li>
 			<% end %>
 			<% if @signed.signed == false %>
-				<li><a href="" confirmed-click="sign()" 
-    ng-confirm-click="¿Está seguro de firmar este documento?">Firmar</a></li>
+			<li><a data-toggle="modal" data-target="#modal-panel-participant-sign" name="button-participants" id="button-participants">Firmar</a></li>
 			<% end %>
 			<% if @current_user_role.id == 1 and !@document.agreed %>
 				<li><a href="" confirmed-click="destroy()" 
@@ -246,6 +248,24 @@
 			</div>
 		</div>
 	</div>
+	<div ng-controller="DocumentSignController" id="modal-panel-participant-sign" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="db-modal">
+			<br>
+			<br>
+			<p><center><%= image_tag("FirmaExpress2.png", width: "300")%></center></p>
+			<br>
+			<center><img class="img-circle" style="margin-top: -1px; margin-left: 30px" src="<%=root_url + current_user.avatar.to_s %>" width=80 height=80></center>
+			<p style="text-align:center;color:#000;margin-top:15px;font-size:22px;">
+				<strong>
+					Hola <%= current_user.first_name.capitalize %>
+				</strong>
+			</p>
+			<p style="text-align:center;color:#000;margin-top:10px;padding-bottom:25px;border-bottom:1px solid #000;font-size:16px;margin-left:auto;margin-right:auto;font-family: 'Lato',sans-serif;font-weight: lighter;">Estas apunto de firmar el Documento: "<%= @document.name.capitalize %>"</p>
+			<p style="color:#000;text-align:center;margin-bottom:15px; margin-top:15px;font-family: 'Lato',sans-serif;font-weight: lighter;">¿Estás seguro de querer firmarlo?</p>
+			<center><input type="button" ng-click="sign()" id="btn-blue" value="Aceptar" /><input type="button" data-dismiss="modal" id="btn-blue" value="Cancelar"/></center>
+		</div>						
+	
+	</div>	
 	<iframe id="documento2" src="<%= root_path + @document.path %>"></iframe>
 	<div id="importante"><p class="datosextra">Solo se pueden subir documentos en PDF. Si no tienes tus archivos en este formato, utiliza nuestro conversor de Word a PDF <a href="conversor.html" style="color:#ab8f5a;font-weight:bolder;">aquí</a>.</p></div>
 </div>
