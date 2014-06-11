@@ -235,6 +235,8 @@
 						<!-- Invitation Form -->
 					</div><br>
 					<% if @document.agreed %>
+						<h5 style="text-align:center;">DOCUMENTO FIRMADO POR TODOS SUS MIEMBROS</h5>
+							<%= image_tag("timbredocumentofirmado.png", :align=> "right", size: "295x250")%>
 							<!-- Show QR -->
 							<img src="http://chart.apis.google.com/chart?chs=200x200&cht=qr&chl=http://<%= request.host %>/check_document/<%= @document.id %>&choe=ISO-8859-1"><br />
 							<p class="negro">Sellado <%= @document.agreed_at %></p>
@@ -275,6 +277,17 @@
 			</div>
 		</div>
 	</div>
+	<div id="modal-panel-user-sign-ok" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="db-modal">
+			<p style="text-align:center;margin-top:25px;"><img src="img/FirmaExpress2.png" width="300"></p>
+			<p style="text-align:center;margin-top:15px;"><img src="img/patriciojara.png" width="75" height="75"></p>
+			<p style="text-align:center;"><img src="img/firma usuario.png" width="350"></p>
+			<p style="color:#000;text-align:center;margin-bottom:15px;font-family: 'Lato',sans-serif;font-weight: lighter;">Has firmado el documento exitosamente</p>
+			<div id="invitaciones">
+				<div id="continuar">Continuar</div>
+			</div>
+		</div>		
+	</div>
 	<div ng-controller="DocumentSignController" id="modal-panel-participant-sign" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="db-modal">
 			<br>
@@ -314,6 +327,8 @@
 			<li><%= participant.first_name %> <%= participant.last_name %> - <%= participant.role %> - <%= sign_state %></li>
 		<% end %>
 	</ul>
+	
+		<%= image_tag("timbredocumentofirmado.png", :align=> "right")%>
 	<!-- Show QR -->
 	<img src="http://chart.apis.google.com/chart?chs=200x200&cht=qr&chl=http://<%= request.host %>/check_document/<%= @document.id %>&choe=ISO-8859-1">
 	<p class="print">Sellado <%= @document.agreed_at %></p>
