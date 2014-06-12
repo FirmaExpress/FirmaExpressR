@@ -31,6 +31,19 @@ Gestión de Documentos
 	<div id="documento">
 		<%= form_for @document, html: { style: "margin-top: 150px" } do |f| %>
 			<%= f.file_field :path %>
+			<h3>Métodos de verificación de firma</h3>
+			<p>
+			<%= label_tag :simple_check, 'Verificación simple', class: 'negro' %>
+			<%= check_box_tag :simple_check, nil, true, disabled: 'disabled' %>
+			</p>
+			<p>
+			<%= label_tag :name_check, 'Solicitar nombre', class: 'negro' %>
+			<%= check_box_tag :name_check %>
+			</p>
+			<p>
+			<%= label_tag :captcha_check, 'Código captcha', class: 'negro' %>
+			<%= check_box_tag :captcha_check %>
+			</p>
 			<%= submit_tag "Subir",{id: 'submit'} %>
 		<% end %>
 	</div>
