@@ -112,9 +112,11 @@ app.controller("NewUserInviteController", function($scope, $http){
 });
 app.controller("DocumentSignController", function($scope, $http){
 	$scope.sign = function(){
+		$('#sign_loading').attr('style', 'display: block;text-align:center;margin-left:auto;margin-right:auto;');
 		$http.get('../documents/sign/' + $scope.document_id + '.json').success(function(data) {
 			console.log(data);
-			location.reload(true);
+			$('#modal-panel-participant-sign').modal('hide');
+			$('#modal-panel-user-sign-ok').modal('show');
 		});
 	}
 });

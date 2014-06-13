@@ -1,9 +1,10 @@
 <% content_for :title do %>
 	<%= @document.name %>
 <% end %>
-<% content_for :style do %>
+<% content_for :styles do %>
 	<% stylesheet_link_tag "bootstrap-theme.css" %>
 	<% stylesheet_link_tag "print.css" %>
+	<link href='http://fonts.googleapis.com/css?family=Arizonia' rel='stylesheet' type='text/css'>
 <% end %>
 <% content_for :js do %>
 	<%= javascript_include_tag "bootstrap-modal.js" %>
@@ -146,12 +147,14 @@
 	</div>
 	<div id="modal-panel-user-sign-ok" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="db-modal">
-			<p style="text-align:center;margin-top:25px;"><img src="img/FirmaExpress2.png" width="300"></p>
-			<p style="text-align:center;margin-top:15px;"><img src="img/patriciojara.png" width="75" height="75"></p>
-			<p style="text-align:center;"><img src="img/firma usuario.png" width="350"></p>
+			<p style="text-align:center;margin-top:25px;"><%= image_tag 'FirmaExpress2.png', width: '300' %></p>
+			<p style="text-align:center;margin-top:15px;">
+			<img class="img-circle" style="margin-top: -1px; margin-left: 0px" src="<%=root_url + current_user.avatar.to_s %>" width=80 height=80>
+			</p><br><br>
+			<p style="text-align:center;font-family: 'Arizonia', cursive;font-size:50px" class='negro'><%= current_user.first_name %> <%= current_user.last_name %></p><br><br>
 			<p style="color:#000;text-align:center;margin-bottom:15px;font-family: 'Lato',sans-serif;font-weight: lighter;">Has firmado el documento exitosamente</p>
 			<div id="invitaciones">
-				<div id="continuar">Continuar</div>
+				<div id="continuar" onclick="location.reload(true);">Continuar</div>
 			</div>
 		</div>		
 	</div>
@@ -169,6 +172,7 @@
 			</p>
 			<p style="text-align:center;color:#000;margin-top:10px;padding-bottom:25px;border-bottom:1px solid #000;font-size:16px;margin-left:auto;margin-right:auto;font-family: 'Lato',sans-serif;font-weight: lighter;">Estas apunto de firmar el Documento: "<%= @document.name.capitalize %>"</p>
 			<p style="color:#000;text-align:center;margin-bottom:15px; margin-top:15px;font-family: 'Lato',sans-serif;font-weight: lighter;">¿Estás seguro de querer firmarlo?</p>
+			<p><%= image_tag 'facebook_lo.gif', style: 'display: none;text-align:center;margin-left:auto;margin-right:auto;', id: 'sign_loading', height: '25' %></p>
 			<center><input type="button" ng-click="sign()" id="btn-blue" value="Aceptar" /><input type="button" data-dismiss="modal" id="btn-blue" value="Cancelar"/></center>
 		</div>						
 	
