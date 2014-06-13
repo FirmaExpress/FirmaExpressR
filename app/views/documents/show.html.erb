@@ -116,7 +116,7 @@
 									<div ng-controller="InviteController" ng-init="document_id=<%= @document.id %>">
 										<input class="email" ng-model="emails"  ng-enter="invite()" type="text" placeholder="Ingresar emails separados por comas" id="invitees_emails" />
 										<input type="button" ng-click="invite()" id="invitar" value="Enviar" /><br><p></p><br>
-										<p><%= image_tag 'facebook_lo.gif', style: 'display: none;text-align:center;margin-left:auto;margin-right:auto;', id: 'sign_loading', height: '25' %></p>
+										<p><%= image_tag 'facebook_lo.gif', style: 'display: none;text-align:center;margin-left:auto;margin-right:auto;', id: 'invitation_loading', height: '25' %></p>
 										<div id="invitation_message" style="display:none" class="alert alert-success">{{ message }}</div>
 									</div>
 								</div>
@@ -175,8 +175,8 @@
 			</p>
 			<p style="text-align:center;color:#000;margin-top:10px;padding-bottom:25px;border-bottom:1px solid #000;font-size:16px;margin-left:auto;margin-right:auto;font-family: 'Lato',sans-serif;font-weight: lighter;">Estas apunto de firmar el Documento: "<%= @document.name.capitalize %>"</p>
 			<p style="color:#000;text-align:center;margin-bottom:15px; margin-top:15px;font-family: 'Lato',sans-serif;font-weight: lighter;">¿Estás seguro de querer firmarlo?</p>
-			<p><%= image_tag 'facebook_lo.gif', style: 'display: none;text-align:center;margin-left:auto;margin-right:auto;', id: 'sign_loading', height: '25' %></p>
 			<center><input type="button" ng-click="sign()" id="btn-blue" value="Aceptar" /><input type="button" data-dismiss="modal" id="btn-blue" value="Cancelar"/></center>
+			<p><%= image_tag 'facebook_lo.gif', style: 'display: none;text-align:center;margin-left:auto;margin-right:auto;', id: 'sign_loading', height: '25' %></p>
 		</div>						
 	
 	</div>	
