@@ -16,3 +16,4 @@ User.create([{
 	password: '12345678', 
 	password_confirmation: '12345678',
 	user_type_id: 1 }])
+SignType.create([{ name: 'Check' }, { name: 'Captcha' }, { name: 'Nombre' }, { name: 'RUT' }])

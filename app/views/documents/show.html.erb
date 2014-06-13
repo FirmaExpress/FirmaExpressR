@@ -6,141 +6,8 @@
 	<% stylesheet_link_tag "print.css" %>
 <% end %>
 <% content_for :js do %>
-<%= javascript_include_tag "bootstrap-modal.js" %>
-	<script type="text/javascript">
-		var app = angular.module("FEFront", []);
-		app.directive('ngEnter', function () {
-		    return function (scope, element, attrs) {
-		        element.bind("keydown keypress", function (event) {
-		            if(event.which === 13) {
-		                scope.$apply(function (){
-		                    scope.$eval(attrs.ngEnter);
-		                });
-
-		                event.preventDefault();
-		            }
-		        });
-		    };
-		});
-		app.directive('ngConfirmClick', function(){
-			return {
-				link: function (scope, element, attr) {
-					var msg = attr.ngConfirmClick || "Are you sure?";
-					var clickAction = attr.confirmedClick;
-					element.bind('click',function (event) {
-						if ( window.confirm(msg) ) {
-							scope.$eval(clickAction)
-						}
-					});
-				}
-			};
-		})
-		app.filter('iif', function () {
-			return function(input, trueValue, falseValue) {
-				return input ? trueValue : falseValue;
-			};
-		});
-		app.controller("DocumentsListController", function($scope, $http){
-			$http.get('../documents/list.json').success(function(data) {
-				console.log(data);
-				$scope.documents = data;
-			});
-		});
-		app.controller("InviteController", function($scope, $http){
-			$scope.message = "";
-			$scope.invite = function(){
-				var emails = $scope.emails;
-				$scope.emails = undefined;
-				if($scope.validateEmails(emails))
-				{
-					console.log(emails);
-					$http.get('../users/invite.json?t=participant&d=<%= @document.id %>&e=' + emails).success(function(data) {
-						console.log(data);
-					});
-				}
-			}
-			$scope.validateEmails = function(emails){
-				var valid_emails = true;
-				if(emails != undefined)
-				{
-					emails = emails.replace(/ /g,'');
-					emails_arr = emails.split(",");
-					for(var index = 0; index < emails_arr.length; index++)
-					{
-						if($scope.validateEmail(emails_arr[index]) == false)
-						{
-							valid_emails = false;
-							break;
-						}
-					}
-				}
-				else
-					valid_emails = false;
-				return valid_emails;
-			}
-			$scope.validateEmail = function(email) { 
-				var re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-				return re.test(email);
-			}
-		});
-		app.controller("NewUserInviteController", function($scope, $http){
-			$scope.message = "";
-			$scope.invite = function(){
-				var emails = $scope.emails;
-				$scope.emails = undefined;
-				if($scope.validateEmails(emails))
-				{
-					console.log(emails);
-					$http.get('../users/invite.json?t=free&e=' + emails).success(function(data) {
-						console.log(data);
-					});
-				}
-			}
-			$scope.validateEmails = function(emails){
-				var valid_emails = true;
-				if(emails != undefined)
-				{
-					emails = emails.replace(/ /g,'');
-					emails_arr = emails.split(",");
-					for(var index = 0; index < emails_arr.length; index++)
-					{
-						if($scope.validateEmail(emails_arr[index]) == false)
-						{
-							valid_emails = false;
-							break;
-						}
-					}
-				}
-				else
-					valid_emails = false;
-				return valid_emails;
-			}
-			$scope.validateEmail = function(email) { 
-				var re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-				return re.test(email);
-			}
-		});
-		app.controller("DocumentSignController", function($scope, $http){
-			$scope.document_id = <%= @document.id %>;
-			$scope.sign = function(){
-				$http.get('../documents/sign/' + $scope.document_id + '.json').success(function(data) {
-					console.log(data);
-					location.reload(true);
-				});
-			}
-		});
-		app.controller("DocumentOptionsController", function($scope, $http){
-			$scope.document_id = <%= @document.id %>;
-			$scope.destroy = function(){
-				$http.get('../documents/destroy/' + $scope.document_id + '.json').success(function(data) {
-					console.log(data);
-					window.location.href = "http://<%= request.host %>"
-				});
-			}
-		});
-		
-	</script>
-	<% javascript_include_tag "bootstrap-modal.js" %>
+	<%= javascript_include_tag "bootstrap-modal.js" %>
+	<% javascript_include_tag "show_document.angular.js" %>
 <% end %>
 <div id="containerdocumentos">
 	<div id="headline">
@@ -166,7 +33,7 @@
 		<% end %>
 		-->
 	</div>
-	<div id="optionsdocumento" ng-controller="DocumentOptionsController">
+	<div id="optionsdocumento" ng-controller="DocumentOptionsController" ng-init="document_id=<%= @document.id %>">
 		<ul>
 			<% if @document.agreed %>
 				<li><a href="" onclick="window.print();">Imprimir</a></li>
@@ -190,38 +57,67 @@
 	<div id="modal-panel-participants" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<div class="modal-header">
+				<div class="db-modal-box">
 					<button style="float: right; border: 0px none; background: none repeat scroll 0% 0% transparent; font-size: 20px; font-weight: bold; color: rgb(0, 0, 0); cursor: pointer;" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel"><%= @document.name %></h4>
+					<h2 class="db-modal-title" id="myModalLabel">Compartir: <%= @document.name.capitalize %></h2>
 				</div>
-			
-				<div class="modal-body">
-					<ul>
-						<% @participants.each do |participant| %>
-							<% sign_state = if participant.signed
-								'Firmado'
-							else
-								'Sin Firmar'
-							end %>
-							<li class="negro"><%= participant.first_name %> <%= participant.last_name %> - <%= participant.role %> - <%= sign_state %></li>
-						<% end %>
-					</ul>
-					<!-- Invitation Form -->
-					<br />
+				<div class="db-modal-content">
+					<h5>Nº Miembros</h5>
+					<div id="miembros" >
+						<table id="box-table-a">
+							<thead>
+								<tr>
+									<th width="300">Miembro</th>
+									<th style="text-align:center;">Estado</th>
+									<th style="text-align:center;">Rol</th>
+									<th style="text-align:center;">Eliminar</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% @participants.each do |participant| %>
+									<% sign_state = if participant.signed
+
+										'Firmado'
+									else
+
+										'Sin Firmar'
+									end %>
+									<tr>
+										<% unless participant.first_name == nil %>
+
+											<td><%= participant.first_name %> <%= participant.last_name %></td>
+											<td style="text-align:center;"><%= sign_state %></td>
+											<td style="text-align:center;"><%= participant.role %></td>
+											<td style="text-align:center;">X</td>
+										<% else %>
+											<td><%= participant.email%></td>
+											<td style="text-align:center;"><%= sign_state %></td>
+											<td style="text-align:center;"><%= participant.role %></td>
+											<td style="text-align:center;">X</td>
+										<% end %>	
+									</tr>
+								<% end %>
+							</tbody>
+						</table>
+						<!-- Invitation Form -->
+					</div><br>
 					<% if @document.agreed %>
-						<!-- Show QR -->
-						<img src="http://chart.apis.google.com/chart?chs=200x200&cht=qr&chl=http://<%= request.host %>/check_document/<%= @document.id %>&choe=ISO-8859-1"><br />
-						<p class="negro">Sellado <%= @document.agreed_at %></p>
-					<% else %>
-						<% if @current_user_role.id  == 1 %>
-							<h4 class="negro">Invitar<h4/>
-							<div ng-controller="InviteController">
-								<input ng-model="emails"  ng-enter="invite()" type="text" placeholder="Ingresar emails separados por comas" id="invitees_emails" /><br>
-								<input type="button" ng-click="invite()" id="btn-blue" value="Enviar" />
-								<div>{{ message }}</div>
-							</div>
+						<h5 style="text-align:center;">DOCUMENTO FIRMADO POR TODOS SUS MIEMBROS</h5>
+							<%= image_tag("timbredocumentofirmado.png", :align=> "right", size: "295x250")%>
+							<!-- Show QR -->
+							<img src="http://chart.apis.google.com/chart?chs=200x200&cht=qr&chl=http://<%= request.host %>/check_document/<%= @document.id %>&choe=ISO-8859-1"><br />
+							<p class="negro">Sellado <%= @document.agreed_at %></p>
+						<% else %>
+							<% if @current_user_role.id  == 1 %>
+								<div id="invitaciones">
+									<div ng-controller="InviteController" ng-init="document_id=<%= @document.id %>">
+										<input class="email" ng-model="emails"  ng-enter="invite()" type="text" placeholder="Ingresar emails separados por comas" id="invitees_emails" />
+										<input type="button" ng-click="invite()" id="invitar" value="Enviar" />
+										<div>{{ message }}</div>
+									</div>
+								</div>
+							<% end %>
 						<% end %>
-					<% end %>
 				</div>
 				<div class="modal-footer">
 					
@@ -248,7 +144,18 @@
 			</div>
 		</div>
 	</div>
-	<div ng-controller="DocumentSignController" id="modal-panel-participant-sign" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div id="modal-panel-user-sign-ok" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="db-modal">
+			<p style="text-align:center;margin-top:25px;"><img src="img/FirmaExpress2.png" width="300"></p>
+			<p style="text-align:center;margin-top:15px;"><img src="img/patriciojara.png" width="75" height="75"></p>
+			<p style="text-align:center;"><img src="img/firma usuario.png" width="350"></p>
+			<p style="color:#000;text-align:center;margin-bottom:15px;font-family: 'Lato',sans-serif;font-weight: lighter;">Has firmado el documento exitosamente</p>
+			<div id="invitaciones">
+				<div id="continuar">Continuar</div>
+			</div>
+		</div>		
+	</div>
+	<div ng-controller="DocumentSignController" id="modal-panel-participant-sign" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-init="document_id=<%= @document.id %>">
 		<div class="db-modal">
 			<br>
 			<br>
@@ -257,7 +164,7 @@
 			<center><img class="img-circle" style="margin-top: -1px; margin-left: 30px" src="<%=root_url + current_user.avatar.to_s %>" width=80 height=80></center>
 			<p style="text-align:center;color:#000;margin-top:15px;font-size:22px;">
 				<strong>
-					Hola <%= current_user.first_name.capitalize %>
+					Hola <%= current_user.first_name %>
 				</strong>
 			</p>
 			<p style="text-align:center;color:#000;margin-top:10px;padding-bottom:25px;border-bottom:1px solid #000;font-size:16px;margin-left:auto;margin-right:auto;font-family: 'Lato',sans-serif;font-weight: lighter;">Estas apunto de firmar el Documento: "<%= @document.name.capitalize %>"</p>
@@ -287,6 +194,8 @@
 			<li><%= participant.first_name %> <%= participant.last_name %> - <%= participant.role %> - <%= sign_state %></li>
 		<% end %>
 	</ul>
+	
+		<%= image_tag("timbredocumentofirmado.png", :align=> "right")%>
 	<!-- Show QR -->
 	<img src="http://chart.apis.google.com/chart?chs=200x200&cht=qr&chl=http://<%= request.host %>/check_document/<%= @document.id %>&choe=ISO-8859-1">
 	<p class="print">Sellado <%= @document.agreed_at %></p>
