@@ -104,24 +104,27 @@
 					</div><br>
 					<% if @document.agreed %>
 						<h5 style="text-align:center;">DOCUMENTO FIRMADO POR TODOS SUS MIEMBROS</h5>
-							<%= image_tag("timbredocumentofirmado.png", :align=> "right", size: "295x250")%>
+						<div id="miembros2">
+							<%= image_tag("timbredocumentofirmado.png")%>
+						</div><br>
+						<p class="negro">Como elemento de seguridad, lee el código QR para verificar los participantes del documento.</p><br>
 							<!-- Show QR -->
-							<img src="http://chart.apis.google.com/chart?chs=200x200&cht=qr&chl=http://<%= request.host %>/check_document/<%= @document.id %>&choe=ISO-8859-1"><br />
-							<p class="negro">Sellado <%= @document.agreed_at %></p>
+							<p style="text-align:center;"><img src="http://chart.apis.google.com/chart?chs=200x200&cht=qr&chl=http://<%= request.host %>/check_document/<%= @document.id %>&choe=ISO-8859-1"></p><br />
 						<% else %>
 							<% if @current_user_role.id  == 1 %>
 								<div id="invitaciones">
 									<div ng-controller="InviteController" ng-init="document_id=<%= @document.id %>">
 										<input class="email" ng-model="emails"  ng-enter="invite()" type="text" placeholder="Ingresar emails separados por comas" id="invitees_emails" />
-										<input type="button" ng-click="invite()" id="invitar" value="Enviar" />
-										<div>{{ message }}</div>
+										<input type="button" ng-click="invite()" id="invitar" value="Enviar" /><br><p></p><br>
+										<p><%= image_tag 'facebook_lo.gif', style: 'display: none;text-align:center;margin-left:auto;margin-right:auto;', id: 'sign_loading', height: '25' %></p>
+										<div id="invitation_message" style="display:none" class="alert alert-success">{{ message }}</div>
 									</div>
 								</div>
 							<% end %>
 						<% end %>
 				</div>
-				<div class="modal-footer">
-					
+				<div class="modal-footer"; >
+					<p class="negro" style="text-align:center;">Sellado <%= @document.agreed_at %></p>	
 				</div>
 			</div>
 		</div>

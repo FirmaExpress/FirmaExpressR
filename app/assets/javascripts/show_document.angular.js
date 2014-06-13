@@ -44,8 +44,13 @@ app.controller("InviteController", function($scope, $http){
 		if($scope.validateEmails(emails))
 		{
 			console.log(emails);
+			$('#sign_loading').attr('style', 'display: block;text-align:center;margin-left:auto;margin-right:auto;');
 			$http.get('../users/invite.json?t=participant&d=' + $scope.document_id + '&e=' + emails).success(function(data) {
 				console.log(data);
+				$('#sign_loading').attr('style', 'display: none');
+				$scope.message = data[0].message;
+				$('#invitation_message').attr('style', 'display:block;margin-top:20px;text-align:center');
+				$('#invitation_message').fadeIn("slow").delay(5000).fadeOut("slow");
 			});
 		}
 	}
