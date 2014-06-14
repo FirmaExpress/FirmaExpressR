@@ -31,7 +31,9 @@ FirmaExpressR::Application.routes.draw do
   get "/about_us", to: "home#aboutus"
   get "/plans", to: "home#plans"
   namespace :api, path: '/', constraints: { subdomain: 'api' } do
-    resources :users, only: [:index, :show]
+    resources :users, only: [:index, :show] do
+      resources :documents, only: [:index]
+    end
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

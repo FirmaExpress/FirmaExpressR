@@ -1,13 +1,17 @@
 module API
-	class UsersController < ApplicationController
+	class UsersController < APIController
 		def index
 			users = User.all
-			render json: users, status: 200
+			respond_to do |format|
+				format.json { render json: users, status: :ok } #200
+			end
 		end
 
 		def show
 			user = User.find(params[:id])
-			render json: user, status: 200
+			respond_to do |format|
+				format.json { render json: user, status: :ok } #200
+			end
 		end
 	end
 end

@@ -9,3 +9,6 @@
 #
 # two: {}
 #  column: value
+one:
+  user_id: 1
+  document_id: 1
