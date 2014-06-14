@@ -4,4 +4,4 @@ one:
   first_name: Claudio
   last_name: Guerra
   email: claudio.guerra@firmaexpress.com
-  password: 12345678
+  encrypted_password: 12345678
