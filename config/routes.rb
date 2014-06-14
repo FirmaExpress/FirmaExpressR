@@ -25,7 +25,7 @@ FirmaExpressR::Application.routes.draw do
   default_url_options :host => "Firmaexpress.dev"
   resources :sessions
   resources :documents
-  resources :users
+  #resources :users
   # You can have the root of your site routed with "root"
   #get "/login", to: "home#login" 
   get "/about_us", to: "home#aboutus"
