@@ -12,6 +12,7 @@ class Document < ActiveRecord::Base
 	has_many :users, through: :participants
 	has_many :roles, through: :participants
 	has_many :requested_sign_types
+	has_many :signs, through: :participants
 
 	validates :name, presence: true
 	validates :path, presence: true

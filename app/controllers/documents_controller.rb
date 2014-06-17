@@ -15,13 +15,13 @@ class DocumentsController < ApplicationController
 		@document = Document.new(file: file, user_id: current_user.id)
 		if @document.save
 			if params[:simple_check]
-				@document.requested_sign_types.create(sign_type: 1)
+				@document.requested_sign_types.create(sign_type_id: 1)
 			end
 			if params[:captcha_check]
-				@document.requested_sign_types.create(sign_type: 2)
+				@document.requested_sign_types.create(sign_type_id: 2)
 			end
 			if params[:name_check]
-				@document.requested_sign_types.create(sign_type: 3)
+				@document.requested_sign_types.create(sign_type_id: 3)
 			end
 			@participant = Participant.new(document_id: @document.id, role_id: 1, user_id: current_user.id, signed: 'f')
 			if @participant.save

@@ -24,7 +24,7 @@ FirmaExpressR::Application.routes.draw do
   post "users/complete_invitee_profile", to: "users#complete_invitee_profile"
   default_url_options :host => "Firmaexpress.dev"
   resources :sessions
-  resources :documents
+  #resources :documents
   #resources :users
   # You can have the root of your site routed with "root"
   #get "/login", to: "home#login" 
@@ -32,8 +32,11 @@ FirmaExpressR::Application.routes.draw do
   get "/plans", to: "home#plans"
   namespace :api, path: '/', constraints: { subdomain: 'api' } do
     resources :users, only: [:index, :show] do
-      resources :documents, only: [:index]
+      resources :documents, only: [:index, :show] do
+        resources :signs, only: [:index]
+      end
     end
+    #resources :documents, only: [:index, :show]
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

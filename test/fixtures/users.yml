@@ -6,3 +6,10 @@ one:
   last_name: Guerra
   email: claudio.guerra@firmaexpress.com
   encrypted_password: 12345678
+
+two:
+  id: 2
+  first_name: Patricio
+  last_name: Jara
+  email: patricio.jara@firmaexpress.com
+  encrypted_password: qwertyui

@@ -5,6 +5,7 @@ one:
   name: File_1
   path: /path/file_1.pdf
 
-# two:
-#   name: MyString
-#   path: MyString
+two:
+  id: 2
+  name: File_2
+  path: /path/file_2.pdf

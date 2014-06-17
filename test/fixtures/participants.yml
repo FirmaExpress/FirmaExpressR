@@ -12,3 +12,7 @@
 one:
   user_id: 1
   document_id: 1
+
+two:
+  user_id: 2
+  document_id: 2
