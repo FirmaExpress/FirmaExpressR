@@ -24,8 +24,8 @@ FirmaExpressR::Application.routes.draw do
   post "users/complete_invitee_profile", to: "users#complete_invitee_profile"
   default_url_options :host => "Firmaexpress.dev"
   resources :sessions
-  #resources :documents
-  #resources :users
+  resources :documents
+  resources :users
   # You can have the root of your site routed with "root"
   #get "/login", to: "home#login" 
   get "/about_us", to: "home#aboutus"

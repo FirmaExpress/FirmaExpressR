@@ -127,6 +127,18 @@ border-radius: 3px;}
 #documento form a:hover {color:#EDC00F} 
 #searchimg img {background:#3399ff;border:1px solid #e5e5e5;position:relative;padding:4px 10px 5px 10px;margin-top:5px;cursor:pointer;margin-left:1px;}
 #searchimg img:hover {background:#3399ff;border:1px solid #e5e5e5;}
+#verificacion {position:absolute;float:left;top:40%;height:100px;width:300px;color:#000;left:29%;text-align:center!important;padding:15px;border: 1px solid #175892;background: none repeat scroll 0% 0% rgba(235, 235, 235, 0.8);}
+#seleccionar {position:absolute;float:left;top:20%;height:40px;width:300px;color:#000;left:29%;text-align:center!important;padding:15px;}
+#searchimg img {background:#3399ff;border:1px solid #e5e5e5;position:relative;padding:4px 10px 5px 10px;margin-top:5px;cursor:pointer;margin-left:1px;}
+#searchimg img:hover {background:#3399ff;border:1px solid #e5e5e5;}
+#verificacion h4 {text-align:center!important;}
+#verificacion input {width:50px;}
+#verificacion table {margin:15px auto 0;color: #1B1B1B;
+font-family: "Lato",sans-serif;
+font-weight: lighter!important;}
+#verificacion table th {color: #1B1B1B;
+font-family: "Lato",sans-serif;
+font-weight: lighter!important;}
 
 /* --------------Documentos-------------- */
 
