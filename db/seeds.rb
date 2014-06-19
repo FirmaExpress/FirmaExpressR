@@ -16,4 +16,28 @@ User.create([{
 	password: '12345678', 
 	password_confirmation: '12345678',
 	user_type_id: 1 }])
-SignType.create([{ name: 'Check' }, { name: 'Captcha' }, { name: 'Nombre' }, { name: 'RUT' }])
+check = SignSecurityMethod.new
+check.name = 'Check'
+check.save
+captcha = SignSecurityMethod.new
+captcha.name = 'Captcha'
+captcha.save
+nombre = SignSecurityMethod.new
+nombre.name = 'Nombre'
+nombre.save
+
+level_a = SignSecurityLevel.new
+level_a.level = 0
+level_a.sign_security_methods << check
+level_a.save
+level_b = SignSecurityLevel.new
+level_b.level = 1
+level_b.sign_security_methods << check
+level_b.sign_security_methods << captcha
+level_b.save
+level_c = SignSecurityLevel.new
+level_c.level = 2
+level_c.sign_security_methods << check
+level_c.sign_security_methods << captcha
+level_c.sign_security_methods << nombre
+level_c.save
