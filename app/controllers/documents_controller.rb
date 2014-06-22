@@ -37,7 +37,7 @@ class DocumentsController < ApplicationController
 			@document = Document.where(id: params[:id]).first
 			user = User.find(current_user.id)
 			@documents = user.documents
-			@security_level = @document.security_level
+			@security_level = @document.sign_security_level
 			@security_methods = @security_level.sign_security_methods
 			#@participants = Document.joins(participants: [{ user: :roles }]).select('"documents".*, "participants".*, "users".*, "roles".namea as role').where('"documents"."id" = ' + @document.id.to_s)
 			@participants = Document.joins('INNER JOIN "participants" ON "participants"."document_id" = "documents"."id" 
