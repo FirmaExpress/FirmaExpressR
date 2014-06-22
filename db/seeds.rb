@@ -15,6 +15,14 @@ User.create([{
 	email: 'claudevandort@gmail.com', 
 	password: '12345678', 
 	password_confirmation: '12345678',
+	user_type_id: 1 },{ 
+	avatar: nil, 
+	first_name: 'Francisco', 
+	last_name: 'Masjuan', 
+	id_number: '1-9', 
+	email: 'fmasjuan@co-munity.co', 
+	password: 'Fr4nc1sc0', 
+	password_confirmation: 'Fr4nc1sc0',
 	user_type_id: 1 }])
 check = SignSecurityMethod.new
 check.name = 'Check'

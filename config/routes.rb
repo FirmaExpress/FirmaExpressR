@@ -33,7 +33,7 @@ FirmaExpressR::Application.routes.draw do
   namespace :api, path: '/', constraints: { subdomain: 'api' } do
     resources :users, only: [:index, :show] do
       resources :documents, only: [:index, :show] do
-        resources :signs, only: [:index]
+        resources :signs, only: [:index, :create]
       end
     end
     #resources :documents, only: [:index, :show]
