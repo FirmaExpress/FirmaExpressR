@@ -23,6 +23,14 @@ User.create([{
 	email: 'fmasjuan@co-munity.co', 
 	password: 'Fr4nc1sc0', 
 	password_confirmation: 'Fr4nc1sc0',
+	user_type_id: 1 },{ 
+	avatar: nil, 
+	first_name: 'Patricio', 
+	last_name: 'Jara', 
+	id_number: '17121986-8', 
+	email: 'patricioalfredo18@gmail.com', 
+	password: '12345678', 
+	password_confirmation: '12345678',
 	user_type_id: 1 }])
 check = SignSecurityMethod.new
 check.name = 'Check'
@@ -35,16 +43,21 @@ nombre.name = 'Nombre'
 nombre.save
 
 level_a = SignSecurityLevel.new
-level_a.level = 0
+level_a.level = 1
 level_a.sign_security_methods << check
 level_a.save
 level_b = SignSecurityLevel.new
-level_b.level = 1
+level_b.level = 2
 level_b.sign_security_methods << check
 level_b.sign_security_methods << captcha
 level_b.save
+level_b = SignSecurityLevel.new
+level_b.level = 2
+level_b.sign_security_methods << check
+level_b.sign_security_methods << nombre
+level_b.save
 level_c = SignSecurityLevel.new
-level_c.level = 2
+level_c.level = 3
 level_c.sign_security_methods << check
 level_c.sign_security_methods << captcha
 level_c.sign_security_methods << nombre
