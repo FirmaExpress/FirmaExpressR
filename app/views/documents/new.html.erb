@@ -35,18 +35,16 @@ Gestión de Documentos
 				<h4>Métodos de Verificación de Firma</h4>
 				<table>
 					<tbody>
-						<tr width="80%">
-							<th><%= radio_button_tag :level, 1, checked: true %></th>
-							<th><%= label_tag :level_1, 'Nivel 1 (Verificación simple)', class: 'negro' %></th>
-						</tr>
-						<tr>
-							<th><%= radio_button_tag :level, 2 %></th>
-							<th><%= label_tag :level_2, 'Nivel 2 (V. simple y captcha)', class: 'negro' %></th>
-						</tr>
-						<tr width="20%">
-							<th><%= radio_button_tag :level, 3 %></th>
-							<th><%= label_tag :level_3, 'Nivel 3 (V. simple, captcha y nombre)', class: 'negro' %></th>
-						</tr>
+						<% @sign_security_levels.each do |security_level| %>
+							<tr>
+								<% if security_level.id == @sign_security_levels[0].id %>
+									<th><%= radio_button_tag :level, security_level.id, checked: true %></th>
+								<% else %>
+									<th><%= radio_button_tag :level, security_level.id %></th>
+								<% end %>
+								<th><%= label_tag "level_#{security_level.id}".to_sym, "Nivel #{security_level.level}: #{security_level.description}", class: 'negro' %></th>
+							</tr>
+						<% end %>
 					</tbody>
 				</table>
 			</div>

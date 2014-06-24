@@ -6,6 +6,7 @@ class DocumentsController < ApplicationController
 		@document = Document.new
 		user = User.find(current_user.id)
 		@documents = user.documents
+		@sign_security_levels = SignSecurityLevel.all
 	end
 
 	def create

@@ -135,15 +135,19 @@ app.controller("DocumentSignController", function($scope, $http){
 	}
 
 	$scope.validateSign = function(){
-		var result = false;
+		var result = true;
 		//var data = { methods: [] };
 		angular.forEach($scope.methods, function(method, id){
-			/*if(id == 1)
-			{}*/
-			if(result == true && method != true)
-				result = false;
-			else if(result == false)
-				result = method;
+			if(result == true){
+				if(id == 1){
+					if(method == false)
+						result = false;
+				}
+				if (id == 3) {
+					if (method.toLowerCase() != $scope.user_fullname)
+						result = false;
+				}
+			}
 			//this.methods.push({ id: id, input: method });
 		}/*, data*/);
 		/*console.log(data);
