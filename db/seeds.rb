@@ -38,7 +38,7 @@ User.create([{
 	id_number: '2-7', 
 	email: 'diegomaturanabaeza@gmail.com', 
 	password: 'D13g0M4tur4n4', 
-	password_confirmation: 'D13g0',
+	password_confirmation: 'D13g0M4tur4n4',
 	user_type_id: 1 }])
 check = SignSecurityMethod.new
 check.name = 'Verificación simple'
