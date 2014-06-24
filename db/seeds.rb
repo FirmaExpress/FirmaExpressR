@@ -31,9 +31,17 @@ User.create([{
 	email: 'patricioalfredo18@gmail.com', 
 	password: '12345678', 
 	password_confirmation: '12345678',
+	user_type_id: 1 },{ 
+	avatar: nil, 
+	first_name: 'Diego', 
+	last_name: 'Maturana', 
+	id_number: '2-7', 
+	email: 'diegomaturanabaeza@gmail.com', 
+	password: 'D13g0', 
+	password_confirmation: 'D13g0',
 	user_type_id: 1 }])
 check = SignSecurityMethod.new
-check.name = 'Check'
+check.name = 'Verificación simple'
 check.save
 captcha = SignSecurityMethod.new
 captcha.name = 'Captcha'
@@ -44,21 +52,32 @@ nombre.save
 
 level_a = SignSecurityLevel.new
 level_a.level = 1
+level_a.name = 'Nivel 1'
+level_a.description = 'Verificación simple'
 level_a.sign_security_methods << check
 level_a.save
+
 level_b = SignSecurityLevel.new
 level_b.level = 2
+level_b.name = 'Nivel 1'
+level_b.description = 'V. simple y captcha'
 level_b.sign_security_methods << check
 level_b.sign_security_methods << captcha
 level_b.save
-level_b = SignSecurityLevel.new
-level_b.level = 2
-level_b.sign_security_methods << check
-level_b.sign_security_methods << nombre
-level_b.save
+
 level_c = SignSecurityLevel.new
-level_c.level = 3
+level_c.level = 2
+level_c.name = 'Nivel 1'
+level_c.description = 'V. simple y nombre'
 level_c.sign_security_methods << check
-level_c.sign_security_methods << captcha
 level_c.sign_security_methods << nombre
 level_c.save
+
+level_d = SignSecurityLevel.new
+level_d.level = 3
+level_d.name = 'Nivel 1'
+level_d.description = 'V. simple, captcha y nombre'
+level_d.sign_security_methods << check
+level_d.sign_security_methods << captcha
+level_d.sign_security_methods << nombre
+level_d.save
