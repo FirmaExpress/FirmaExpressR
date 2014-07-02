@@ -116,14 +116,55 @@ app.controller("NewUserInviteController", function($scope, $http){
 	}
 });
 app.controller("DocumentSignController", function($scope, $http){
+	$scope.methods = [];
 	$scope.sign = function(){
-		$('#sign_loading').attr('style', 'display: block;text-align:center;margin-left:auto;margin-right:auto;');
-		$http.get('../documents/sign/' + $scope.document_id + '.json').success(function(data) {
-			console.log(data);
-			$('#modal-panel-participant-sign').modal('hide');
-			$('#modal-panel-user-sign-ok').modal('show');
-		});
+		if($scope.validateSign())
+		{
+			$('#sign_loading').attr('style', 'display: block;text-align:center;margin-left:auto;margin-right:auto;');
+			//old sign code
+			$http.get('../documents/sign/' + $scope.document_id + '.json').success(function(data) {
+				console.log(data);
+				$('#modal-panel-participant-sign').modal('hide');
+				$('#modal-panel-user-sign-ok').modal('show');
+			});
+		}
+		else
+		{
+			alert('Complete su firma.');
+		}
 	}
+
+	$scope.validateSign = function(){
+		var result = true;
+		//var data = { methods: [] };
+		angular.forEach($scope.methods, function(method, id){
+			if(result == true){
+				if(id == 1){
+					if(method == false)
+						result = false;
+				}
+				if (id == 3) {
+					if (method.toLowerCase() != $scope.user_fullname)
+						result = false;
+				}
+			}
+			//this.methods.push({ id: id, input: method });
+		}/*, data*/);
+		/*console.log(data);
+		$http({
+			method: 'post',
+			url: 'http://api.firmaexpress.dev/users/' + $scope.user_id + '/documents/' + $scope.document_id + '/signs',
+			data: data
+		}).
+		success(function(data, status, headers, config){
+			result = true;
+		}).
+		error(function(data, status, headers, config){
+			result = false;
+		});*/
+		return result;
+	}
+	//console.log($scope.validateSign());
 });
 app.controller("DocumentOptionsController", function($scope, $http){
 	$scope.destroy = function(){

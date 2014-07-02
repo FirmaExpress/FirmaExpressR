@@ -6,23 +6,21 @@ class DocumentsController < ApplicationController
 		@document = Document.new
 		user = User.find(current_user.id)
 		@documents = user.documents
+		@sign_security_levels = SignSecurityLevel.all
 	end
 
 	def create
+		unless params[:document]
+			render "new"
+		end
 		file = params[:document][:path]
 		#dir = 'uploads/users/' + current_user.to_s() + '/documents/'
 		#document_path = dir + uploaded_io.original_filename
 		@document = Document.new(file: file, user_id: current_user.id)
+		@security_level = SignSecurityLevel.find(params[:level].to_i)
+		@security_methods = @security_level.sign_security_methods
+		@document.sign_security_level = @security_level
 		if @document.save
-			if params[:simple_check]
-				@document.requested_sign_types.create(sign_type: 1)
-			end
-			if params[:captcha_check]
-				@document.requested_sign_types.create(sign_type: 2)
-			end
-			if params[:name_check]
-				@document.requested_sign_types.create(sign_type: 3)
-			end
 			@participant = Participant.new(document_id: @document.id, role_id: 1, user_id: current_user.id, signed: 'f')
 			if @participant.save
 				redirect_to root_url
@@ -32,10 +30,6 @@ class DocumentsController < ApplicationController
 		else
 			render "new"
 		end
-		#FileUtils.mkdir_p('public/' + dir) unless File.directory?(dir)
-		#File.open(Rails.root.join('public', dir, uploaded_io.original_filename), 'wb') do |file|
-		#	file.write(uploaded_io.read)
-		#end
 	end
 
 	def show
@@ -44,7 +38,8 @@ class DocumentsController < ApplicationController
 			@document = Document.where(id: params[:id]).first
 			user = User.find(current_user.id)
 			@documents = user.documents
-			@requested_sign_types = @document.requested_sign_types.includes(:sign_type)
+			@security_level = @document.sign_security_level
+			@security_methods = @security_level.sign_security_methods
 			#@participants = Document.joins(participants: [{ user: :roles }]).select('"documents".*, "participants".*, "users".*, "roles".namea as role').where('"documents"."id" = ' + @document.id.to_s)
 			@participants = Document.joins('INNER JOIN "participants" ON "participants"."document_id" = "documents"."id" 
 				INNER JOIN "users" ON "users"."id" = "participants"."user_id" 

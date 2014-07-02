@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140610012845) do
+ActiveRecord::Schema.define(version: 20140623212207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,10 @@ ActiveRecord::Schema.define(version: 20140610012845) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "agreed_at"
+    t.integer  "sign_security_level_id"
   end
+
+  add_index "documents", ["sign_security_level_id"], name: "index_documents_on_sign_security_level_id", using: :btree
 
   create_table "invite_codes", force: true do |t|
     t.string  "code"
@@ -33,26 +36,15 @@ ActiveRecord::Schema.define(version: 20140610012845) do
   add_index "invite_codes", ["user_id"], name: "index_invite_codes_on_user_id", using: :btree
 
   create_table "participants", force: true do |t|
-    t.integer  "user_id",     null: false
-    t.integer  "document_id", null: false
-    t.integer  "role_id"
-    t.boolean  "signed"
-    t.datetime "signed_at"
+    t.integer "user_id",     null: false
+    t.integer "document_id", null: false
+    t.integer "role_id"
+    t.boolean "signed"
   end
 
   add_index "participants", ["document_id"], name: "index_participants_on_document_id", using: :btree
   add_index "participants", ["role_id"], name: "index_participants_on_role_id", using: :btree
   add_index "participants", ["user_id"], name: "index_participants_on_user_id", using: :btree
-
-  create_table "requested_sign_types", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "document_id"
-    t.integer  "sign_type_id"
-  end
-
-  add_index "requested_sign_types", ["document_id"], name: "index_requested_sign_types_on_document_id", using: :btree
-  add_index "requested_sign_types", ["sign_type_id"], name: "index_requested_sign_types_on_sign_type_id", using: :btree
 
   create_table "roles", force: true do |t|
     t.string   "name"
@@ -60,20 +52,48 @@ ActiveRecord::Schema.define(version: 20140610012845) do
     t.datetime "updated_at"
   end
 
-  create_table "sign_types", force: true do |t|
-    t.string "name"
+  create_table "sign_security_level_methods", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "sign_security_method_id"
+    t.integer  "sign_security_level_id"
+  end
+
+  add_index "sign_security_level_methods", ["sign_security_level_id"], name: "index_sign_security_level_methods_on_sign_security_level_id", using: :btree
+  add_index "sign_security_level_methods", ["sign_security_method_id"], name: "index_sign_security_level_methods_on_sign_security_method_id", using: :btree
+
+  create_table "sign_security_levels", force: true do |t|
+    t.integer  "level"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name"
+    t.string   "description"
+  end
+
+  create_table "sign_security_methods", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "signs", force: true do |t|
-    t.string   "ip_address"
+    t.string   "ip"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "participant_id"
-    t.integer  "sign_type_id"
   end
 
   add_index "signs", ["participant_id"], name: "index_signs_on_participant_id", using: :btree
-  add_index "signs", ["sign_type_id"], name: "index_signs_on_sign_type_id", using: :btree
+
+  create_table "used_sign_security_methods", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "sign_id"
+    t.integer  "sign_security_method_id"
+  end
+
+  add_index "used_sign_security_methods", ["sign_id"], name: "index_used_sign_security_methods_on_sign_id", using: :btree
+  add_index "used_sign_security_methods", ["sign_security_method_id"], name: "index_used_sign_security_methods_on_sign_security_method_id", using: :btree
 
   create_table "user_types", force: true do |t|
     t.string   "name"

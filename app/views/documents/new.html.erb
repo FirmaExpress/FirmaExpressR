@@ -31,20 +31,24 @@ Gestión de Documentos
 	<div id="documento">
 		<%= form_for @document, html: { style: "margin-top: 150px" } do |f| %>
 			<%= f.file_field :path %>
-			<h3>Métodos de verificación de firma</h3>
-			<p>
-			<%= label_tag :simple_check, 'Verificación simple', class: 'negro' %>
-			<%= check_box_tag :simple_check, nil, true, disabled: 'disabled' %>
-			</p>
-			<p>
-			<%= label_tag :name_check, 'Solicitar nombre', class: 'negro' %>
-			<%= check_box_tag :name_check %>
-			</p>
-			<p>			@participants = Document.joins('INNE
-			<%= label_tag :captcha_check, 'Código captcha', class: 'negro' %>
-			<%= check_box_tag :captcha_check %>
-			</p>
-			<%= submit_tag "Subir",{id: 'submit'} %>
+			<div id="verificacion">
+				<h4>Métodos de Verificación de Firma</h4>
+				<table>
+					<tbody>
+						<% @sign_security_levels.each do |security_level| %>
+							<tr>
+								<% if security_level.id == @sign_security_levels[0].id %>
+									<th><%= radio_button_tag :level, security_level.id, checked: true %></th>
+								<% else %>
+									<th><%= radio_button_tag :level, security_level.id %></th>
+								<% end %>
+								<th><%= label_tag "level_#{security_level.id}".to_sym, "Nivel #{security_level.level}: #{security_level.description}", class: 'negro' %></th>
+							</tr>
+						<% end %>
+					</tbody>
+				</table>
+			</div>
+			<%= submit_tag "Subir", { id: 'submit' } %>
 		<% end %>
 	</div>
 	<div id="importante"><p class="datosextra">Solo se pueden subir documentos en PDF. Si no tienes tus archivos en este formato, utiliza nuestro conversor de Word a PDF <a href="conversor.html" style="color:#ab8f5a;font-weight:bolder;">aquí</a>.</p></div>

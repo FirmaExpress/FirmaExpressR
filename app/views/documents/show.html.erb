@@ -161,24 +161,36 @@
 			</div>
 		</div>		
 	</div>
-	<div ng-controller="DocumentSignController" id="modal-panel-participant-sign" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-init="document_id=<%= @document.id %>">
-		<div class="db-modal">
-			<br>
-			<br>
-			<p><center><%= image_tag("FirmaExpress2.png", width: "300")%></center></p>
-			<br>
-			<center><img class="img-circle" style="margin-top: -1px; margin-left: 30px" src="<%=root_url + current_user.avatar.to_s %>" width=80 height=80></center>
-			<p style="text-align:center;color:#000;margin-top:15px;font-size:22px;">
-				<strong>
-					Hola <%= current_user.first_name %>
-				</strong>
-			</p>
-			<p style="text-align:center;color:#000;margin-top:10px;padding-bottom:25px;border-bottom:1px solid #000;font-size:16px;margin-left:auto;margin-right:auto;font-family: 'Lato',sans-serif;font-weight: lighter;">Estas apunto de firmar el Documento: "<%= @document.name.capitalize %>"</p>
-			<p style="color:#000;text-align:center;margin-bottom:15px; margin-top:15px;font-family: 'Lato',sans-serif;font-weight: lighter;">¿Estás seguro de querer firmarlo?</p>
-			<center><input type="button" ng-click="sign()" id="btn-blue" value="Aceptar" /><input type="button" data-dismiss="modal" id="btn-blue" value="Cancelar"/></center>
-			<p><%= image_tag 'facebook_lo.gif', style: 'display: none;text-align:center;margin-left:auto;margin-right:auto;', id: 'sign_loading', height: '25' %></p>
-		</div>						
-	
+	<div ng-controller="DocumentSignController" id="modal-panel-participant-sign" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-init="user_id=<%= current_user.id %>;user_fullname='<%= "#{current_user.first_name} #{current_user.last_name}".downcase %>';document_id=<%= @document.id %>">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<br>
+					<br>
+					<p><center><%= image_tag("FirmaExpress2.png", width: "300")%></center></p>
+					<br>
+					<center><img class="img-circle" style="margin-top: -1px; margin-left: 30px" src="<%=root_url + current_user.avatar.to_s %>" width=80 height=80></center>
+					<p style="text-align:center;color:#000;margin-top:15px;font-size:22px;">
+						<strong>
+							Hola <%= current_user.first_name %>
+						</strong>
+					</p>
+					<p style="text-align:center;color:#000;margin-top:10px;padding-bottom:25px;border-bottom:1px solid #000;font-size:16px;margin-left:auto;margin-right:auto;font-family: 'Lato',sans-serif;font-weight: lighter;">Estas apunto de firmar el Documento: "<%= @document.name.capitalize %>"</p>
+					<table class="negro">
+					<% @security_methods.each do |method| %>
+						<% if method.id == 1 %>
+							<tr><td><%= label_tag :method_1, '¿Estás seguro de querer firmarlo?' %></td><td><%= check_box_tag :method_1, 1, nil, 'ng-model' => "methods[#{method.id}]", 'ng-init' => "methods[#{method.id}]=false" %></td></tr>
+						<% elsif method.id == 3 %>
+							<tr><td><%= label_tag :method_3, 'Ingrese su nombre y apellido' %></td><td><%= text_field_tag :method_3, '', 'ng-model' => "methods[#{method.id}]", 'ng-init' => "methods[#{method.id}]=''", style: 'width:150px;border:1px solid #aaa;height:5px;' %></td></tr>
+						<% end %>
+					<% end %>
+					</table>
+					<!--<p style="color:#000;text-align:center;margin-bottom:15px; margin-top:15px;font-family: 'Lato',sans-serif;font-weight: lighter;"></p>-->
+					<center><input type="button" ng-click="sign()" id="btn-blue" value="Aceptar" /><input type="button" data-dismiss="modal" id="btn-blue" value="Cancelar"/></center>
+					<p><%= image_tag 'fb-loader.gif', style: 'display: none;text-align:center;margin-left:auto;margin-right:auto;', id: 'sign_loading', height: '25' %></p>
+				</div>
+			</div>
+		</div>		
 	</div>	
 	<iframe id="documento2" src="<%= root_path + @document.path %>"></iframe>
 	<div id="importante"><p class="datosextra">Solo se pueden subir documentos en PDF. Si no tienes tus archivos en este formato, utiliza nuestro conversor de Word a PDF <a href="conversor.html" style="color:#ab8f5a;font-weight:bolder;">aquí</a>.</p></div>
