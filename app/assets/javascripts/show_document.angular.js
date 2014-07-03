@@ -1,4 +1,13 @@
-var app = angular.module("FEFront", []);
+var app = angular.module("FEFront", ['reCAPTCHA']);
+app.config(function (reCAPTCHAProvider) {
+    // required: please use your own key :)
+    reCAPTCHAProvider.setPublicKey('6LdY0_USAAAAALCFdgwLuw4OoAaFEFJi2jpHIKpz');
+
+    // optional: gets passed into the Recaptcha.create call
+    reCAPTCHAProvider.setOptions({
+        theme: 'clean'
+    });
+});
 app.directive('ngEnter', function () {
     return function (scope, element, attrs) {
         element.bind("keydown keypress", function (event) {
@@ -136,7 +145,6 @@ app.controller("DocumentSignController", function($scope, $http){
 
 	$scope.validateSign = function(){
 		var result = true;
-		//var data = { methods: [] };
 		angular.forEach($scope.methods, function(method, id){
 			if(result == true){
 				if(id == 1){
@@ -148,23 +156,9 @@ app.controller("DocumentSignController", function($scope, $http){
 						result = false;
 				}
 			}
-			//this.methods.push({ id: id, input: method });
-		}/*, data*/);
-		/*console.log(data);
-		$http({
-			method: 'post',
-			url: 'http://api.firmaexpress.dev/users/' + $scope.user_id + '/documents/' + $scope.document_id + '/signs',
-			data: data
-		}).
-		success(function(data, status, headers, config){
-			result = true;
-		}).
-		error(function(data, status, headers, config){
-			result = false;
-		});*/
+		});
 		return result;
 	}
-	//console.log($scope.validateSign());
 });
 app.controller("DocumentOptionsController", function($scope, $http){
 	$scope.destroy = function(){
