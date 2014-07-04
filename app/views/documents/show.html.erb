@@ -216,9 +216,9 @@
 			<li><%= participant.first_name %> <%= participant.last_name %> - <%= participant.role %> - <%= sign_state %></li>
 		<% end %>
 	</ul>
-	<div id="miembros2" style="text-align:center">
-		<%= image_tag("timbredocumentofirmado.png", :align=> "center")%>
-	</div>
+	<!--<div id="miembros2" style="text-align:center">-->
+	<%= image_tag("timbredocumentofirmado.png", width: "300px", height: "202px")%>
+	<!--</div>-->
 	<!-- Show QR -->
 	<img src="http://chart.apis.google.com/chart?chs=200x200&cht=qr&chl=http://<%= request.host %>/check_document/<%= @document.id %>&choe=ISO-8859-1">
 	<p class="print">Sellado <%= @document.agreed_at %></p>
