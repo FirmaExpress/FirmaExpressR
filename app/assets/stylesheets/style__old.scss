@@ -127,7 +127,7 @@ border-radius: 3px;}
 #documento form a:hover {color:#EDC00F} 
 #searchimg img {background:#3399ff;border:1px solid #e5e5e5;position:relative;padding:4px 10px 5px 10px;margin-top:5px;cursor:pointer;margin-left:1px;}
 #searchimg img:hover {background:#3399ff;border:1px solid #e5e5e5;}
-#verificacion {position:absolute;float:left;top:40%;height:100px;width:300px;color:#000;left:29%;text-align:center!important;padding:15px;border: 1px solid #175892;background: none repeat scroll 0% 0% rgba(235, 235, 235, 0.8);}
+#verificacion {margin-top:20px;float:left;top:40%;width:300px;color:#000;left:29%;text-align:center!important;padding:15px;border: 1px solid #175892;background: none repeat scroll 0% 0% rgba(235, 235, 235, 0.8);}
 #seleccionar {position:absolute;float:left;top:20%;height:40px;width:300px;color:#000;left:29%;text-align:center!important;padding:15px;}
 #searchimg img {background:#3399ff;border:1px solid #e5e5e5;position:relative;padding:4px 10px 5px 10px;margin-top:5px;cursor:pointer;margin-left:1px;}
 #searchimg img:hover {background:#3399ff;border:1px solid #e5e5e5;}
@@ -211,7 +211,7 @@ label {display:block;margin-top:20px;}
 form {margin:0 auto;width:400px;}
 input, textarea {width:380px;height:18px;background:#FFF;border:2px solid #f6f6f6;padding:10px;margin-top:5px;font-size:11px;color:#1b1b1b;font-weight:lighter; font-style:italic;}
 textarea {height:100px;}
-#submit {width:200px;height:40px;border:none;margin-top:20px;cursor:pointer;background:#3399ff;color:#FFF;font-family: 'Lato', sans-serif; font-weight:lighter; font-style:italic; font-size:16px;padding:5px;}
+#submit {width:200px;height:40px;border:none;margin-top:20px;margin-left:70px;cursor:pointer;background:#3399ff;color:#FFF;font-family: 'Lato', sans-serif; font-weight:lighter; font-style:italic; font-size:16px;padding:5px;}
 #submit:hover {color:#175892;border:1px solid #175892;background-color:#ccc;padding:5px;}
 
 /* --------------Bio-------------- */

@@ -1,10 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
 Role.create([{ name: 'Dueño' }, { name: 'Pendiente' }, { name: 'Invitado' }])
 
 admin = UserType.create name: 'Admin'
@@ -23,6 +16,6 @@ captcha = SignSecurityMethod.create name: 'Captcha'
 nombre = SignSecurityMethod.create name: 'Nombre'
 
 SignSecurityLevel.create level: 1, name: 'Nivel 1', description: 'Verificación simple', sign_security_methods: [check]
-SignSecurityLevel.create level: 2, name: 'Nivel 2', description: 'V. simple y captcha', sign_security_methods: [check, captcha]
+#SignSecurityLevel.create level: 2, name: 'Nivel 2', description: 'V. simple y captcha', sign_security_methods: [check, captcha]
 SignSecurityLevel.create level: 2, name: 'Nivel 2', description: 'V. simple y nombre', sign_security_methods: [check, nombre]
-SignSecurityLevel.create level: 3, name: 'Nivel 3', description: 'V. simple, captcha y nombre', sign_security_methods: [check, captcha, nombre]
+#SignSecurityLevel.create level: 3, name: 'Nivel 3', description: 'V. simple, captcha y nombre', sign_security_methods: [check, captcha, nombre]
