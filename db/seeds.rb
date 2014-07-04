@@ -1,8 +1,9 @@
-Role.create([{ name: 'Dueño' }, { name: 'Pendiente' }, { name: 'Invitado' }])
+Role.create([{ name: 'Dueño' }, { name: 'Invitado' }])
 
 admin = UserType.create name: 'Admin'
 user = UserType.create name: 'Usuario'
 free = UserType.create name: 'Invitado'
+pending = UserType.create name: 'Pendiente'
 
 User.create([
 	{ avatar: nil, first_name: 'Claudio', last_name: 'Guerra', id_number: '17026575-0', email: 'claudevandort@gmail.com', password: '12345678', password_confirmation: '12345678',user_type: admin },

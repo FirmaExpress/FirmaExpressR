@@ -178,17 +178,18 @@
 						</strong>
 					</p>
 					<p style="text-align:center;color:#000;margin-top:10px;padding-bottom:25px;border-bottom:1px solid #000;font-size:16px;margin-left:auto;margin-right:auto;font-family: 'Lato',sans-serif;font-weight: lighter;">Estas apunto de firmar el Documento: "<%= @document.name.capitalize %>"</p>
-					<table class="negro">
-					<% @security_methods.each do |method| %>
-						<% if method.id == 1 %>
-							<tr><td><%= label_tag :method_1, '¿Estás seguro de querer firmarlo?' %></td><td><%= check_box_tag :method_1, 1, nil, 'ng-model' => "methods[#{method.id}]", 'ng-init' => "methods[#{method.id}]=false" %></td></tr>
-						<% elsif method.id == 3 %>
-							<tr><td><%= label_tag :method_3, 'Ingrese su nombre y apellido' %></td><td><%= text_field_tag :method_3, '', 'ng-model' => "methods[#{method.id}]", 'ng-init' => "methods[#{method.id}]=''", style: 'width:150px;border:1px solid #aaa;height:5px;' %></td></tr>
+					<form name="signForm" role="form">
+						<table class="negro">
+						<% @security_methods.each do |method| %>
+							<% if method.id == 1 %>
+								<tr><td><%= label_tag :method_1, '¿Estás seguro de querer firmarlo?' %></td><td><%= check_box_tag :method_1, 1, nil, 'ng-model' => "methods[#{method.id}]", 'ng-init' => "methods[#{method.id}]=false" %></td></tr>
+							<% elsif method.id == 3 %>
+								<tr><td><%= label_tag :method_3, 'Ingrese su nombre y apellido' %></td><td><%= text_field_tag :method_3, '', 'ng-model' => "methods[#{method.id}]", 'ng-init' => "methods[#{method.id}]=''", style: 'width:150px;border:1px solid #aaa;height:5px;' %></td></tr>
+							<% end %>
 						<% end %>
-					<% end %>
-					</table>
-					<!--<p style="color:#000;text-align:center;margin-bottom:15px; margin-top:15px;font-family: 'Lato',sans-serif;font-weight: lighter;"></p>-->
-					<center><input type="button" ng-click="sign()" id="btn-blue" value="Aceptar" /><input type="button" data-dismiss="modal" id="btn-blue" value="Cancelar"/></center>
+						</table>
+						<center><input ng-disabled="registerForm.$invalid" type="button" ng-click="sign()" id="btn-blue" value="Aceptar" /><input type="button" data-dismiss="modal" id="btn-blue" value="Cancelar"/></center>
+					</form>
 					<p><%= image_tag 'fb-loader.gif', style: 'display: none;text-align:center;margin-left:auto;margin-right:auto;', id: 'sign_loading', height: '25' %></p>
 				</div>
 			</div>

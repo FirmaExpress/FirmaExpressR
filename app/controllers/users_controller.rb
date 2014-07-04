@@ -54,14 +54,15 @@ class UsersController < ApplicationController
 				unless user
 					#Pendiente: Implementar validación diferida según endpoint	
 					user = User.new(email: email, password: email, password_confirmation: email)
-					type = UserType.find(2)
-					user.user_type = type
+					pending = UserType.find_by name: 'Pendiente'
+					user.user_type = pending
 					user.save
 				end
 				document = Document.find(document_id)
 				if document
 					if Participant.where('"document_id" = ' + document.id.to_s + ' AND "user_id" = ' + user.id.to_s).exists? == false
-						participant = Participant.new(document_id: document.id, role_id: 2, user_id: user.id, signed: 'f')
+						invitee = Role.find_by name: 'Invitado'
+						participant = Participant.new(document_id: document.id, role: invitee, user_id: user.id, signed: 'f')
 						participant.save
 						UserMailer.invitation_email(user, document).deliver
 					end
@@ -97,6 +98,8 @@ class UsersController < ApplicationController
 			user = User.find_by email: email
 			if user
 				#user.avatar = avatar
+				free = UserType.find_by name: 'Invitado'
+				user.user_type = free
 				user.first_name = first_name
 				user.last_name = last_name
 				user.email = email
