@@ -105,11 +105,29 @@ class DocumentsController < ApplicationController
 			document.agreed_at = Time.now
 			document.save
 			DocumentMailer.everybody_signed(document, participants).deliver
+			pdf = Prawn::Document.new
+			pdf.text "folio: #{document.id}"#, align: :center
+			pdf.text "#{document.name}", align: :center, size: 20, styles: [:bold]
+			participants.each do |p|
+				sign_state = if participant.signed
+					'Firmado'
+				else
+					'Sin firmar'
+				end
+				pdf.text "#{p.first_name} #{p.last_name} - #{sign_state}", align: :center
+			end
+			pdf.image open("#{Rails.root}/app/assets/images/timbredocumentofirmado.png"), width: 300, height: 202, position: :center
+			pdf.image open("http://chart.apis.google.com/chart?chs=200x200&cht=qr&chl=http://#{request.host}/check_document/#{document.id}&choe=ISO-8859-1"), position: :center
+			pdf.text "Sellado: #{document.agreed_at}", align: :center
+			#pdf.render_file "/home/claudevandort/test.pdf"
+			pdf.render_file "#{Rails.root}/public/#{document.path}_sign"
+			options = "-q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite"
+			system "gs #{options} -sOutputFile='#{Rails.root}/public/#{document.path}_signed' '#{Rails.root}/public/#{document.path}' '#{Rails.root}/public/#{document.path}_sign'"
 		else
 			DocumentMailer.signed_by(owner, signer, document).deliver
 		end
 		respond_to do |format|
-			format.json { render :json => [status: participant_save_status, signer: signer ] }
+			format.json { render :json => [status: participant_save_status, signer: signer, cmd: "gs #{options} -sOutputFile='#{Rails.root}/public/#{document.path}_signed' '#{Rails.root}/public/#{document.path}' '#{Rails.root}/public/#{document.path}_sign'" ] }
 		end	
 	end
 

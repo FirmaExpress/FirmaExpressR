@@ -31,7 +31,7 @@ Gestión de Documentos
 	<div id="documento">
 	<% if current_user.user_type.name == 'Admin' or current_user.user_type.name == 'Usuario' %>
 		<%= form_for @document, html: { style: "margin-top: 100px" } do |f| %>
-			<%= f.file_field :path %>
+			<%= f.file_field :path, required: 'required' %>
 			<div id="verificacion">
 				<h4>Métodos de Verificación de Firma</h4>
 				<table>

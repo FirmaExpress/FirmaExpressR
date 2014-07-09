@@ -42,6 +42,8 @@ gem 'devise'
 gem "paperclip", "~> 4.1"
 #gem 'paperclip', github: 'thoughtbot/paperclip'
 
+gem 'prawn'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
