@@ -127,7 +127,7 @@ class DocumentsController < ApplicationController
 			DocumentMailer.signed_by(owner, signer, document).deliver
 		end
 		respond_to do |format|
-			format.json { render :json => [status: participant_save_status, signer: signer, cmd: "gs #{options} -sOutputFile='#{Rails.root}/public/#{document.path}_signed' '#{Rails.root}/public/#{document.path}' '#{Rails.root}/public/#{document.path}_sign'" ] }
+			format.json { render :json => [status: participant_save_status, signer: signer] }
 		end	
 	end
 
