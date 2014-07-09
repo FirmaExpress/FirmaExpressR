@@ -29,6 +29,7 @@ Gestión de Documentos
 	</div>
 	<div id="optionsdocumento"></div>
 	<div id="documento">
+	<% if current_user.user_type.name == 'Admin' or current_user.user_type.name == 'Usuario' %>
 		<%= form_for @document, html: { style: "margin-top: 100px" } do |f| %>
 			<%= f.file_field :path, required: 'required' %>
 			<div id="verificacion">
@@ -48,8 +49,17 @@ Gestión de Documentos
 					</tbody>
 				</table>
 			</div>
-			<%= submit_tag "Subir", { id: 'submit' } %>
+			<%= submit_tag "Añadir a tu repositorio Virtual", { id: 'submit' } %>
 		<% end %>
+	<% else %>
+		<div id="verificacion">
+			<table>
+				<tbody>
+           			<p style="text-align:center;"><h4>Revisa y firma el documento que te han compartido</h4></p>
+           	    </tbody>
+           	</table>
+        </div>   
+	<% end %>	
 	</div>
 	<div id="importante"><p class="datosextra">Solo se pueden subir documentos en PDF. Si no tienes tus archivos en este formato, utiliza nuestro conversor de Word a PDF <a href="conversor.html" style="color:#ab8f5a;font-weight:bolder;">aquí</a>.</p></div>
 </div>

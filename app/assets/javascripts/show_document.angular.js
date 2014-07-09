@@ -168,3 +168,13 @@ app.controller("DocumentOptionsController", function($scope, $http){
 		});
 	}
 });
+app.controller("ParticipantOptionsController", function($scope, $http){
+	$scope.destroy = function(user_id){
+		var request_url = '../participants/' + user_id + '/destroy/' + $scope.document_id + '.json'
+		console.log(request_url);
+		$http.get(request_url).success(function(data) {
+			console.log(data);
+			//window.location.href = "http://firmaexpress.com"
+		});
+	}
+});

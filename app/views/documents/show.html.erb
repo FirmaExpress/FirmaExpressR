@@ -34,13 +34,19 @@
 		<% end %>
 		-->
 	</div>
+	  
 	<div id="optionsdocumento" ng-controller="DocumentOptionsController" ng-init="document_id=<%= @document.id %>">
+		<% if @signed.signed == true %>
+		<ul>
+			<div class="alert alert-success" role="alert" >Documento firmado por usted</div>
+		</ul>
+		<%end%>
 		<ul>
 			<% if @document.agreed %>
 				<li><a href="" onclick="var PDF = document.getElementById('documento2'); PDF.focus(); PDF.contentWindow.print();">Imprimir</a></li>
 			<% end %>
 			<% if @signed.signed == false %>
-			<li><a data-toggle="modal" data-target="#modal-panel-participant-sign" name="button-participants" id="button-participants">Firmar</a></li>
+				<li><a data-toggle="modal" data-target="#modal-panel-participant-sign" name="button-participants" id="button-participants">Firmar</a></li>	
 			<% end %>
 			<% if @current_user_role.id == 1 and !@document.agreed %>
 				<li><a href="" confirmed-click="destroy()" 
@@ -55,7 +61,7 @@
 			<% end %>
 		</ul>
 	</div>
-	<div id="modal-panel-participants" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div id="modal-panel-participants" ng-controller="ParticipantOptionsController" ng-init="document_id=<%= @document.id %>" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="db-modal-box">
@@ -76,6 +82,7 @@
 							</thead>
 							<tbody>
 								<% @participants.each do |participant| %>
+								    <% @count_participant = @participants.count  %>
 									<% sign_state = if participant.signed
 
 										'Firmado'
@@ -85,17 +92,13 @@
 									end %>
 									<tr>
 										<% unless participant.first_name == nil %>
-
 											<td><%= participant.first_name %> <%= participant.last_name %></td>
-											<td style="text-align:center;"><%= sign_state %></td>
-											<td style="text-align:center;"><%= participant.role %></td>
-											<td style="text-align:center;">X</td>
 										<% else %>
 											<td><%= participant.email%></td>
-											<td style="text-align:center;"><%= sign_state %></td>
-											<td style="text-align:center;"><%= participant.role %></td>
-											<td style="text-align:center;">X</td>
 										<% end %>	
+										<td style="text-align:center;"><%= sign_state %></td>
+										<td style="text-align:center;"><%= participant.role %></td>
+										<td style="text-align:center;"><a href="#" confirmed-click="destroy(<%= participant.user_id %>)" ng-confirm-click="¿Está seguro que desea eliminar este participante?" class="negro" >X</a></td>
 									</tr>
 								<% end %>
 							</tbody>
@@ -178,18 +181,22 @@
 						</strong>
 					</p>
 					<p style="text-align:center;color:#000;margin-top:10px;padding-bottom:25px;border-bottom:1px solid #000;font-size:16px;margin-left:auto;margin-right:auto;font-family: 'Lato',sans-serif;font-weight: lighter;">Estas apunto de firmar el Documento: "<%= @document.name.capitalize %>"</p>
-					<form name="signForm" role="form">
-						<table class="negro">
-						<% @security_methods.each do |method| %>
-							<% if method.id == 1 %>
-								<tr><td><%= label_tag :method_1, '¿Estás seguro de querer firmarlo?' %></td><td><%= check_box_tag :method_1, 1, nil, 'ng-model' => "methods[#{method.id}]", 'ng-init' => "methods[#{method.id}]=false" %></td></tr>
-							<% elsif method.id == 3 %>
-								<tr><td><%= label_tag :method_3, 'Ingrese su nombre y apellido' %></td><td><%= text_field_tag :method_3, '', 'ng-model' => "methods[#{method.id}]", 'ng-init' => "methods[#{method.id}]=''", style: 'width:150px;border:1px solid #aaa;height:5px;' %></td></tr>
+					<!-- el siguente if verifica que el participante sea el dueño del documento y  el unico participante en este momento. se mnuetra mensaje cumpliendo esta condicion-->
+					<% if @current_user_role.id == 1 and @count_participant == 1 %>
+						<div class="alert alert-info" role="alert">Importante: Hasta el momento es el unico particpante en este documento, si firma se creara el sello con estado firmado y no podrá realizar invitaciones para que otras personas firmen el documento.</div>
+					<%end%>
+						<form name="signForm" role="form">
+							<table class="negro">
+							<% @security_methods.each do |method| %>
+								<% if method.id == 1 %>
+									<tr><td><%= label_tag :method_1, '¿Estás seguro de querer firmarlo?' %></td><td><%= check_box_tag :method_1, 1, nil, 'ng-model' => "methods[#{method.id}]", 'ng-init' => "methods[#{method.id}]=false" %></td></tr>
+								<% elsif method.id == 3 %>
+									<tr><td><%= label_tag :method_3, 'Ingrese su nombre y apellido' %></td><td><%= text_field_tag :method_3, '', 'ng-model' => "methods[#{method.id}]", 'ng-init' => "methods[#{method.id}]=''", style: 'width:150px;border:1px solid #aaa;height:5px;' %></td></tr>
+								<% end %>
 							<% end %>
-						<% end %>
-						</table>
-						<center><input ng-disabled="registerForm.$invalid" type="button" ng-click="sign()" id="btn-blue" value="Aceptar" /><input type="button" data-dismiss="modal" id="btn-blue" value="Cancelar"/></center>
-					</form>
+							</table>
+							<center><input ng-disabled="registerForm.$invalid" type="button" ng-click="sign()" id="btn-blue" value="Aceptar" /><input type="button" data-dismiss="modal" id="btn-blue" value="Cancelar"/></center>
+						</form>
 					<p><%= image_tag 'fb-loader.gif', style: 'display: none;text-align:center;margin-left:auto;margin-right:auto;', id: 'sign_loading', height: '25' %></p>
 				</div>
 			</div>
