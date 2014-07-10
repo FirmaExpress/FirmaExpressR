@@ -104,7 +104,9 @@ class DocumentsController < ApplicationController
 		if document.to_sign == 0
 			document.agreed_at = Time.now
 			document.save
-			DocumentMailer.everybody_signed(document, participants).deliver
+			participants.each do |participant|
+				DocumentMailer.everybody_signed(document, participant).deliver
+			end
 			pdf = Prawn::Document.new
 			pdf.text "folio: #{document.id}"#, align: :center
 			pdf.text "#{document.name}", align: :center, size: 20, styles: [:bold]

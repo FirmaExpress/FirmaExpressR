@@ -27,8 +27,17 @@ FirmaExpressR::Application.configure do
   config.action_mailer.perform_deliveries = true
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_options = {from: 'firmaexpress2014@gmail.com'}
-  config.action_mailer.default_url_options = { :host => "firmaexpress.dev" }
+  config.action_mailer.default_options = { from: 'contacto@firmaexpress.com' }
+  config.action_mailer.default_url_options = { :host => "firmaexpress.com" }
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.mandrillapp.com',
+    port:                 587,
+    domain:               'firmaexpress.com',
+    user_name:            'contacto@firmaexpress.com',
+    password:             'bdvJLbbjVKqblYEEtb-tqQ',
+    authentication:       'plain',
+    enable_starttls_auto: true  }
+=begin
   config.action_mailer.smtp_settings = {
     address:              'smtp.gmail.com',
     port:                 587,
@@ -37,5 +46,6 @@ FirmaExpressR::Application.configure do
     password:             'zaq12wsx@',
     authentication:       'plain',
     enable_starttls_auto: true  }
+=end
     Paperclip.options[:command_path] = "/usr/bin/convert"
 end

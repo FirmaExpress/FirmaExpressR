@@ -83,13 +83,14 @@ FirmaExpressR::Application.configure do
   config.action_mailer.perform_deliveries = true
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_options = {from: 'firmaexpress2014@gmail.com'}
+  config.action_mailer.default_options = { from: 'contacto@firmaexpress.com' }
+  config.action_mailer.default_url_options = { :host => "firmaexpress.com" }
   config.action_mailer.smtp_settings = {
-    address:              'smtp.gmail.com',
+    address:              'smtp.mandrillapp.com',
     port:                 587,
     domain:               'firmaexpress.com',
-    user_name:            'firmaexpress2014',
-    password:             'zaq12wsx@',
+    user_name:            'contacto@firmaexpress.com',
+    password:             'bdvJLbbjVKqblYEEtb-tqQ',
     authentication:       'plain',
     enable_starttls_auto: true  }
 end
