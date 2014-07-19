@@ -14,14 +14,6 @@
 # Configure Using Gemfile
 # gem 'pg'
 #
-development:
-  adapter: postgresql
-  host: localhost
-  encoding: unicode
-  database: firmaexpress_development
-  pool: 5
-  username: firmaexpress
-  password: F1rm43xpr3$$
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -54,9 +46,18 @@ test:
 #
 production:
   adapter: postgresql
-  host: localhost
+  host: firma-express-production.co3dkfqvg7k1.us-east-1.rds.amazonaws.com
   encoding: unicode
-  database: firmaexpress_production
+  database: firma_express_production
   pool: 5
-  username: firmaexpress
-  password: F1rm43xpr3$$
+  username: firma_express
+  password: F1rm43xpr3ss
+#
+development:
+  adapter: postgresql
+  host: firma-express-development.co3dkfqvg7k1.us-east-1.rds.amazonaws.com
+  encoding: unicode
+  database: firma_express_development
+  pool: 5
+  username: firma_express
+  password: F1rm43xpr3ss
