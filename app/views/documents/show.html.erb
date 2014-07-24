@@ -6,6 +6,7 @@
 	<link href='https://fonts.googleapis.com/css?family=Arizonia' rel='stylesheet' type='text/css'>
 <% end %>
 <% content_for :js do %>
+	<%= javascript_include_tag "bootstrap-modal.js" %>
 	<%= javascript_include_tag "show_document.angular.js" %>
 <% end %>
 <div id="containerdocumentos">

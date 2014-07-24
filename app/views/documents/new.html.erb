@@ -29,7 +29,7 @@ Gestión de Documentos
 	</div>
 	<div id="optionsdocumento"></div>
 	<div id="documento">
-	<% if current_user.user_type.name == 'Admin' or current_user.user_type.name == 'Usuario' %>
+	<% unless current_user.user_type.name == 'Invitado' %>
 		<%= form_for @document, html: { style: "margin-top: 100px" } do |f| %>
 			<%= f.file_field :path, required: 'required' %>
 			<div id="verificacion">
