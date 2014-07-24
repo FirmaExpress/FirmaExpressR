@@ -16,6 +16,8 @@
   <%= yield :styles %>
   <%= csrf_meta_tags %>
   <%= javascript_include_tag "angular.min.js" %>
+  <%= javascript_include_tag "angular-re-captcha.js" %>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <%= javascript_include_tag "bootstrap-modal.js" %>
   <%= javascript_include_tag "skrollr.js" %>
   <%= yield :js %>
