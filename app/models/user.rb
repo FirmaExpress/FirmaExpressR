@@ -98,7 +98,7 @@ class User < ActiveRecord::Base
 =end
 
 	def set_user_id
-		self.user_type_id = 3 if self.user_type_id.blank?
+		self.user_type_id = 2 if self.user_type_id.blank?
 	end
 
 	def self.authenticate(email, password)
