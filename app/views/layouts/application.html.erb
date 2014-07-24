@@ -6,8 +6,8 @@
   <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Yellowtail|Kaushan+Script|Damion' rel='stylesheet' type='text/css'>
   <%= yield :styles %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => false %>
-  <%= javascript_include_tag :application %>
+  <%= javascript_include_tag "angular.min.js" %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
   <%= yield :js %>
 </head>
