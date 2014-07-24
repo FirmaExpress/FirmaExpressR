@@ -1,4 +1,4 @@
-var app = angular.module("FEFront");
+var app = angular.module("FEFront", []);
 /*app.config(function (reCAPTCHAProvider) {
     // required: please use your own key :)
     reCAPTCHAProvider.setPublicKey('6LdY0_USAAAAALCFdgwLuw4OoAaFEFJi2jpHIKpz');
