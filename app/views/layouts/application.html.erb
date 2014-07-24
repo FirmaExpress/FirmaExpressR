@@ -4,8 +4,19 @@
   <title>Firma Express - <%= yield :title %></title>
   <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Yellowtail|Kaushan+Script|Damion' rel='stylesheet' type='text/css'>
+  <%= stylesheet_link_tag "style.css" %>
+  <%= stylesheet_link_tag "style__old.css" %>
+  <%= stylesheet_link_tag "parallax.scss" %>
+  <%= stylesheet_link_tag "print.css" %>
+  <%= stylesheet_link_tag "bootstrap-alert.css" %>
+  <%= stylesheet_link_tag "bootstrap-modal.css" %>
+  <%= stylesheet_link_tag "bootstrap-theme.css" %>
+  <% #stylesheet_link_tag "joyride-2.1.css" %>
   <%= yield :styles %>
   <%= csrf_meta_tags %>
+  <%= javascript_include_tag "angular.min.js" %>
+  <%= javascript_include_tag "bootstrap-modal.js" %>
+  <%= javascript_include_tag "skrollr.js" %>
   <%= yield :js %>
 </head>
 <body>
