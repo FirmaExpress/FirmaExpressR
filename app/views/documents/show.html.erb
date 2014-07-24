@@ -23,16 +23,6 @@
 		<div id="item{{ document.id == <%= @document.id %> | iif : 'activo' : '' }}" ng-repeat="document in documents | filter:searchText">
 			<a href="{{ document.id }}"><p><strong>{{document.name}}</strong></p></a>
 		</div>
-		<!--
-		<% @documents.each do |doc|%>
-			<% if doc.id == @document.id %>
-				<div id="itemactivo">
-			<% else %>
-				<div id="item">
-			<% end %>
-			<a href="<%= doc.id %>"><p><strong><%= doc.name %></strong> / <i>Progreso: 1 de 4</i></p></a></div>
-		<% end %>
-		-->
 	</div>
 	  
 	<div id="optionsdocumento" ng-controller="DocumentOptionsController" ng-init="document_id=<%= @document.id %>">
