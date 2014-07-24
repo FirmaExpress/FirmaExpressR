@@ -14,6 +14,11 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def show
+		sign_out :user
+		redirect_to root_url
+	end
+
 	def create
 		uploaded_io = params[:user][:avatar]
 		first_name = params[:user][:first_name]
