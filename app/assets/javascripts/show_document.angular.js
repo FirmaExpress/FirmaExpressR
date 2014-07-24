@@ -1,5 +1,5 @@
 var app = angular.module("FEFront");
-app.config(function (reCAPTCHAProvider) {
+/*app.config(function (reCAPTCHAProvider) {
     // required: please use your own key :)
     reCAPTCHAProvider.setPublicKey('6LdY0_USAAAAALCFdgwLuw4OoAaFEFJi2jpHIKpz');
 
@@ -7,7 +7,7 @@ app.config(function (reCAPTCHAProvider) {
     reCAPTCHAProvider.setOptions({
         theme: 'clean'
     });
-});
+});*/
 app.directive('ngEnter', function () {
     return function (scope, element, attrs) {
         element.bind("keydown keypress", function (event) {
