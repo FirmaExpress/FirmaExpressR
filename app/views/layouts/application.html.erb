@@ -3,10 +3,14 @@
 <head>
   <title>Firma Express - <%= yield :title %></title>
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => false %>
-  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Yellowtail|Kaushan+Script|Damion' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Yellowtail|Kaushan+Script|Damion' rel='stylesheet' type='text/css'>
   <%= yield :styles %>
   <% #javascript_include_tag "application", "data-turbolinks-track" => false %>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <%= javascript_include_tag "angular.min.js" %>
+  <%= javascript_include_tag "ga.js" %>
+  <%= javascript_include_tag "skrollr.js" %>
   <%= csrf_meta_tags %>
   <%= yield :js %>
 </head>
