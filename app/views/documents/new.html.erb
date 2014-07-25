@@ -21,6 +21,7 @@ Gestión de Documentos
 		<div id="itemactive"><a href="<%= root_url %>"><h4>Subir Documento</h4></a></div>
 		<div id="item"><a href=""><h4>Biblioteca</h4></a></div>
 		<div id="options">
+			<div id="numero2"></div>
 			<input type="search" placeholder="Buscar" class="search" ng-model="searchText">
 		</div>
 		<div id="item" ng-repeat="document in documents | filter:searchText">
@@ -31,6 +32,7 @@ Gestión de Documentos
 	<div id="documento">
 	<% unless current_user.user_type.name == 'Invitado' %>
 		<%= form_for @document, html: { style: "margin-top: 100px" } do |f| %>
+		<div id="numero3"></div>
 			<%= f.file_field :path, required: 'required' %>
 			<div id="verificacion">
 				<h4>Métodos de Verificación de Firma</h4>
@@ -49,6 +51,10 @@ Gestión de Documentos
 					</tbody>
 				</table>
 			</div>
+			<br>
+			<div id="numero5"></div>
+			<br><br><br><br><br><br><br><br><br><br>
+			<div id="numero6"></div>
 			<%= submit_tag "Añadir a tu repositorio Virtual", { id: 'submit' } %>
 		<% end %>
 	<% else %>
@@ -67,3 +73,50 @@ Gestión de Documentos
 <p class="left">Todos los Derechos Reservados a Firma Express 2013 / <a href="preguntasfrecuentes.html">Preguntas Frecuentes</a> / <a href="legal.html">Condiciones Legales</a>.</p>
 <p class="right">Dirección: Av. Nombre Nº1234 / Teléfono: +56 2 2342567 / Mail: contacto@firmaexpress.cl</p>
 </footer>
+    <!-- Tip Content -->
+    <% #if current_user.sign_in_count == 1 %>
+	    <ol id="joyRideTipContent">
+	      <li data-button="Comenzar">
+	        <h2>Bienvenido a Firma Express</h2>
+	      <p>Hola!!! Te daremos un rapido tour por las principales caracteristicas y bondades que te entrega Firma Express. Solo te tomará unos cuantos minutos.</p>
+	       <br>
+	      </li>
+	      <li data-id="numero2" data-button="Siguiente">
+        	<h2>Encuentra tu Documento</h2>
+	        <p>Si posees una larga lista de documentos en tu repositorio, realiza la busqueda en tiempo real con el moderno sistema que te ofrece Firma Express.</p>
+      	  </li>
+      	  <li data-id="numero3" data-button="Siguiente">
+	        <h2>Añade un Documento</h2>
+	        <p>Selecciona tu documento PDF desde tu PC presionando Examinar, luego escoge el metodo para verificar tu firma (Nivel 1 o Nivel 2) y termina el proceso presionando el botón "Anadir a mi repositorio virtual". </p>
+	      </li>
+	      <li data-id="numero4">
+	        <h2>Bienvenido a Firma Express</h2>
+	      <p>Hola!!! Te daremos un rapido tour por las principales caracteristicas y bondades que te entrega Firma Express. Solo te tomará unos cuantos minutos.</p>
+	       <br>
+	   </li>
+	    <li data-id="numero5" data-button="Siguiente">
+	        <h2>Método de Para verificar tu firma</h2>
+	      <p>Selecciona un método de verificación y evitaras que cualquier bicho malicioso se haga pasar por tí cuando firmes. </p>
+	       <br>
+	   </li>
+	   <li data-id="numero6" data-button="Siguiente">
+	        <h2>Añade tu documento</h2>
+	      <p> Añada su documento a su repositorio presionando este botón</p>
+	       <br>
+	   </li>
+	    </ol>
+	<%#end%>
+	<script>
+      $(window).load(function() {
+        $('#joyRideTipContent').joyride({
+          autoStart : true,
+          postStepCallback : function (index, tip) {
+          if (index == 2) {
+            $(this).joyride('set_li', false, 1);
+          }
+        },
+        modal:true,
+        expose: false
+        });
+      });
+    </script>
