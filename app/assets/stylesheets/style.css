@@ -71,7 +71,7 @@ header { width:100%; height:45px; background-color: #175892;min-width:1000px; po
 #containerhome #headline2 {background-color: #175892;width:100%;height:30px;text-align:center;padding-top:13px;}
 #containerhome #headline2 h3 {color:#FFF;}
 #containerhome #headline h3 {color:#175892;}
-#containerhome {width: 100%; clear:both; min-height:600px; background-image:image-url("background.jpg"); background-position:top center; background-repeat:no-repeat;margin-top:45px;}
+#containerhome {width: 100%; clear:both; min-height:600px; background-image:url(img/background.jpg); background-position:top center; background-repeat:no-repeat;margin-top:45px;}
 #insideheadline {max-width:1000px;margin:0 auto;}
 #login {height:400px; margin:0 auto;}
 #formulariologin {position:absolute;margin-left:70px;margin-top:96px;}
