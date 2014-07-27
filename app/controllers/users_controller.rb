@@ -28,10 +28,11 @@ class UsersController < ApplicationController
 		page = Nokogiri::HTML(open("https://portal.sidiv.registrocivil.cl/usuarios-portal/pages/DocumentRequestStatus.xhtml?RUN=#{rut}-#{dv}&type=CEDULA&serial=#{serial}"))
 		valid = page.css('.setWidthOfSecondColumn').text == 'Vigente'
 		sii_page = Nokogiri::HTML(open("https://zeus.sii.cl/cvc_cgi/stc/getstc?RUT=#{rut}&DV=#{dv}&PRG=STC&OPC=NOR"))
+		OpenSSL::SSL.const_set(:VERIFY_PEER, OpenSSL::SSL::VERIFY_PEER)
 		begin
-			name = sii_page.css('html body center')[1].css('table')[0].css('tr')[0].css('td')[1].css('font').text.strip
+			name = sii_page.css('html body center')[1].css('table')[0].css('tr')[0].css('td')[1].css('font').text.strip.titleize
 		rescue Exception => e
-			name = ''	
+			name = ''
 		end
 		respond_to do |format|
 			format.json { render json: [rut: "#{rut}-#{dv}", name: name, serial: serial, value: page.css('.setWidthOfSecondColumn').text, valid: valid] }
