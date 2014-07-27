@@ -21,9 +21,9 @@ class UsersController < ApplicationController
 
 	def rut
 		rut = params[:rut].split('-')[0]
-		dv = params[:rut].split('-')[1]
+		dv = params[:rut].split('-')[1].upcase
 		name = ''
-		serial = params[:serial]
+		serial = params[:serial].upcase
 		OpenSSL::SSL.const_set(:VERIFY_PEER, OpenSSL::SSL::VERIFY_NONE)
 		page = Nokogiri::HTML(open("https://portal.sidiv.registrocivil.cl/usuarios-portal/pages/DocumentRequestStatus.xhtml?RUN=#{rut}-#{dv}&type=CEDULA&serial=#{serial}"))
 		valid = page.css('.setWidthOfSecondColumn').text == 'Vigente'
