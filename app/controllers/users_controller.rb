@@ -22,12 +22,17 @@ class UsersController < ApplicationController
 	def rut
 		rut = params[:rut].split('-')[0]
 		dv = params[:rut].split('-')[1]
+		name = ''
 		serial = params[:serial]
 		OpenSSL::SSL.const_set(:VERIFY_PEER, OpenSSL::SSL::VERIFY_NONE)
 		page = Nokogiri::HTML(open("https://portal.sidiv.registrocivil.cl/usuarios-portal/pages/DocumentRequestStatus.xhtml?RUN=#{rut}-#{dv}&type=CEDULA&serial=#{serial}"))
 		valid = page.css('.setWidthOfSecondColumn').text == 'Vigente'
 		sii_page = Nokogiri::HTML(open("https://zeus.sii.cl/cvc_cgi/stc/getstc?RUT=#{rut}&DV=#{dv}&PRG=STC&OPC=NOR"))
-		name = sii_page.css('html body center')[1].css('table')[0].css('tr')[0].css('td')[1].css('font').text.strip
+		begin
+			name = sii_page.css('html body center')[1].css('table')[0].css('tr')[0].css('td')[1].css('font').text.strip
+		rescue Exception => e
+			name = 'Sin nombre'	
+		end
 		respond_to do |format|
 			format.json { render json: [rut: rut, name: name, serial: serial, value: page.css('.setWidthOfSecondColumn').text, valid: valid] }
 		end
