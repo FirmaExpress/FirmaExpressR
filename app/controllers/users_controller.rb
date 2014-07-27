@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_action :authenticate_user!, except: [:complete_invitee_profile]
+	before_action :authenticate_user!, except: [:complete_invitee_profile, :rut]
 	before_action :invitations, :invitations_left
 	#before_action :check_auth, only: [:profile, :invite]
 	def new
@@ -17,6 +17,17 @@ class UsersController < ApplicationController
 	def show
 		sign_out :user
 		redirect_to root_url
+	end
+
+	def rut
+		rut = params[:rut]
+		serial = params[:serial]
+		OpenSSL::SSL.const_set(:VERIFY_PEER, OpenSSL::SSL::VERIFY_NONE)
+		page = Nokogiri::HTML(open("https://portal.sidiv.registrocivil.cl/usuarios-portal/pages/DocumentRequestStatus.xhtml?RUN=#{rut}&type=CEDULA&serial=#{serial}"))
+		valid = page.css('.setWidthOfSecondColumn').text == 'Vigente'
+		respond_to do |format|
+			format.json { render json: [rut: rut, serial: serial, value: page.css('.setWidthOfSecondColumn').text, valid: valid] }
+		end
 	end
 
 	def create
