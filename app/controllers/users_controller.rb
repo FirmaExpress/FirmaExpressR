@@ -31,10 +31,10 @@ class UsersController < ApplicationController
 		begin
 			name = sii_page.css('html body center')[1].css('table')[0].css('tr')[0].css('td')[1].css('font').text.strip
 		rescue Exception => e
-			name = 'Sin nombre'	
+			name = ''	
 		end
 		respond_to do |format|
-			format.json { render json: [rut: rut, name: name, serial: serial, value: page.css('.setWidthOfSecondColumn').text, valid: valid] }
+			format.json { render json: [rut: "#{rut}-#{dv}", name: name, serial: serial, value: page.css('.setWidthOfSecondColumn').text, valid: valid] }
 		end
 	end
 
