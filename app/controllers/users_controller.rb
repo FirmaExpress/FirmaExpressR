@@ -70,8 +70,9 @@ class UsersController < ApplicationController
 		password_confirmation = params[:user][:password_confirmation]
 		id_number = params[:user][:id_number]
 		invitation_code = params[:user][:invite_code]
+		id_document_serial = params[:user][:id_document_serial]
 
-		@user = User.new(avatar: uploaded_io.original_filename, first_name: first_name, last_name: last_name, id_number: id_number, email: email, password: password, password_confirmation: password_confirmation, user_type_id: 3, invite_code: invitation_code)
+		@user = User.new(avatar: uploaded_io.original_filename, first_name: first_name, last_name: last_name, id_number: id_number, email: email, password: password, password_confirmation: password_confirmation, user_type_id: 3, invite_code: invitation_code, id_document_serial: id_document_serial)
 		if @user.save
 			#3.times do
 			#	@user.invite_codes << InviteCode.create()
