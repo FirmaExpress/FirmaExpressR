@@ -44,6 +44,10 @@ gem "paperclip", "~> 4.1"
 
 gem 'prawn'
 
+#gem 'open-uri'
+#gem 'openssl'
+gem 'nokogiri'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
