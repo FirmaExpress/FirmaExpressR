@@ -66,7 +66,7 @@
 									<th width="300">Miembro</th>
 									<th style="text-align:center;">Estado</th>
 									<th style="text-align:center;">Rol</th>
-									<th style="text-align:center;">Dirección ip</th>
+									<th style="text-align:center;">Dirección IP</th>
 									<!--<th style="text-align:center;">Eliminar</th> -->
 								</tr>
 							</thead>
@@ -81,7 +81,7 @@
 										'Sin Firmar'
 									end %>
 									<tr>
-										<% unless participant.first_name == nil %>
+										<% unless participant.first_name == nil %> 
 											<td><%= participant.first_name %> <%= participant.last_name %></td>
 										<% else %>
 											<td><%= participant.email%></td>
