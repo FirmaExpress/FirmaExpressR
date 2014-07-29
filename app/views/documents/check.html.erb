@@ -12,7 +12,11 @@
 			else
 				'Sin Firmar'
 			end %>
-			<li class="negro"><%= participant.first_name %> <%= participant.last_name %> - <%= participant.role %> - <%= sign_state %></li>
+			<li class="negro"><%= participant.first_name %> <%= participant.last_name %> - <%= participant.role %> - <%= sign_state %>
+			</li>
+			<li>
+				<h2 class="netro"><%=request.remote_ip%></h2>
+			</li>
 		<% end %>
 		<br />
 		<h5 style="text-align:center;">DOCUMENTO FIRMADO POR TODOS SUS MIEMBROS</h5>

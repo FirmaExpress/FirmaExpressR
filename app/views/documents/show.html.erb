@@ -66,6 +66,7 @@
 									<th width="300">Miembro</th>
 									<th style="text-align:center;">Estado</th>
 									<th style="text-align:center;">Rol</th>
+									<th style="text-align:center;">Dirección ip</th>
 									<!--<th style="text-align:center;">Eliminar</th> -->
 								</tr>
 							</thead>
@@ -87,6 +88,7 @@
 										<% end %>	
 										<td style="text-align:center;"><%= sign_state %></td>
 										<td style="text-align:center;"><%= participant.role %></td>
+										<td style="text-align:center;"><%= request.remote_ip%></td>
 										<!--<td style="text-align:center;"><a href="#" confirmed-click="destroy(<%= participant.user_id %>)" ng-confirm-click="¿Está seguro que desea eliminar este participante?" class="negro" >X</a></td> -->
 									</tr>
 								<% end %>
