@@ -35,12 +35,12 @@
 				<li><a href="" onclick="var PDF = document.getElementById('documento2'); PDF.focus(); PDF.contentWindow.print();">Imprimir</a></li>
 			<% end %>
 			<% if @signed.signed == false %>
-				<li><a data-toggle="modal" data-target="#modal-panel-participant-sign" name="button-participants" id="button-participants">Firmar</a></li>	
+				<li><div class="numero1"></div><a data-toggle="modal" data-target="#modal-panel-participant-sign" name="button-participants" id="button-participants">Firmar</a></li>	
 			<% end %>
 			<% if @current_user_role.id == 1 and !@document.agreed %>
-				<li><a href="" confirmed-click="destroy()" 
+				<li><div class="numero2"></div><a href="" confirmed-click="destroy()" 
     ng-confirm-click="¿Está seguro de eliminar este documento?">Eliminar</a></li>
-				<li><a data-toggle="modal" data-target="#modal-panel-participants" name="button-participants" id="button-participants">Compartir</a></li>
+				<li><div class="numero3"></div><a data-toggle="modal" data-target="#modal-panel-participants" name="button-participants" id="button-participants">Compartir</a></li>
             <% end %>
             <% if @document.agreed or (@current_user_role.id != 1 and !@document.agreed) %>
             	<li><a data-toggle="modal" data-target="#modal-panel-participants" name="button-participants" id="button-participants">Ver firmas</a></li>
@@ -81,7 +81,7 @@
 										'Sin Firmar'
 									end %>
 									<tr>
-										<% unless participant.first_name == nil %> 
+										<% unless participant.first_name == nil %>
 											<td><%= participant.first_name %> <%= participant.last_name %></td>
 										<% else %>
 											<td><%= participant.email%></td>
@@ -222,3 +222,45 @@
 	<p class="print">Sellado <%= @document.agreed_at %></p>
 	<% end %>
 </div>
+<ol id="joyRideTipContent">
+    <li data-button="Comenzar">
+        <h2>Ahora firma tu documento</h2>
+      	<p>Comparte y firma tu documento</p>
+        <br>
+    </li>
+    <li data-class="numero1" data-button="Siguiente" data-options="tipLocation:top">
+        <h2>Firma tu documento</h2>
+      	<p>firma tu documento cuando quieras, donde quieras y en el lugar que te encuentres. </p>
+        <br>
+    </li>
+    <li data-class="numero2" data-button="Siguiente" data-options="tipLocation:top">
+        <h2>Eliminalo</h2>
+      	<p>firma tu documento cuando quieras, donde quieras y en el lugar que te encuentres. </p>
+        <br>
+    </li>
+    <li data-class="numero3" data-button="Siguiente" data-options="tipLocation:top">
+        <h2>Comparte el documento ha ser firmado</h2>
+      	<p>firma tu documento cuando quieras, donde quieras y en el lugar que te encuentres. </p>
+        <br>
+    </li>
+    <li data-button="Listo, he entendido" data-options="tipLocation:top">
+        <h2>Dudas</h2>
+      	<p>Cualquier duda, contactacnos a contacto@firmaexpress.com</p>
+        <br>
+    </li>
+</ol>
+<script>
+  $(window).load(function() {
+    $('#joyRideTipContent').joyride({
+      autoStart : true,
+      postStepCallback : function (index, tip) {
+      if (index == 2) {
+        $(this).joyride('set_li', false, 1);
+      }
+    },
+    modal:true,
+    expose: false
+    });
+  });
+</script>
+
