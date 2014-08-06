@@ -9,10 +9,11 @@
  */
 
 .alert {
-  padding: 15px;
-  margin-bottom: 20px;
+  padding: 20px;
+  margin: 0 40px 15px;
   border: 1px solid transparent;
-  border-radius: 4px;
+  	font-family: "Lato",sans-serif;
+font-weight: lighter;
 }
 .alert h4 {
   margin-top: 0;
