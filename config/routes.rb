@@ -8,6 +8,7 @@ FirmaExpressR::Application.routes.draw do
   get "documents/new"
   get "sessions/new"
   get "users/new"
+  get "users/rut", to: "users#rut"
   get "users/invite", to: "users#invite", as: "invite"
   get "/contact", to: "home#contact", as: "contact_form"
   post "users/contact", to: "users#contact", as: "contact"

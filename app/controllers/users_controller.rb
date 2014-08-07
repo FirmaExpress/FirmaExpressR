@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_action :authenticate_user!, except: [:complete_invitee_profile]
+	before_action :authenticate_user!, except: [:complete_invitee_profile, :rut]
 	before_action :invitations, :invitations_left
 	#before_action :check_auth, only: [:profile, :invite]
 	def new
@@ -19,6 +19,48 @@ class UsersController < ApplicationController
 		redirect_to root_url
 	end
 
+	def rut
+		rut = params[:rut].split('-')[0]
+		dv = params[:rut].split('-')[1].upcase
+		serial = params[:serial].upcase
+		name = ''
+		rut_sii = ''
+		serial_valid = true
+		code = 0
+		OpenSSL::SSL.const_set(:VERIFY_PEER, OpenSSL::SSL::VERIFY_NONE)
+		sii_page = Nokogiri::HTML(open("https://zeus.sii.cl/cvc_cgi/stc/getstc?RUT=#{rut}&DV=#{dv}&PRG=STC&OPC=NOR"))
+		begin
+			rut_sii = name = sii_page.css('html body center')[1].css('table')[0].css('tr')[1].css('td')[1].css('font').text
+			code = 200
+		rescue Exception => e
+			code = 404
+		end
+		begin
+			name = sii_page.css('html body center')[1].css('table')[0].css('tr')[0].css('td')[1].css('font').text.strip.titleize
+		rescue Exception => e
+			name = ''
+		end
+
+		if code == 200
+			page = Nokogiri::HTML(open("https://portal.sidiv.registrocivil.cl/usuarios-portal/pages/DocumentRequestStatus.xhtml?RUN=#{rut_sii}&type=CEDULA&serial=#{serial}"))
+			serial_valid = page.css('.setWidthOfSecondColumn').text == 'Vigente'
+		end
+		OpenSSL::SSL.const_set(:VERIFY_PEER, OpenSSL::SSL::VERIFY_PEER)
+		unless serial_valid
+			code = 403
+		end
+		message = if code == 200
+			'Cedula vigente'
+		elsif code == 403
+			'Documento inválido'
+		elsif code == 404
+			'Rut inválido'
+		end
+		respond_to do |format|
+			format.json { render json: [rut: rut_sii, name: name, serial: serial, code: code, message: message] }
+		end
+	end
+
 	def create
 		uploaded_io = params[:user][:avatar]
 		first_name = params[:user][:first_name]
@@ -28,8 +70,9 @@ class UsersController < ApplicationController
 		password_confirmation = params[:user][:password_confirmation]
 		id_number = params[:user][:id_number]
 		invitation_code = params[:user][:invite_code]
+		id_document_serial = params[:user][:id_document_serial]
 
-		@user = User.new(avatar: uploaded_io.original_filename, first_name: first_name, last_name: last_name, id_number: id_number, email: email, password: password, password_confirmation: password_confirmation, user_type_id: 3, invite_code: invitation_code)
+		@user = User.new(avatar: uploaded_io.original_filename, first_name: first_name, last_name: last_name, id_number: id_number, email: email, password: password, password_confirmation: password_confirmation, user_type_id: 3, invite_code: invitation_code, id_document_serial: id_document_serial)
 		if @user.save
 			#3.times do
 			#	@user.invite_codes << InviteCode.create()

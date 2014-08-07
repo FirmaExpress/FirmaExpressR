@@ -35,12 +35,12 @@
 				<li><a href="" onclick="var PDF = document.getElementById('documento2'); PDF.focus(); PDF.contentWindow.print();">Imprimir</a></li>
 			<% end %>
 			<% if @signed.signed == false %>
-				<li><a data-toggle="modal" data-target="#modal-panel-participant-sign" name="button-participants" id="button-participants">Firmar</a></li>	
+				<li><div class="numero1"></div><a data-toggle="modal" data-target="#modal-panel-participant-sign" name="button-participants" id="button-participants">Firmar</a></li>	
 			<% end %>
 			<% if @current_user_role.id == 1 and !@document.agreed %>
-				<li><a href="" confirmed-click="destroy()" 
+				<li><div class="numero2"></div><a href="" confirmed-click="destroy()" 
     ng-confirm-click="¿Está seguro de eliminar este documento?">Eliminar</a></li>
-				<li><a data-toggle="modal" data-target="#modal-panel-participants" name="button-participants" id="button-participants">Compartir</a></li>
+				<li><div class="numero6"></div><a data-toggle="modal" data-target="#modal-panel-participants" name="button-participants" id="button-participants">Compartir</a></li>
             <% end %>
             <% if @document.agreed or (@current_user_role.id != 1 and !@document.agreed) %>
             	<li><a data-toggle="modal" data-target="#modal-panel-participants" name="button-participants" id="button-participants">Ver firmas</a></li>
@@ -66,6 +66,7 @@
 									<th width="300">Miembro</th>
 									<th style="text-align:center;">Estado</th>
 									<th style="text-align:center;">Rol</th>
+									<th style="text-align:center;">Dirección IP</th>
 									<!--<th style="text-align:center;">Eliminar</th> -->
 								</tr>
 							</thead>
@@ -87,6 +88,7 @@
 										<% end %>	
 										<td style="text-align:center;"><%= sign_state %></td>
 										<td style="text-align:center;"><%= participant.role %></td>
+										<td style="text-align:center;"><%= request.remote_ip%></td>
 										<!--<td style="text-align:center;"><a href="#" confirmed-click="destroy(<%= participant.user_id %>)" ng-confirm-click="¿Está seguro que desea eliminar este participante?" class="negro" >X</a></td> -->
 									</tr>
 								<% end %>
@@ -220,3 +222,54 @@
 	<p class="print">Sellado <%= @document.agreed_at %></p>
 	<% end %>
 </div>
+<ol id="joyRideTipContent">
+    
+    <li data-button="Comenzar">
+        <h2>Conozca algunos procesos relacionado con la firma</h2>
+      	<p></p>
+        <br>
+    </li>
+    
+    <li data-class="numero1" data-button="Siguiente" data-options="tipLocation:top">
+        <h2>Firma tu documento</h2>
+      	<p>firma tu documento cuando quieras, donde quieras y en el lugar que te encuentres.</p>
+        <br>
+    </li>
+    
+    <li data-class="numero2" data-button="Siguiente" data-options="tipLocation:top">
+        <h2>Elimina tu documento</h2>
+      	<p>Elimina tu documento siempre y cuando no hayan firmado todos los participantes del mismo. Una vez que el documento sea firmado por todos los involucrados se creará un sellado de tiempo, imposibilitando la eliminación del documento.</p>
+        <br>
+    </li>
+    
+    <li data-class="numero5" data-button="Siguiente" data-options="tipLocation:top">
+
+    </li>
+
+    <li data-class="numero6" data-button="Siguiente" data-options="tipLocation:top">
+       <h2>Comparte tu documento</h2>
+      	<p>Si quieres invitar a una o más personas a firmar el documento, escribe su E-mail y se le notificará inmediatamente tu petición.</p>
+        <br>
+    </li>
+
+    <li data-button="Finalizar" data-options="tipLocation:top">
+       <h2>¿Tiene dudas?</h2>
+      	<p>Favor contactenos a contacto@firmaexpress.com para aclarar sus preguntas y asi obtenga una mejor experiencia con Firma Express.</p>
+        <br>
+    </li>
+</ol>
+<script>
+  $(window).load(function() {
+    $('#joyRideTipContent').joyride({
+      autoStart : true,
+      postStepCallback : function (index, tip) {
+      if (index == 2) {
+        $(this).joyride('set_li', false, 1);
+      }
+    },
+    modal:true,
+    expose: false
+    });
+  });
+</script>
+

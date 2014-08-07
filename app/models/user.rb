@@ -25,6 +25,17 @@ class IdNumberValidator < ActiveModel::Validator
   end
 end
 
+class IdDocumentSerialValidator < ActiveModel::Validator
+	def validate(record)
+		OpenSSL::SSL.const_set(:VERIFY_PEER, OpenSSL::SSL::VERIFY_NONE)
+		page = Nokogiri::HTML(open("https://portal.sidiv.registrocivil.cl/usuarios-portal/pages/DocumentRequestStatus.xhtml?RUN=#{record.id_number}&type=CEDULA&serial=#{record.id_document_serial}"))
+		OpenSSL::SSL.const_set(:VERIFY_PEER, OpenSSL::SSL::VERIFY_PEER)
+		unless page.css('.setWidthOfSecondColumn').text == 'Vigente'
+			record.errors[:base] << "Cedula inválida, param: #{record.id_document_serial}, result: #{page.css('.setWidthOfSecondColumn').text}"
+		end
+	end
+end
+
 =begin
 class InviteCodeValidator < ActiveModel::Validator
 	def validate(record)
@@ -58,6 +69,7 @@ class User < ActiveRecord::Base
 
 	#attr_accessor :password, :password_confirmation, :current_password
 	attr_accessor :invite_code
+	attr_accessor :id_document_serial
 	before_validation :set_user_id
 	#after_save :generate_codes, on: :create
 	#before_save :encrypt_password
@@ -84,6 +96,8 @@ class User < ActiveRecord::Base
 				uniqueness: true,
 				unless: Proc.new { |a| a.id_number.blank? }
 	validates_with IdNumberValidator,
+				unless: Proc.new { |a| a.id_number.blank? }
+	validates_with IdDocumentSerialValidator,
 				unless: Proc.new { |a| a.id_number.blank? }
 	#validates_with InviteCodeValidator, on: :create
 
