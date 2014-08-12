@@ -1,7 +1,19 @@
+<div id="mailing">
+<div id="mailingheader">
+<img height="28" src="/assets/FirmaExpress12.png" alt="Firmaexpresslogo">
+</div>
+<div id="mailcontainer">
 <h1><%= @document.name %> ha sido firmado por todos</h1>
 
-Estimado <%= @participant.first_name %>,<br>
+<p><strong>Estimado <%= @participant.first_name %>,</strong></p></br>
 
 <p>
 	El documento <%= @document.name %> ha sido firmado por todos en <%= @document.agreed_at %>
 </p>
+
+	<a class="signUpButton" href="documento">Ver el Documento</a>
+</div>
+</div>
+<div id="mailingfooter">
+<p>© 2014 FirmaExpress</p>
+</div>

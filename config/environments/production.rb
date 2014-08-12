@@ -93,4 +93,5 @@ FirmaExpressR::Application.configure do
     password:             'bdvJLbbjVKqblYEEtb-tqQ',
     authentication:       'plain',
     enable_starttls_auto: true  }
+    config.action_mailer.asset_host = "https://firmaexpress.com"
 end
