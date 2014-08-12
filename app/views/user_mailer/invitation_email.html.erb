@@ -4,13 +4,24 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Hola!</h1>
-    <p>
-      Has sido invitado para firmar el documento <%= @document.name %>.<br>
-    </p>
-    <p>
-      Para acceder al documento se le solicita seguir el siguiente <a href="<%= @url %>">link</a>.
-    </p>
-    <p>Muchas gracias!</p>
-  </body>
+<div id="mailing">
+<div id="mailingheader">
+  <img src="FirmaExpress1.png" height="28" />
+  </div>
+<div id="mailcontainer">
+<h1>¡Bienvenido a Firma Express!</h1>
+
+<p><strong>Estimado,</strong></p></br>
+
+<p>
+	Has sido invitado por "Nombre del emisor" para firmar el documento <%= @document.name %>. Si quieres firmarlo también, te invitamos a ingresar al siguiente link:
+</p>
+
+	<a class="signUpButton" href="<%= @url %>">Ir al documento</a>
+</div>
+</div>
+<div id="mailingfooter">
+<p>© 2014 FirmaExpress</p>
+</div>
+</body>
 </html>
