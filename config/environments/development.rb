@@ -48,4 +48,5 @@ FirmaExpressR::Application.configure do
     enable_starttls_auto: true  }
 =end
     Paperclip.options[:command_path] = "/usr/bin/convert"
+    config.action_mailer.asset_host = "https://www.firmaenlinea.com"
 end
