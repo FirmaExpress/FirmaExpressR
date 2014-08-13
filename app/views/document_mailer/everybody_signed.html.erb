@@ -1,19 +1,27 @@
-<div id="mailing">
-<div id="mailingheader">
-<img height="28" src="/assets/FirmaExpress12.png" alt="Firmaexpresslogo">
-</div>
-<div id="mailcontainer">
-<h1><%= @document.name %> ha sido firmado por todos</h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <div id="mailing" style="max-width:500px;min-width:400px;height:300px;border:1px solid #175892;margin:20px auto 5px;">
+      <div id="mailingheader" style="background-color:#175892;width:100%;height:30px;text-align:center;padding:10px 0;">
+        <%= image_tag "FirmaExpress1.png", { height: 28, style: "text-align:center;" } %>
+      </div>
+      <div id="mailcontainer" style="padding:25px;text-align:center;">
+        <h1 style="font-size:16px;margin:0 0 10px;font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;"><%= @document.name %> ha sido firmado por todos</h1>
 
-<p><strong>Estimado <%= @participant.first_name %>,</strong></p></br>
+        <p style="color:#333;padding:0 15px;font-family: 'Lato', sans-serif;"><strong>Estimado <%= @participant.first_name %>,</strong></p></br>
 
-<p>
-	El documento <%= @document.name %> ha sido firmado por todos en <%= @document.agreed_at %>
-</p>
+        <p style="font-size:16px;margin:0 0 10px;font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;">
+        El documento <%= @document.name %> ha sido firmado por todos en <%= @document.agreed_at %>
+        </p>
 
-	<a class="signUpButton" href="documento">Ver el Documento</a>
-</div>
-</div>
-<div id="mailingfooter">
-<p>© 2014 FirmaExpress</p>
-</div>
+        <a class="signUpButton" href="<%= @url %>" style="color: #FFF; font-weight: bold; padding: 8px 20px; display: inline-block; background-color: #39F; border: 1px solid #39F; nt-family: 'Lato', sans-serif; rgin-top:25px;">Ver el Documento</a>
+      </div>
+    </div>
+    <div id="mailingfooter" style="max-width:500px;min-width:400px;margin:0 auto;">
+      <p style="color:#333;text-align:right;font-size:10px;color:#175892;font-family: 'Lato', sans-serif;">© 2014 FirmaExpress</p>
+    </div>
+  </body>
+</html>
