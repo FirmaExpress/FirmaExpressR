@@ -106,6 +106,7 @@ class UsersController < ApplicationController
 					user.user_type = pending
 					user.save
 				end
+				user.reload
 				document = Document.find(document_id)
 				if document
 					if Participant.where('"document_id" = ' + document.id.to_s + ' AND "user_id" = ' + user.id.to_s).exists? == false

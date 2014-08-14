@@ -36,22 +36,6 @@ class IdDocumentSerialValidator < ActiveModel::Validator
 	end
 end
 
-=begin
-class InviteCodeValidator < ActiveModel::Validator
-	def validate(record)
-		invitation = InviteCode.find_by(code: record.invite_code, available: true)
-		if record.user_type_id == 3 and invitation == nil
-			record.errors[:base] << "Ingresa un codigo de invitación válido"
-		else
-			if invitation
-				invitation.available = false
-				invitation.save
-			end
-		end
-	end
-end
-=end
-
 class User < ActiveRecord::Base
 	# Include default devise modules. Others available are:
 	# :confirmable, :lockable, :timeoutable and :omniauthable
