@@ -3,6 +3,10 @@ class HomeController < ApplicationController
   	
   end
 
+  def homepage
+    
+  end
+
   def login
   	
   end
