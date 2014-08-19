@@ -196,7 +196,7 @@
 	<iframe id="documento2" src="<%= URI::escape(root_path + @document.path) %><% if @document.agreed %>_signed<% end %>"></iframe>
 	<div id="importante"><p class="datosextra">Solo se pueden subir documentos en PDF. Si no tienes tus archivos en este formato, utiliza nuestro conversor de Word a PDF <a href="conversor.html" style="color:#ab8f5a;font-weight:bolder;">aquí</a>.</p></div>
 </div>
-<%= render "layout/footer" %>
+<%= render "layouts/footer" %>
 <div class="print">
 	<% if @document.agreed %>
 	<h2><%= @document.name %></h2><br /><br />
