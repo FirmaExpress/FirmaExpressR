@@ -196,10 +196,7 @@
 	<iframe id="documento2" src="<%= URI::escape(root_path + @document.path) %><% if @document.agreed %>_signed<% end %>"></iframe>
 	<div id="importante"><p class="datosextra">Solo se pueden subir documentos en PDF. Si no tienes tus archivos en este formato, utiliza nuestro conversor de Word a PDF <a href="conversor.html" style="color:#ab8f5a;font-weight:bolder;">aquí</a>.</p></div>
 </div>
-<footer>
-<p class="left">Todos los Derechos Reservados a Firma Express 2014 / <a href="legal.html">Condiciones Legales</a>.</p>
-<p class="right">Mail: contacto@firmaexpress.cl</p>
-</footer>
+<%= render "layout/footer" %>
 <div class="print">
 	<% if @document.agreed %>
 	<h2><%= @document.name %></h2><br /><br />
