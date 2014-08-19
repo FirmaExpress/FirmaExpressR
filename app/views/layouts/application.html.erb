@@ -32,7 +32,13 @@
 <body>
 	<header>
 		<div id="logo">
-			<a href="<%= root_url %>"><%= image_tag "FirmaExpress1.png", { height: 60, width: 321 } %></a>
+      <% if current_user %>
+        <a href="<%= user_root_url %>">
+      <% else %>
+			 <a href="<%= root_url %>">
+      <% end %>
+        <%= image_tag "FirmaExpress1.png", { height: 60, width: 321 } %>
+      </a>
 		</div>
     <div id="wrap">
         <nav>
