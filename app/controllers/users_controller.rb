@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 
 	def show
 		sign_out :user
-		redirect_to root_url
+		redirect_to user_root_url
 	end
 
 	def rut
@@ -85,7 +85,7 @@ class UsersController < ApplicationController
 			File.open(Rails.root.join('public', avatar_path), 'wb') do |file|
 				file.write(uploaded_io.read)
 			end
-			redirect_to root_url, :notice => "Registrado!"
+			redirect_to user_root_url, :notice => "Registrado!"
 		else
 			render "new"
 		end
@@ -155,7 +155,7 @@ class UsersController < ApplicationController
 				user.password = password
 				user.id_number = id_number
 				user.save
-				redirect_to root_url
+				redirect_to user_root_url
 			end
 		end
 	end
