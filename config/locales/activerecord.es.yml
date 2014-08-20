@@ -1,0 +1,26 @@
+es:
+  activerecord:
+    models:
+      user:
+        one: usuario
+        other: usuarios
+    attributes:
+      user:
+        first_name: 'Nombre'
+        last_name: 'Apellido'
+        password: 'Contraseña'
+    errors:
+      models:
+        user:
+          header:
+            one: 'Un error impidió que te registraras.'
+            other: "%{count} errores impidieron que te registraras."
+          attributes:
+            password:
+              too_short: 'debe tener al menos 8 caracteres.'
+            first_name:
+              blank: 'no se encuentra.'
+            last_name:
+              blank: 'no se encuentra.'
+            email:
+              taken: 'ya está en registrado.'
