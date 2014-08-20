@@ -97,6 +97,18 @@ class User < ActiveRecord::Base
 
 	def set_user_id
 		self.user_type_id = 2 if self.user_type_id.blank?
+		
+		rut, dv = id_number.split('-')
+		rut = rut.delete "."
+		sii_page = Nokogiri::HTML(open("https://zeus.sii.cl/cvc_cgi/stc/getstc?RUT=#{rut}&DV=#{dv}&PRG=STC&OPC=NOR"))
+		begin
+			full_name = sii_page.css('html body center')[1].css('table')[0].css('tr')[0].css('td')[1].css('font').text.strip.titleize
+			self.first_name = full_name.match(/^([^ ]*\ [^ ]*)\ (.*)$/)[1]
+			self.last_name = full_name.match(/^([^ ]*\ [^ ]*)\ (.*)$/)[2]
+		rescue Exception => e
+			self.first_name = ''
+			self.last_name = ''
+		end
 	end
 
 	def self.authenticate(email, password)
