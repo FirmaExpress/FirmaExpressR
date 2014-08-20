@@ -164,7 +164,7 @@ app.controller("DocumentOptionsController", function($scope, $http){
 	$scope.destroy = function(){
 		$http.get('../documents/destroy/' + $scope.document_id + '.json').success(function(data) {
 			console.log(data);
-			window.location.href = "http://firmaexpress.com"
+			window.location.href = "http://firmaexpress.com/home"
 		});
 	}
 });

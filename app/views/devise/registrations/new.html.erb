@@ -1,43 +1,41 @@
 <% content_for :title do %>
-Login
+Registro
 <% end %>
 <div id="container">
 	<div id="headline">
 		<h3>Registrate con nosotros</h3>
 	</div>
 	<div id="info">
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-	<%= devise_error_messages! %>
-	
-	<%= f.label :avatar, 'Imagen de Perfil' %>
-	<%= f.file_field :avatar %>
-	<%= f.label :first_name, 'Nombres' %>
-	<%= f.text_field :first_name %>
-	<%= f.label :last_name, 'Apellidos' %>
-	<%= f.text_field :last_name %>
-	<%= f.label :id_number, 'RUT' %>
-	<%= f.text_field :id_number %>
-	<%= f.label :id_document_serial, 'Numero de cedula' %>
-	<%= f.text_field :id_document_serial %>
-	<%= f.label :email, 'E-mail' %>
-	<%= f.email_field :email, autofocus: true %>
-	<%= f.label :password, 'Contraseña' %>
-	<%= f.password_field :password, autocomplete: "off" %>
-	<%= f.label :password_confirmation, 'Confirmar contraseña' %>
-	<%= f.password_field :password_confirmation, autocomplete: "off" %>
+		<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+			<%= devise_error_messages! %>
+			
+			<% f.label :avatar, 'Imagen de Perfil' %>
+			<% f.file_field :avatar %>
+			<% f.label :first_name, 'Nombres' %>
+			<% f.text_field :first_name %>
+			<% f.label :last_name, 'Apellidos' %>
+			<% f.text_field :last_name %>
+			<%= f.label :id_number, 'RUT' %>
+			<%= f.text_field :id_number, autofocus: true %>
+			<%= f.label :id_document_serial, 'Numero de serie de cedula' %>
+			<span class="field-tip">
+				<%= f.text_field :id_document_serial, 'data-title' => 'Se encuentra impreso en su cedula de identidad. Se solicita para evitar la suplantación de identidad.' %>
+				<span class="tip-content">Se encuentra impreso en su cedula de identidad. <br /><br />Se solicita para evitar la suplantación de identidad.</span>
+			</span>
+			<%= f.label :email, 'E-mail' %>
+			<%= f.email_field :email %>
+			<%= f.label :password, 'Contraseña' %>
+			<%= f.password_field :password, autocomplete: "off" %>
+			<% f.label :password_confirmation, 'Confirmar contraseña' %>
+			<% f.password_field :password_confirmation, autocomplete: "off" %>
 
 
 
-<%= f.submit "Registrarme", {id: 'submit'} %>
-<% end %>
+		<%= f.submit "Registrarme", {id: 'submit'} %>
+		<% end %>
 
-<%= render "devise/shared/links" %>
-		<p class="datosextra">*Datos importantes sobre el registro.<br>
-		*Datos importantes sobre el registro.<br>
-		*Datos importantes sobre el registro.</p>
+		<%= render "devise/shared/links" %>
+		<p class="datosextra"></p>
 	</div>
 </div>
-<footer>
-	<p class="left">Todos los Derechos Reservados a Firma Express 2013 / <a href="preguntasfrecuentes.html">Preguntas Frecuentes</a> / <a href="legal.html">Condiciones Legales</a>.</p>
-	<p class="right">Dirección: Av. Nombre Nº1234 / Teléfono: +56 2 2342567 / Mail: contacto@firmaexpress.cl</p>
-</footer>
+<%= render "layouts/footer" %>
