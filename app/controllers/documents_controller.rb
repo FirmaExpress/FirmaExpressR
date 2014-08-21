@@ -23,7 +23,7 @@ class DocumentsController < ApplicationController
 		if @document.save
 			@participant = Participant.new(document_id: @document.id, role_id: 1, user_id: current_user.id, signed: 'f')
 			if @participant.save
-				redirect_to root_url
+				redirect_to user_root_url
 			else
 				render "new"
 			end
