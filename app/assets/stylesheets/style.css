@@ -15,7 +15,7 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, dialog, figure, footer, header,
 hgroup, menu, nav, section, menu,
 time, mark, audio, video {margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent;}
-body {line-height:1;}
+body{line-height:1;}
 article, aside, dialog, figure, footer, header,
 hgroup, nav, section {display:block;}
 nav ul {list-style:none;}
@@ -27,11 +27,41 @@ input { outline: none; }
 
 /* --------------General-------------- */
 
-body{font-size:12px;line-height:15px;color:#FFF;margin:0 auto;min-width:1000px;width:100%;background-color:#FFF;}
+body{font-size:12px;color:#FFF;margin:0 auto;min-width:1000px;width:100%;background-color:#FFF;font-family: "Lato",sans-serif;
+font-weight: lighter;}
+
+.buttonprueba {color: #FFF;background: linear-gradient(to bottom, #00C4FE 0%, #00ABE3 100%) repeat scroll 0% 0% transparent;float: left;
+display: inline-block;
+font-size: 2.6em;
+padding: 16px 20px;
+border-radius: 8px;
+margin: 0px 0px 9px;font-size: 2em;
+min-width: 129px;border-color: rgba(255, 255, 255, 0.2) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.2);
+border-style: solid;
+border-width: 1px;
+text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2);
+text-align: center;}
+.buttonprueba:hover {color: #FFF;
+background: linear-gradient(to bottom, #1ACAFE 0%, #1AB4E6 100%) repeat scroll 0% 0% transparent;}
+.buttoncomprar {color: #FFF;background: linear-gradient(to bottom, #FF8D25 0%, #FF740E 100%) repeat scroll 0% 0% transparent;border-color: rgba(255, 255, 255, 0.2) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.2);float: left;
+display: inline-block;
+font-size: 2.6em;
+padding: 16px 20px;
+border-radius: 8px;
+margin: 0px 0px 9px;font-size: 2em;
+min-width: 129px;border-color: rgba(255, 255, 255, 0.2) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.2);
+border-style: solid;
+border-width: 1px;
+text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2);
+text-align: center;}
+.buttoncomprar:hover {color: #FFF;
+background: linear-gradient(to bottom, #FF993B 0%, #FF8227 100%) repeat scroll 0% 0% transparent;}
+#slider a {margin:0 10px;}
+#slider h3 {width:350px;text-align:center;margin:15px auto;}
 
 /* --------------Textos-------------- */
 
-p{ text-align:justify;}
+p{ text-align:justify;line-height: 1.5em;}
 
 h1, h2, h3, h4, h5 {font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;color: #175892;}
 
@@ -41,7 +71,7 @@ h3 {font-size:18px; font-weight:normal;}
 h4 {text-align:left; font-size:18px; font-weight:normal;}
 h5 {text-align:left; padding:10px 30px;font-family: 'Lato', sans-serif; text-transform:uppercase;}
 
-a {color:#000; text-decoration:none;}
+a {color:#FFF; text-decoration:none;}
 a:hover {color:#edc00f; text-decoration:none;}
 a:active {color:#edc00f; text-decoration:none;}
 
@@ -55,7 +85,8 @@ a:active {color:#edc00f; text-decoration:none;}
 
 nav { float:right;padding-right:15px;padding-top:15px; font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif; font-size:16px;}
 nav ul li{float:left;}
-nav ul li a{display:block;padding:0 20px;}
+nav ul li a{display:block;padding:0 15px;}
+.menuactive a {color:#edc00f;}
 
 /* --------------Header-------------- */
 	
@@ -78,7 +109,7 @@ header { width:100%; height:45px; background-color: #175892;min-width:1000px; po
 .loginboton {font-family: 'Lato', sans-serif; font-weight:lighter; font-style:italic; font-size:20px;height:40px; background:none; border:none;color:#FFF;margin-top:15px; cursor:pointer;width:175px;margin-left:50px;}
 .loginboton:hover {color:#EDC00F;}
 .inputhome {font-family: 'Lato', sans-serif; font-weight:lighter; font-style:italic; font-size:16px;height:25px; background:none; border:none;color:#1b1b1b;width:150px;display:block;clear:both;}
-#slider {padding-top:270px;padding-left:30%; padding-left:400px;float:left;clear:both;display:block;text-align:right;position:absolute;}
+#slider {padding-top:210px;padding-left:55%;float:left;clear:both;display:block;text-align:right;position:absolute;}
 #slider h1 {color:#3399ff;font-family: 'Kaushan Script', cursive; font-weight:400;}
 #slider h2 {color:#edc00f;font-family: 'Lato', sans-serif; font-weight:lighter;}
 .imagenlogin {margin-left:-200px;}
@@ -87,16 +118,16 @@ header { width:100%; height:45px; background-color: #175892;min-width:1000px; po
 
 #container {width: 100%; clear:both; min-height:600px; background-image:url('background2.jpg');background-attachment:fixed; background-position:top center; background-repeat:no-repeat; overflow:scroll;margin-top:45px}
 #headline {background:rgba(235, 235, 235, 0.8);width:100%;height:30px;text-align:center;padding-top:13px;border-bottom:solid 1px #175892;}
-#servicios {background-color:#FFF;width:100%;height:90px;font-family: 'Lato', sans-serif; font-weight:lighter;font-size: 14px;
-line-height: 1.2;color:#1b1b1b;padding-top:20px;border-bottom: 1px solid #CCC;max-width:1000px;margin:0 auto;}
+#servicios {background-color:#FFF;width:100%;font-family: 'Lato', sans-serif; font-weight:lighter;font-size: 14px;min-height:85px;color:#1b1b1b;padding:30px 0;max-width:1000px;margin:0 auto;}
+#clientes {background-color:#FFF;width:100%;padding:30px 0;max-width:1000px;margin:0 auto;text-align:center;}
 #pasosfirmaexpress {background:#FFF;width:100%;font-family: 'Lato', sans-serif; font-weight:lighter;font-size:12px;color:#1b1b1b; line-height:1.2;min-width:1000px;}
 #pasosfirmaexpress h3 {font-size:38px;margin-top:50px;width:400px;}
 #pasosfirmaexpress p {margin:20px 0 50px;width:400px;font-size:16px;line-height:1.2;}
 #box_1_3 {position:relative; width:27%;padding:0 30px;float:left;display:block;height:auto;}
 #box_1_1 {position:relative; width:95%;padding:0 10px 0 52px;float:left;display:block;height:auto;border-bottom: 1px solid #CCC;margin:0 auto;}
 #info {color:#1b1b1b;font-family: 'Lato', sans-serif; font-size:12px;width:450px;background-color:#FFF;padding:40px 60px;margin:0 auto;line-height:1.2;}
-#info h3 {text-transform:uppercase;}
-#infoprices {color:#1b1b1b;font-family: 'Lato', sans-serif; font-weight:lighter;font-size:12px;width:850px;background-color:#FFF;padding:40px 60px;margin:0 auto;line-height:1;}
+#info h3 {text-transform:uppercase;text-align:center;}
+#infoprices {color:#1b1b1b;font-family: 'Lato', sans-serif; font-weight:lighter;font-size:12px;width:850px;background-color:#FFF;padding:40px 60px;margin:0 auto;line-height:1;min-height:500px;}
 #infoprices h3 {text-align: center;width: 282px;float:left;position:relative;padding:15px 0;}
 #mapa {margin-left:-60px;margin-top:-40px;}
 .datosextra {font-size:11px; text-align:center;margin-top:15px;}
