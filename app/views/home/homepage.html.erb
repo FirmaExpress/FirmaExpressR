@@ -5,11 +5,10 @@ Login
 	<div id="login">
 		<div id="slider">
 		<h3>Conviertete hoy en un usuario de Firmaexpress y comienza a optimizar tu gestión de firma de documentos con nuestra poderosa herramienta.</h3>
-		<a class="buttonprueba" title="Prueba Gratis" href="newuserregistration.html">Prueba Gratis</a>
+		<%= link_to 'Prueba Gratis', new_user_registration_path, class: 'buttonprueba' %>
 		<a class="buttoncomprar" title="Comprar" href="plans.html">Comprar</a>
 		</div>
-		<div id="formulariologin">
-		</div>
+		<%= video_tag "FIRMAexpress01.mp4", size: '711x400', controls: 'true' %>
 		<!--<%= image_tag "login.png", { height: 400, width: 533, class: 'imagenlogin' } %>-->
 	</div>
     <div id="headline">
