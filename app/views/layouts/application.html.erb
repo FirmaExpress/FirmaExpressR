@@ -51,10 +51,11 @@
                 <li><%= link_to 'Home', user_root_path %></li>
                 <li><%= link_to("Logout", destroy_user_session_path, :method => :delete) %></li>
               <% else %>
-                <li><%= link_to 'Prueba gratis', new_user_registration_path %></li>
-                <li><%= link_to 'Acceder', new_user_session_path %></li>
+                <li class="menuactive"><%= link_to 'Prueba gratis', new_user_registration_path %></li>
+                <li><%= link_to 'Iniciar Sesión', new_user_session_path %></li>
                 <li><%= link_to 'Nosotros', about_us_path %></li>
                 <li><%= link_to 'Planes', plans_path %></li>
+                <li><%= link_to 'Beneficios', benefits_path %></li>
                 <li><%= link_to 'Contacto', contact_form_path %></li>
               <% end %>
             </ul>
