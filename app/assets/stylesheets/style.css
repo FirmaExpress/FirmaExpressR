@@ -108,7 +108,7 @@ header { width:100%; height:45px; background-color: #175892;min-width:1000px; po
 #formulariologin {position:absolute;margin-left:70px;margin-top:96px;}
 .loginboton {font-family: 'Lato', sans-serif; font-weight:lighter; font-style:italic; font-size:20px;height:40px; background:none; border:none;color:#FFF;margin-top:15px; cursor:pointer;width:175px;margin-left:50px;}
 .loginboton:hover {color:#EDC00F;}
-.inputhome {font-family: 'Lato', sans-serif; font-weight:lighter; font-style:italic; font-size:16px;height:25px; background:none; border:none;color:#1b1b1b;width:150px;display:block;clear:both;}
+.inputhome {font-family: 'Lato', sans-serif; font-size:16px;color:#1b1b1b;display:block;clear:both;height:20px;}
 #slider {padding-top:30px;padding-left:55%;float:left;clear:both;display:block;text-align:right;position:absolute;}
 #slider h1 {color:#3399ff;font-family: 'Kaushan Script', cursive; font-weight:400;}
 #slider h2 {color:#edc00f;font-family: 'Lato', sans-serif; font-weight:lighter;}
@@ -242,7 +242,7 @@ label {display:block;margin-top:20px;}
 form {margin:0 auto;width:400px;}
 input, textarea {width:380px;height:18px;background:#FFF;border:2px solid #f6f6f6;padding:10px;margin-top:5px;font-size:11px;color:#1b1b1b;font-weight:lighter; font-style:italic;}
 textarea {height:100px;}
-#submit {width:200px;height:40px;border:none;margin-top:20px;margin-left:70px;cursor:pointer;background:#3399ff;color:#FFF;font-family: 'Lato', sans-serif; font-weight:lighter; font-style:italic; font-size:16px;padding:5px;}
+#submit {width:200px;height:40px;border:none;margin:20px auto 0;cursor:pointer;background:#3399ff;color:#FFF;font-family: 'Lato', sans-serif; font-weight:lighter; font-style:italic; font-size:16px;padding:5px;float:right;}
 #submit:hover {color:#175892;border:1px solid #175892;background-color:#ccc;padding:5px;}
 
 /* --------------Bio-------------- */
