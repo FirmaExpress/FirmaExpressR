@@ -22,8 +22,9 @@ div#tableContainer {border: 1px solid #e2e7eb;background: url("img/tableBottomBG
 div.tableCell {width: 280px;float: left;text-align: center;border-right: 1px solid #e2e7eb;border-left: 1px solid #e2e7eb;}
 table.pricingTableContent { width: 100%;}
 table.benefitsTableContent { width: 100%;margin-top:-3px;}
-td {text-align: center;vertical-align: middle;width: 222px;border-right: 1px solid #e2e7eb;color: #77808a;}
+td {text-align: center;vertical-align: middle;width: 222px;border-right: 1px solid #e2e7eb;}
 .noBorder { border-right: none; }
+.celeste {color:#09F;}
 div.tableHeading {padding: 10px 0;background-color: #F5F5F5;}
 div.tableHeading h2 {font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;color: #175892;font-size: 18px; font-weight:normal;}
 table.pricingTableContent tr td { padding: 10px 0; }
