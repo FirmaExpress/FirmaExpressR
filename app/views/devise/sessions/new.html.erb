@@ -14,7 +14,7 @@ Acceder
 					 <%= f.label :remember_me, 'Recuérdame' %> <%= f.check_box :remember_me %>
   				<% end -%>
 				<% if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  				<%= link_to "¿Olvido de Contraseña?", new_password_path(resource_name) %><br />
+  				<%= link_to "¿Olvido de Contraseña?", new_password_path(resource_name), class: 'negro' %><br />
 				<% end -%>
 				<%= render "layouts/alerts" %>
 			<% end %>

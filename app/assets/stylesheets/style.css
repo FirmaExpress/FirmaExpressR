@@ -57,7 +57,7 @@ text-align: center;}
 .buttoncomprar:hover {color: #FFF;
 background: linear-gradient(to bottom, #FF993B 0%, #FF8227 100%) repeat scroll 0% 0% transparent;}
 #slider a {margin:0 10px;}
-#slider h3 {width:350px;text-align:center;margin:15px auto;}
+#slider h3 {width:350px;text-align:left;margin:30px auto;line-height:1.5;font-family: 'Bree Serif', serif;}
 
 /* --------------Textos-------------- */
 
@@ -104,12 +104,12 @@ header { width:100%; height:45px; background-color: #175892;min-width:1000px; po
 #containerhome #headline h3 {color:#175892;}
 #containerhome {width: 100%; clear:both; min-height:600px; background-image:url(background.jpg); background-position:top center; background-repeat:no-repeat;margin-top:45px;}
 #insideheadline {max-width:1000px;margin:0 auto;}
-#login {height:400px; margin:0 auto;}
+#login {height:300px; margin:0 auto;}
 #formulariologin {position:absolute;margin-left:70px;margin-top:96px;}
 .loginboton {font-family: 'Lato', sans-serif; font-weight:lighter; font-style:italic; font-size:20px;height:40px; background:none; border:none;color:#FFF;margin-top:15px; cursor:pointer;width:175px;margin-left:50px;}
 .loginboton:hover {color:#EDC00F;}
 .inputhome {font-family: 'Lato', sans-serif; font-weight:lighter; font-style:italic; font-size:16px;height:25px; background:none; border:none;color:#1b1b1b;width:150px;display:block;clear:both;}
-#slider {padding-top:210px;padding-left:55%;float:left;clear:both;display:block;text-align:right;position:absolute;}
+#slider {padding-top:30px;padding-left:55%;float:left;clear:both;display:block;text-align:right;position:absolute;}
 #slider h1 {color:#3399ff;font-family: 'Kaushan Script', cursive; font-weight:400;}
 #slider h2 {color:#edc00f;font-family: 'Lato', sans-serif; font-weight:lighter;}
 .imagenlogin {margin-left:-200px;}
@@ -125,7 +125,7 @@ header { width:100%; height:45px; background-color: #175892;min-width:1000px; po
 #pasosfirmaexpress p {margin:20px 0 50px;width:400px;font-size:16px;line-height:1.2;}
 #box_1_3 {position:relative; width:27%;padding:0 30px;float:left;display:block;height:auto;}
 #box_1_1 {position:relative; width:95%;padding:0 10px 0 52px;float:left;display:block;height:auto;border-bottom: 1px solid #CCC;margin:0 auto;}
-#info {color:#1b1b1b;font-family: 'Lato', sans-serif; font-size:12px;width:450px;background-color:#FFF;padding:40px 60px;margin:0 auto;line-height:1.2;}
+#info {color:#1b1b1b;font-family: 'Lato', sans-serif; font-size:12px;width:450px;background-color:#FFF;padding:40px 60px;margin:0 auto;line-height:1.2;min-height: 500px;}
 #info h3 {text-transform:uppercase;text-align:center;}
 #infoprices {color:#1b1b1b;font-family: 'Lato', sans-serif; font-weight:lighter;font-size:12px;width:850px;background-color:#FFF;padding:40px 60px;margin:0 auto;line-height:1;min-height:500px;}
 #infoprices h3 {text-align: center;width: 282px;float:left;position:relative;padding:15px 0;}
@@ -254,15 +254,14 @@ textarea {height:100px;}
 .textobio {margin-top:-20px;}
 
 
-#info2 {background-image:url(img/background4.jpg);height:350px; background-size: cover; background-repeat:no-repeat;}
-#info3 {background-image:url(img/background5.jpg);height:350px; background-size: cover; background-repeat:no-repeat;}
-#info4 {background-image:url(img/background3.jpg);height:350px; background-size: cover; background-repeat:no-repeat;}
-#info5 {background-image:url(img/background6.jpg);height:300px; background-size: cover; background-repeat:no-repeat;}
-#info4 img {margin-top:-250px!important;}
+#info2 {background-image:url(img/background4.jpg);height:280px; background-size: cover; background-repeat:no-repeat;}
+#info3 {background-image:url(img/background5.jpg);height:280px; background-size: cover; background-repeat:no-repeat;}
+#info4 {background-image:url(img/background3.jpg);height:280px; background-size: cover; background-repeat:no-repeat;}
+#info5 {background-image:url(img/background6.jpg);height:280px; background-size: cover; background-repeat:no-repeat;}
 #bio2 {border-bottom:1px solid #ccc;border-top:1px solid #ccc; height:350px;padding:15px 0;background-color:#FFF;width:100%;}
 #bio2 p {color:#1b1b1b;font-family: 'Lato', sans-serif; font-weight:lighter;font-size:14px;position:relative;margin-left:520px;width:400px;line-height:1.2;margin-top:10px;}
-#wrapbio img {position:absolute;margin-top:-200px;}
-#bio2 h3 {text-transform:uppercase;position:relative;margin-left:520px;font-size:32px;margin-top:30px;line-height:1.2;width:400px;}
+#wrapbio img {position:absolute;margin-top:-180px;}
+#bio2 h3 {text-transform:uppercase;position:relative;margin-left:520px;font-size:28px;margin-top:30px;line-height:1.2;width:400px;font-family: 'Bree Serif', serif;}
 #wrapbio {width:100%;max-width:1000px;margin:5% auto;}
 
 /* --------------Modal-------------- */
