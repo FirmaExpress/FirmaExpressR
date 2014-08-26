@@ -6,13 +6,7 @@ Contacto
 		<h3>¡Comunícate con nosotros!</h3>
 	</div>
 	<div id="info">
-		<div id="mapa">
-			<iframe width="570" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.cl/?ie=UTF8&amp;ll=-33.668298,-70.363372&amp;spn=1.412668,2.584534&amp;t=m&amp;z=9&amp;output=embed"></iframe>
-			<br>
-			<small>
-				<a href="https://maps.google.cl/?ie=UTF8&amp;ll=-33.668298,-70.363372&amp;spn=1.412668,2.584534&amp;t=m&amp;z=9&amp;source=embed" style="color:#0000FF;text-align:left">Ver mapa más grande</a>
-			</small>
-		</div>
+		
 		<%= form_tag({:controller => "users", :action => "contact" }, :method => "post") do %>
 	    	<%= label_tag "name", "Nombre" %>
 	   		<%= text_field_tag "name", "", :size => 5, :maxlenght => 5, :placeholder => "Nombre", :required => "required" %>
