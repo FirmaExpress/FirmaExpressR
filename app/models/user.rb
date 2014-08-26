@@ -31,7 +31,8 @@ class IdDocumentSerialValidator < ActiveModel::Validator
 		page = Nokogiri::HTML(open("https://portal.sidiv.registrocivil.cl/usuarios-portal/pages/DocumentRequestStatus.xhtml?RUN=#{record.id_number}&type=CEDULA&serial=#{record.id_document_serial}"))
 		OpenSSL::SSL.const_set(:VERIFY_PEER, OpenSSL::SSL::VERIFY_PEER)
 		unless page.css('.setWidthOfSecondColumn').text == 'Vigente'
-			record.errors[:base] << "Cedula inválida, param: #{record.id_document_serial}, result: #{page.css('.setWidthOfSecondColumn').text}"
+			#record.errors[:base] << "Cedula inválida, param: #{record.id_document_serial}, result: #{page.css('.setWidthOfSecondColumn').text}"
+			record.errors[:base] << 'Cedula inválida'
 		end
 	end
 end

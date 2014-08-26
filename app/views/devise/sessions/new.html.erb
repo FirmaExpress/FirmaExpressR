@@ -5,7 +5,7 @@ Acceder
 	<div id="headline">
 		<h3>Acceder</h3>
 	</div>
-	<div id="info">
+	<div id="acceso">
 			<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 				<%= f.email_field :email, { placeholder: 'E-mail', class: 'inputhome', autofocus: 'true'} %>
 				<%= f.password_field :password, { placeholder: 'Password', class: 'inputhome'}%>
@@ -13,7 +13,9 @@ Acceder
 				<% if devise_mapping.rememberable? -%>
 					 <%= f.label :remember_me, 'Recuérdame' %> <%= f.check_box :remember_me %>
   				<% end -%>
-				<%= render "devise/shared/links" %>
+				<% if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+  				<%= link_to "¿Olvidó su Contraseña?", new_password_path(resource_name), class: 'passwordforget' %><br />
+				<% end -%>
 				<%= render "layouts/alerts" %>
 			<% end %>
 			<p class="datosextra"></p>

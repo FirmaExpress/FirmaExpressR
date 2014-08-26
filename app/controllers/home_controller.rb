@@ -7,6 +7,10 @@ class HomeController < ApplicationController
     
   end
 
+  def benefits
+    
+  end
+
   def login
   	
   end
