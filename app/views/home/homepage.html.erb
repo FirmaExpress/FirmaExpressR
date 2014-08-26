@@ -1,6 +1,21 @@
 <% content_for :title do %>
 Login
 <% end %>
+<% content_for :styles do %>
+	<% stylesheet_link_tag "tinycarousel.css" %>
+	<link href='https://fonts.googleapis.com/css?family=Arizonia' rel='stylesheet' type='text/css'>
+<% end %>
+<% content_for :js do %>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<%= javascript_include_tag "jquery.tinycarousel.js" %>
+	<script>
+		$(document).ready(function()
+		{
+			$('#slider1').tinycarousel();
+		});
+
+	</script>
+<% end %>
 <div id="containerhome">
 	<div id="login">
 		<div id="slider">
@@ -38,6 +53,25 @@ Login
 	<div id="headline">
 	<h3>Empresas que ya usan Firma Express</h3>
 	</div>
+    <div id="slider1">
+		<a class="buttons prev" href="#">&#60;</a>
+		<div class="viewport">
+			<ul class="overview">
+				<li><%= image_tag "agemer.png", { width: 250 } %></li>
+				<li><%= image_tag "bergerberger.png", { width: 240 } %></li>
+				<li><%= image_tag "co-munity.png", { width: 250 } %></li>
+				<li><%= image_tag "glauben.png", { width: 250 } %></li>
+				<li><%= image_tag "humanup.png", { width: 250 } %></li>
+				<li><%= image_tag "innovafull.png", { width: 250 } %></li>
+				<li><%= image_tag "ki.png", { width: 250 } %></li>
+				<li><%= image_tag "teohilfe.png", { width: 250 } %></li>
+				<li><%= image_tag "vigaworks.png", { width: 250 } %></li>
+				<li><%= image_tag "zupventures.png", { width: 250 } %></li>
+			</ul>
+		</div>
+		<a class="buttons next" href="#">&#62;</a>
+	</div>
+
 	<div id="clientes">
 		<%= image_tag "agemer.png", { width: 100, style: 'margin-right:12px;' } %><%= image_tag "alige.png", { width: 100, style: 'margin-right:12px;' } %><%= image_tag "bergerberger.png", { width: 100, style: 'margin-right:12px;' } %><%= image_tag "co-munity.png", { width: 100, style: 'margin-right:12px;' } %><%= image_tag "glauben.png", { width: 100, style: 'margin-right:12px;' } %><%= image_tag "humanup.png", { width: 100, style: 'margin-right:12px;' } %><%= image_tag "innovafull.png", { width: 100, style: 'margin-right:12px;' } %><%= image_tag "ki.png", { width: 100, style: 'margin-right:12px;' } %><%= image_tag "teohilfe.png", { width: 100, style: 'margin-right:12px;' } %><%= image_tag "vigaworks.png", { width: 100, style: 'margin-right:12px;' } %><%= image_tag "zupventures.png", { width: 100, style: 'margin-right:12px;' } %>
 	</div>
