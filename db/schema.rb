@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140623212207) do
+ActiveRecord::Schema.define(version: 20140828224935) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,14 @@ ActiveRecord::Schema.define(version: 20140623212207) do
 
   add_index "invite_codes", ["user_id"], name: "index_invite_codes_on_user_id", using: :btree
 
+  create_table "invoices", force: true do |t|
+    t.string  "description"
+    t.integer "total"
+    t.integer "subscription_id"
+  end
+
+  add_index "invoices", ["subscription_id"], name: "index_invoices_on_subscription_id", using: :btree
+
   create_table "participants", force: true do |t|
     t.integer "user_id",     null: false
     t.integer "document_id", null: false
@@ -45,6 +53,19 @@ ActiveRecord::Schema.define(version: 20140623212207) do
   add_index "participants", ["document_id"], name: "index_participants_on_document_id", using: :btree
   add_index "participants", ["role_id"], name: "index_participants_on_role_id", using: :btree
   add_index "participants", ["user_id"], name: "index_participants_on_user_id", using: :btree
+
+  create_table "plans", force: true do |t|
+    t.string   "name"
+    t.integer  "documents_per_user"
+    t.integer  "documents_per_month"
+    t.boolean  "templantes"
+    t.boolean  "statistics"
+    t.boolean  "admin_panel"
+    t.boolean  "api"
+    t.integer  "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "roles", force: true do |t|
     t.string   "name"
@@ -84,6 +105,16 @@ ActiveRecord::Schema.define(version: 20140623212207) do
   end
 
   add_index "signs", ["participant_id"], name: "index_signs_on_participant_id", using: :btree
+
+  create_table "subscriptions", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "plan_id"
+  end
+
+  add_index "subscriptions", ["plan_id"], name: "index_subscriptions_on_plan_id", using: :btree
+  add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
 
   create_table "used_sign_security_methods", force: true do |t|
     t.datetime "created_at"
