@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140828224935) do
+ActiveRecord::Schema.define(version: 20140829031626) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,18 @@ ActiveRecord::Schema.define(version: 20140828224935) do
   end
 
   add_index "invoices", ["subscription_id"], name: "index_invoices_on_subscription_id", using: :btree
+
+  create_table "organization_users", force: true do |t|
+    t.integer "user_id"
+    t.integer "organization_id"
+  end
+
+  add_index "organization_users", ["organization_id"], name: "index_organization_users_on_organization_id", using: :btree
+  add_index "organization_users", ["user_id"], name: "index_organization_users_on_user_id", using: :btree
+
+  create_table "organizations", force: true do |t|
+    t.string "name"
+  end
 
   create_table "participants", force: true do |t|
     t.integer "user_id",     null: false
@@ -111,8 +123,10 @@ ActiveRecord::Schema.define(version: 20140828224935) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "plan_id"
+    t.integer  "organization_id"
   end
 
+  add_index "subscriptions", ["organization_id"], name: "index_subscriptions_on_organization_id", using: :btree
   add_index "subscriptions", ["plan_id"], name: "index_subscriptions_on_plan_id", using: :btree
   add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
 
