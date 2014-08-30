@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140829031626) do
+ActiveRecord::Schema.define(version: 20140830173126) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,8 +52,11 @@ ActiveRecord::Schema.define(version: 20140829031626) do
   add_index "organization_users", ["user_id"], name: "index_organization_users_on_user_id", using: :btree
 
   create_table "organizations", force: true do |t|
-    t.string "name"
+    t.string  "name"
+    t.integer "subscriber_id"
   end
+
+  add_index "organizations", ["subscriber_id"], name: "index_organizations_on_subscriber_id", using: :btree
 
   create_table "participants", force: true do |t|
     t.integer "user_id",     null: false
@@ -68,8 +71,7 @@ ActiveRecord::Schema.define(version: 20140829031626) do
 
   create_table "plans", force: true do |t|
     t.string   "name"
-    t.integer  "documents_per_user"
-    t.integer  "documents_per_month"
+    t.integer  "documents"
     t.boolean  "templantes"
     t.boolean  "statistics"
     t.boolean  "admin_panel"
@@ -118,17 +120,18 @@ ActiveRecord::Schema.define(version: 20140829031626) do
 
   add_index "signs", ["participant_id"], name: "index_signs_on_participant_id", using: :btree
 
+  create_table "subscribers", force: true do |t|
+  end
+
   create_table "subscriptions", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
     t.integer  "plan_id"
-    t.integer  "organization_id"
+    t.integer  "subscriber_id"
   end
 
-  add_index "subscriptions", ["organization_id"], name: "index_subscriptions_on_organization_id", using: :btree
   add_index "subscriptions", ["plan_id"], name: "index_subscriptions_on_plan_id", using: :btree
-  add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
+  add_index "subscriptions", ["subscriber_id"], name: "index_subscriptions_on_subscriber_id", using: :btree
 
   create_table "used_sign_security_methods", force: true do |t|
     t.datetime "created_at"
@@ -167,10 +170,12 @@ ActiveRecord::Schema.define(version: 20140829031626) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.integer  "subscriber_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["subscriber_id"], name: "index_users_on_subscriber_id", using: :btree
   add_index "users", ["user_type_id"], name: "index_users_on_user_type_id", using: :btree
 
 end
