@@ -20,4 +20,6 @@ SignSecurityLevel.create level: 2, name: 'Nivel 2', description: 'V. simple y no
 Plan.create name: 'Gratis', documents: 10, templates: false, statistics: false, admin_panel: false, api: false, price: 0
 Plan.create name: 'Persona', documents: 300, templates: true, statistics: true, admin_panel: false, api: false, price: 3000
 Plan.create name: 'Small Bussines', documents: 1500, templates: true, statistics: true, admin_panel: true, api: false, price: 12500
-Plan.create name: 'Corporate', documents: 4500, templates: true, statistics: true, admin_panel: true, api: true, price: 30000
+Plan.create name: 'IT Small Bussines', documents: 1500, templates: true, statistics: true, admin_panel: true, api: true, price: 22500
+Plan.create name: 'Corporate', documents: 4500, templates: true, statistics: true, admin_panel: true, api: false, price: 30000
+Plan.create name: 'IT Corporate', documents: 4500, templates: true, statistics: true, admin_panel: true, api: true, price: 40000
