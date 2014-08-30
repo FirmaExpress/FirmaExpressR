@@ -3,7 +3,7 @@ class CreatePlans < ActiveRecord::Migration
     create_table :plans do |t|
       t.string :name
       t.integer :documents
-      t.boolean :templantes
+      t.boolean :templates
       t.boolean :statistics
       t.boolean :admin_panel
       t.boolean :api
