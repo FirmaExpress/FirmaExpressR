@@ -46,6 +46,7 @@ class User < ActiveRecord::Base
 	has_many :participants
 	has_many :documents, through: :participants
 	has_many :roles, through: :participants
+	belongs_to :subscriber
 	has_many :invite_codes
 	belongs_to :user_type
 
