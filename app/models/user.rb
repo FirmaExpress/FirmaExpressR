@@ -46,6 +46,7 @@ class User < ActiveRecord::Base
 	has_many :participants
 	has_many :documents, through: :participants
 	has_many :roles, through: :participants
+	belongs_to :subscriber
 	has_many :invite_codes
 	belongs_to :user_type
 
@@ -110,6 +111,8 @@ class User < ActiveRecord::Base
 			self.first_name = ''
 			self.last_name = ''
 		end
+		self.subscriber = Subscriber.create
+		self.subscriber.plans << Plan.first
 	end
 
 	def self.authenticate(email, password)
