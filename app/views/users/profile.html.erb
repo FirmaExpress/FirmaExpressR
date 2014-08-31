@@ -91,7 +91,7 @@
 	<br>
 	<h5>Documentos</h5>
 	<p>Máximo: <%= current_user.subscriber.plans.last.documents %></p>
-	<p>Nº de Documentos: <%= current_user.documents.count %></p>
+	<p>Nº de Documentos: <%= Participant.where(user: current_user, role_id: 1).count %></p>
 	<br>
 	<h5>Datos de Usuario</h5>
 	<p>Usuario desde: <%= current_user.created_at %></p>
