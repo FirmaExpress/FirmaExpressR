@@ -111,6 +111,8 @@ class User < ActiveRecord::Base
 			self.first_name = ''
 			self.last_name = ''
 		end
+		self.subscriber = Subscriber.create
+		self.subscriber.plans << Plan.first
 	end
 
 	def self.authenticate(email, password)

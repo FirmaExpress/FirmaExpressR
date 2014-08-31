@@ -36,14 +36,14 @@ Plan.create name: 'IT Small Bussines', documents: 1500, templates: true, statist
 Plan.create name: 'Corporate', documents: 4500, templates: true, statistics: true, admin_panel: true, api: false, price: 30000
 Plan.create name: 'IT Corporate', documents: 4500, templates: true, statistics: true, admin_panel: true, api: true, price: 40000
 
-claudio = User.create id_number: '17026575-0', id_document_serial: '100692111', email: 'claudevandort@gmail.com', password: '12345678', user_type: admin
-claudio.subscriber = Subscriber.create
-claudio.subscriber.plans << Plan.first
-claudio.save
+#claudio = User.create id_number: '17026575-0', id_document_serial: '100692111', email: 'claudevandort@gmail.com', password: '12345678', user_type: admin
+#claudio.subscriber = Subscriber.create
+#claudio.subscriber.plans << Plan.first
+#claudio.save
 #user = User.first
 #user.subscriber.plans.last
 
-User.create([
-	{ avatar: nil, first_name: 'Daniel', last_name: 'Vera', id_number: '10974805-6', email: 'danielveram@gmail.com', password: 'guitarra', password_confirmation: 'guitarra',user_type: admin },
-	{ avatar: nil, first_name: 'Diego', last_name: 'Maturana', id_number: '2-7', email: 'diegomaturanabaeza@gmail.com', password: 'D13g0M4tur4n4', password_confirmation: 'D13g0M4tur4n4',user_type: admin },
-	{ avatar: nil, first_name: 'Francisco', last_name: 'Masjuan', id_number: '1-9', email: 'fmasjuan@co-munity.co', password: 'Fr4nc1sc0', password_confirmation: 'Fr4nc1sc0',user_type: admin }])
+#User.create([
+#	{ avatar: nil, first_name: 'Daniel', last_name: 'Vera', id_number: '10974805-6', email: 'danielveram@gmail.com', password: 'guitarra', password_confirmation: 'guitarra',user_type: admin },
+#	{ avatar: nil, first_name: 'Diego', last_name: 'Maturana', id_number: '2-7', email: 'diegomaturanabaeza@gmail.com', password: 'D13g0M4tur4n4', password_confirmation: 'D13g0M4tur4n4',user_type: admin },
+#	{ avatar: nil, first_name: 'Francisco', last_name: 'Masjuan', id_number: '1-9', email: 'fmasjuan@co-munity.co', password: 'Fr4nc1sc0', password_confirmation: 'Fr4nc1sc0',user_type: admin }])
