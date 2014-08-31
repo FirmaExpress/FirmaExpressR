@@ -1,3 +1,20 @@
+Role.all.each(&:destroy)
+UserType.all.each(&:destroy)
+User.all.each(&:destroy)
+Participant.all.each(&:destroy)
+Document.all.each(&:destroy)
+SignSecurityLevel.all.each(&:destroy)
+SignSecurityMethod.all.each(&:destroy)
+SignSecurityLevelMethod.all.each(&:destroy)
+UsedSignSecurityMethod.all.each(&:destroy)
+Sign.all.each(&:destroy)
+OrganizationUser.all.each(&:destroy)
+Organization.all.each(&:destroy)
+Subscriber.all.each(&:destroy)
+Subscription.all.each(&:destroy)
+Plan.all.each(&:destroy)
+Invoice.all.each(&:destroy)
+
 Role.create([{ name: 'Dueño' }, { name: 'Invitado' }])
 
 admin = UserType.create name: 'Admin'
@@ -22,6 +39,9 @@ Plan.create name: 'IT Corporate', documents: 4500, templates: true, statistics: 
 claudio = User.create id_number: '17026575-0', id_document_serial: '100692111', email: 'claudevandort@gmail.com', password: '12345678', user_type: admin
 claudio.subscriber = Subscriber.create
 claudio.subscriber.plans << Plan.first
+claudio.save
+#user = User.includes(:subscriber).first
+#user.subscriber.plans
 
 User.create([
 	{ avatar: nil, first_name: 'Daniel', last_name: 'Vera', id_number: '10974805-6', email: 'danielveram@gmail.com', password: 'guitarra', password_confirmation: 'guitarra',user_type: admin },
