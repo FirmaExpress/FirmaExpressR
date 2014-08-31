@@ -178,8 +178,9 @@ app.controller("ParticipantOptionsController", function($scope, $http){
 		});
 	}
 });
+/*
 $(window).load(function() {
-        $('#joyRideTipContent').joyride({
+   		  $('#joyRideTipContent').joyride({
           autoStart : true,
           postStepCallback : function (index, tip) {
           if (index == 2) {
@@ -190,3 +191,4 @@ $(window).load(function() {
         expose: true
         });
       });
+*/
