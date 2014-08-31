@@ -40,8 +40,8 @@ claudio = User.create id_number: '17026575-0', id_document_serial: '100692111', 
 claudio.subscriber = Subscriber.create
 claudio.subscriber.plans << Plan.first
 claudio.save
-#user = User.includes(:subscriber).first
-#user.subscriber.plans
+#user = User.first
+#user.subscriber.plans.last
 
 User.create([
 	{ avatar: nil, first_name: 'Daniel', last_name: 'Vera', id_number: '10974805-6', email: 'danielveram@gmail.com', password: 'guitarra', password_confirmation: 'guitarra',user_type: admin },
