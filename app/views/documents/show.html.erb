@@ -113,7 +113,7 @@
 									<div ng-controller="InviteController" ng-init="document_id=<%= @document.id %>">
 										<input class="email" ng-model="emails"  ng-enter="invite()" type="text" placeholder="Ingresar emails separados por comas" id="invitees_emails" />
 										<input type="button" ng-click="invite()" id="invitar" value="Enviar" /><br><p></p><br>
-										<p><%= image_tag 'facebook_lo.gif', style: 'display: none;text-align:center;margin-left:auto;margin-right:auto;', id: 'invitation_loading', height: '25' %></p>
+										<p><%= image_tag("fb-loader.gif", style: 'display: none;text-align:center;margin-left:auto;margin-right:auto;', id: 'invitation_loading', height: '25') %></p>
 										<div id="invitation_message" style="display:none" class="alert alert-success">{{ message }}</div>
 									</div>
 								</div>

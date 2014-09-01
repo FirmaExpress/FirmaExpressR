@@ -81,16 +81,20 @@
 	    </span>
 		<%= image_tag("iconoeditar.png", class: "hiddable show", size: "36x30", :align=> "right") %>
 	    <%= image_tag("iconoguardar.png", class: "hiddable", size: "36x30", "ng-click" => "updateprofile('email', user.email)", :align=> "right") %> <br>
+	</p><br>
+	<p id="plan">
+		<span>Plan: <%= current_user.subscriber.plans.last.name %></span>
 	</p>
 	<br>
 	<h5>Firmas</h5>
 	<p>Nº de Firmas: 100</p>
 	<br>
 	<h5>Documentos</h5>
-	<p>Nº de Documentos: 100</p>
+	<p>Máximo: <%= current_user.subscriber.plans.last.documents %></p>
+	<p>Nº de Documentos: <%= Participant.where(user: current_user, role_id: 1).count %></p>
 	<br>
 	<h5>Datos de Usuario</h5>
-	<p>Usuario desde: 01/01/2014</p>
+	<p>Usuario desde: <%= current_user.created_at.to_formatted_s(:db) %></p>
 	<br>
 	<h5>Otros Datos</h5>
 	<p>Dato: Valor</p>
