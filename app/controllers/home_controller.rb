@@ -23,6 +23,9 @@ class HomeController < ApplicationController
   def plans
   	
   end
+  def terms
+    
+  end
   def contact
     
   end
