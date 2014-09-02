@@ -27,7 +27,7 @@ Registro
 			<%= f.email_field :email %>
 			<%= f.label :password, 'Contraseña' %>
 			<%= f.password_field :password, autocomplete: "off" %>
-			Acepto las <%= link_to 'Condiciones de servicio', terms_path, class: 'negro' %>
+			Acepto las <%= link_to 'Condiciones de servicio', terms_path, target: '_blank', class: 'negro' %>
 			<%= f.check_box :terms %>
 
 		<%= f.submit "Registrarme", {id: 'submit'} %>
