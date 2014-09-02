@@ -57,8 +57,7 @@ class User < ActiveRecord::Base
 	attr_accessor :invite_code
 	attr_accessor :id_document_serial
 	before_validation :set_user_id
-	#after_save :generate_codes, on: :create
-	#before_save :encrypt_password
+	attr_accessor :terms
 
 	validates :password,
 				presence: true,
@@ -85,7 +84,7 @@ class User < ActiveRecord::Base
 				unless: Proc.new { |a| a.id_number.blank? }
 	validates_with IdDocumentSerialValidator,
 				unless: Proc.new { |a| a.id_number.blank? }
-	#validates_with InviteCodeValidator, on: :create
+	validates_acceptance_of :terms
 
 =begin
 	def generate_codes
