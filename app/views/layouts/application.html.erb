@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="FEFront">
 <head>
-  <title>Firma Express - <%= yield :title %></title>
+  <title>Firma Express <%= yield :title %></title>
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => false %>
   <%= stylesheet_link_tag "joyride-2.1.css"%>
   <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic' rel='stylesheet' type='text/css'>
@@ -45,18 +45,21 @@
         <nav>
             <ul>
               <% if current_user %>
+                <% if current_user.subscriber.plans.last.name == 'Gratis' %>
+                  <li class="cambiaAplan"><%= link_to 'Obtener un plan', plans_path %></li>
+                <% end %>
                 <li><%= link_to "Bienvenido #{current_user.first_name}", profile_path %></li>
                 <li><img class="img-circle" style="margin-top: -5px; margin-left: 5px" src="<%= root_url + current_user.avatar.to_s %>" width=30 height=30></li>
                 <% if current_user.user_type_id == 1 %>
                 <% end %>
                 <li><%= link_to 'Home', user_root_path %></li>
                 <li><%= link_to("Logout", destroy_user_session_path, :method => :delete) %></li>
-                <li class="cambiaAplan"><%= link_to 'Obtener un plan', plans_path %></li>    
               <% else %>
                 <li><%= link_to 'Iniciar Sesión', new_user_session_path %></li>
                 <li><%= link_to 'Nosotros', about_us_path %></li>
                 <li><%= link_to 'Planes', plans_path %></li>
                 <li><%= link_to 'Beneficios', benefits_path %></li>
+                <li><%= link_to 'Preguntas frecuentes', contact_form_path %></li>
                 <li><%= link_to 'Contacto', contact_form_path %></li>
               <% end %>
             </ul>

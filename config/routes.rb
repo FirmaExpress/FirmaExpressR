@@ -34,6 +34,7 @@ FirmaExpressR::Application.routes.draw do
   get "/about_us", to: "home#aboutus"
   get "/plans", to: "home#plans"
   get "/benefits", to: "home#benefits"
+  get "/terms", to: "home#terms"
   namespace :api, path: '/', constraints: { subdomain: 'api' } do
     resources :users, only: [:index, :show] do
       resources :documents, only: [:index, :show] do
