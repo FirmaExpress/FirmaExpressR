@@ -281,7 +281,7 @@ textarea {height:100px;}
 #info5 {background-image:url(img/background6.jpg);height:280px; background-size: cover; background-repeat:no-repeat;}
 #bio2 {border-bottom:1px solid #ccc;border-top:1px solid #ccc; height:350px;padding:15px 0;background-color:#FFF;width:100%;}
 #bio2 p {color:#1b1b1b;font-family: 'Lato', sans-serif; font-weight:lighter;font-size:14px;position:relative;margin-left:520px;width:400px;line-height:1.2;margin-top:10px;}
-#wrapbio img {position:absolute;margin-top:-180px;}
+#wrapbio img {position:absolute;margin-top:-210px;}
 #bio2 h3 {text-transform:uppercase;position:relative;margin-left:520px;font-size:28px;margin-top:30px;line-height:1.2;width:400px;font-family: 'Bree Serif', serif;}
 #wrapbio {width:100%;max-width:1000px;margin:5% auto;}
 
