@@ -22,6 +22,7 @@ class HomeController < ApplicationController
     message = params[:message]
     plan = Plan.find(plan_id)
     UserMailer.get_plan_email(name, email, message, plan).deliver
+    UserMailer.billing_info_email(name, email, plan).deliver
     redirect_to root_url
   end
 

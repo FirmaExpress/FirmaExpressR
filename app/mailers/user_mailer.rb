@@ -1,5 +1,13 @@
 class UserMailer < ActionMailer::Base
 
+  def billing_info_email(name, email, plan)
+    @url = 'http://firmaexpress.com/contact'
+    @name = name
+    @email = email
+    @plan = plan
+    mail(to: email, subject: "Solicitud de plan #{plan.name}")
+  end
+
   def invitation_email(user, document)
     @url = if user.id_number
       'http://firmaexpress.com/documents/' + document.id.to_s
