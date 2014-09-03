@@ -15,6 +15,16 @@ class HomeController < ApplicationController
     @plan = Plan.find(params[:plan_id])
   end
 
+  def get_plan_post
+    plan_id = params[:plan_id]
+    name = params[:name]
+    email = params[:email]
+    message = params[:message]
+    plan = Plan.find(plan_id)
+    UserMailer.get_plan_email(name, email, message, plan).deliver
+    redirect_to root_url
+  end
+
   def login
   	
   end
