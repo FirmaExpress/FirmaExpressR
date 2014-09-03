@@ -51,6 +51,8 @@ gem 'nokogiri'
 gem 'eventmachine'
 gem 'em-resolv-replace'
 
+gem 'paypal-recurring'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
