@@ -1,0 +1,17 @@
+<% content_for :title do %>
+- Obtener un plan
+<% end %>
+<% content_for :style do %>
+<% stylesheet_link_tag "master.scss" %>
+<% stylesheet_link_tag "http://fonts.googleapis.com/css?family=PT+Sans:400,700" %>
+<% stylesheet_link_tag "http://fonts.googleapis.com/css?family=Oswald" %>
+<% end %>
+<div id="container">
+	<div id="headline">
+		<h3>Obtén un plan</h3>
+	</div>
+	<div id="info">
+		<h3>Solicitud de plan <%= @plan.name %></h3>
+	</div>
+</div>
+<%= render "layouts/footer" %>

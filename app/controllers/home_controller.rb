@@ -11,6 +11,10 @@ class HomeController < ApplicationController
     
   end
 
+  def get_plan
+    @plan = Plan.find(params[:plan_id])
+  end
+
   def login
   	
   end
