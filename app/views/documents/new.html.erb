@@ -1,5 +1,5 @@
 <% content_for :title do %>
-Gestión de Documentos
+-  Documentos
 <% end %>
 <% content_for :js do %>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
@@ -18,7 +18,7 @@ Gestión de Documentos
 		<h3>Gestión de Documentos</h3>
 	</div>
 	<div id="biblioteca" ng-controller="DocumentsListController">
-		<div id="itemactive"><a href="<%= root_url %>"><h4>Subir Documento</h4></a></div>
+		<div id="itemactive"><a href="/home"><h4>Subir Documento</h4></a></div>
 		<div id="item"><a href=""><h4>Biblioteca</h4></a></div>
 		<div id="options">
 			<div id="numero2"></div>
@@ -30,7 +30,7 @@ Gestión de Documentos
 	</div>
 	<div id="optionsdocumento"></div>
 	<div id="documento">
-	<% unless current_user.user_type.name == 'Invitado' %>
+	<% unless Participant.where(user: current_user, role_id: 1).count >= current_user.subscriber.plans.last.documents %>
 		<%= form_for @document, html: { style: "margin-top: 100px" } do |f| %>
 		<div id="numero3"></div>
 			<%= f.file_field :path, required: 'required' %>
@@ -61,7 +61,7 @@ Gestión de Documentos
 		<div id="verificacion">
 			<table>
 				<tbody>
-           			<p style="text-align:center;"><h4>Revisa y firma el documento que te han compartido</h4></p>
+           			<p style="text-align:center;"><h4>Tienes <%= current_user.subscriber.plans.last.documents %> documentos en Firma Express y haz llegado al limite de tu cuenta, contrata un <%= link_to 'plan con más capacidad', plans_path %> para subír y firmar más documentos.</h4></p>
            	    </tbody>
            	</table>
         </div>   
@@ -102,6 +102,7 @@ Gestión de Documentos
     </ol>
 <%#end%>
 <script>
+/*
   $(window).load(function() {
     $('#joyRideTipContent').joyride({
       autoStart : true,
@@ -113,5 +114,5 @@ Gestión de Documentos
     modal:true,
     expose: false
     });
-  });
+  });*/
 </script>

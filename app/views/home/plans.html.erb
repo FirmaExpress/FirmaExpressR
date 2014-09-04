@@ -1,5 +1,5 @@
 <% content_for :title do %>
-Planes
+- Planes
 <% end %>
 <% content_for :style do %>
 <% stylesheet_link_tag "master.scss" %>
@@ -11,26 +11,26 @@ Planes
 		<h3>¿Qué Ofrecemos?</h3>
 	</div>
 	<div id="infoprices">
-		<h3>Básico</h3><h3>Profesional</h3><h3>Premium</h3>
+		<h3><%= image_tag "independent.png", { width: 100} %></br></br>Persona</h3><h3><%= image_tag "smallcompany.png", { width: 100} %></br></br>Small Business</h3><h3><%= image_tag "company.png", { width: 100} %></br></br>Corporate</h3>
 		<div id="pageContainer">
 			<div id="tableContainer">
 				<table class="pricingTableContent">
 					<!-- Table Content -->
 					<tbody>
 						<tr class="altRow2">
-							<td><strong>Consultar</strong></td>
-							<td><strong>Consultar</strong></td>
-							<td class="noBorder"><strong>Consultar</strong></td>
+							<td><strong>$3.000 / mes</strong></td>
+							<td><strong>$12.500 / mes</strong></td>
+							<td class="noBorder"><strong>$30.000 / mes</strong></td>
 						</tr>
 						<tr>
-							<td><strong>25 Documentos</strong></td>
-							<td><strong>50 Documentos</strong></td>
-							<td class="noBorder"><strong>100 Documentos</strong></td>
+							<td><strong>300 Documentos</strong></td>
+							<td><strong>1.500 Documentos</strong></td>
+							<td class="noBorder"><strong>4.500 Documentos</strong></td>
 						</tr>
 						<tr class="altRow">
-							<td><strong>5 Firmantes</strong> / Documento</td>
-							<td><strong>10 Firmantes</strong> / Documento</td>
-							<td class="noBorder"><strong>20 Firmantes</strong> / Documento</td>
+							<td><strong>Personal</strong></td>
+							<td><strong>Máx. 5 usuarios</strong></td>
+							<td class="noBorder"><strong>Máx. 15 usuarios</strong></td>
 						</tr>
 						<tr>
 							<td>Descarga de Documentos</td>
@@ -58,15 +58,18 @@ Planes
 							<td class="noBorder">Reportes mensuales de uso/actividad</td>
 						</tr>
 						<tr class="altRow">
-							<td><em>*Precios vigentes para el 2014.</em></td>
-							<td><em>*Precios vigentes para el 2014.</em></td>
-							<td class="noBorder"><em>*Precios vigentes para el 2014.</em></td>
+							<td class="celeste"><em>*$35.000 por comprar el plan anual.</em></td>
+							<td><em></em></td>
+							<td class="noBorder"><em></em></td>
 						</tr>
 						<tr class="signUpRow">
 							
-							<td><a href="/contact" class="signUpButton">Consultar</a></td>
-							<td><a href="/contact" class="signUpButton">Próximamente</a></td>
-							<td class="noBorder"><a href="/contact" class="signUpButton">Próximamente</a></td>
+							<td><%= link_to 'Contratar', { controller: 'home', action: 'get_plan', plan_id: 2}, class: 'signUpButton' %></td>
+							<td><%= link_to 'Contratar', { controller: 'home', action: 'get_plan', plan_id: 3}, class: 'signUpButton' %></td>
+							<td class="noBorder"><%= link_to 'Contratar', { controller: 'home', action: 'get_plan', plan_id: 5}, class: 'signUpButton' %></td>
+						</tr>
+						<tr class="altRow">
+							<td class="celeste" colspan="3"><em>*Precios vigentes para el 2014.</em></td>
 						</tr>
 					</tbody>
 				</table>

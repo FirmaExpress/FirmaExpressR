@@ -31,7 +31,8 @@ class IdDocumentSerialValidator < ActiveModel::Validator
 		page = Nokogiri::HTML(open("https://portal.sidiv.registrocivil.cl/usuarios-portal/pages/DocumentRequestStatus.xhtml?RUN=#{record.id_number}&type=CEDULA&serial=#{record.id_document_serial}"))
 		OpenSSL::SSL.const_set(:VERIFY_PEER, OpenSSL::SSL::VERIFY_PEER)
 		unless page.css('.setWidthOfSecondColumn').text == 'Vigente'
-			record.errors[:base] << "Cedula inválida, param: #{record.id_document_serial}, result: #{page.css('.setWidthOfSecondColumn').text}"
+			#record.errors[:base] << "Cedula inválida, param: #{record.id_document_serial}, result: #{page.css('.setWidthOfSecondColumn').text}"
+			record.errors[:base] << 'Cedula inválida'
 		end
 	end
 end
@@ -45,6 +46,7 @@ class User < ActiveRecord::Base
 	has_many :participants
 	has_many :documents, through: :participants
 	has_many :roles, through: :participants
+	belongs_to :subscriber
 	has_many :invite_codes
 	belongs_to :user_type
 
@@ -55,8 +57,7 @@ class User < ActiveRecord::Base
 	attr_accessor :invite_code
 	attr_accessor :id_document_serial
 	before_validation :set_user_id
-	#after_save :generate_codes, on: :create
-	#before_save :encrypt_password
+	attr_accessor :terms
 
 	validates :password,
 				presence: true,
@@ -83,7 +84,7 @@ class User < ActiveRecord::Base
 				unless: Proc.new { |a| a.id_number.blank? }
 	validates_with IdDocumentSerialValidator,
 				unless: Proc.new { |a| a.id_number.blank? }
-	#validates_with InviteCodeValidator, on: :create
+	validates_acceptance_of :terms
 
 =begin
 	def generate_codes
@@ -96,19 +97,24 @@ class User < ActiveRecord::Base
 =end
 
 	def set_user_id
+
 		self.user_type_id = 2 if self.user_type_id.blank?
-		
-		rut, dv = id_number.split('-')
-		rut = rut.delete "."
-		sii_page = Nokogiri::HTML(open("https://zeus.sii.cl/cvc_cgi/stc/getstc?RUT=#{rut}&DV=#{dv}&PRG=STC&OPC=NOR"))
-		begin
-			full_name = sii_page.css('html body center')[1].css('table')[0].css('tr')[0].css('td')[1].css('font').text.strip.titleize
-			self.first_name = full_name.match(/^([^ ]*\ [^ ]*)\ (.*)$/)[1]
-			self.last_name = full_name.match(/^([^ ]*\ [^ ]*)\ (.*)$/)[2]
-		rescue Exception => e
-			self.first_name = ''
-			self.last_name = ''
+		if user_type_id != 4
+			rut, dv = id_number.split("-")
+			rut = rut.delete "."
+			sii_page = Nokogiri::HTML(open("https://zeus.sii.cl/cvc_cgi/stc/getstc?RUT=#{rut}&DV=#{dv}&PRG=STC&OPC=NOR"))
+			begin
+				full_name = sii_page.css('html body center')[1].css('table')[0].css('tr')[0].css('td')[1].css('font').text.strip.titleize
+				self.first_name = full_name.match(/^([^ ]*\ [^ ]*)\ (.*)$/)[1]
+				self.last_name = full_name.match(/^([^ ]*\ [^ ]*)\ (.*)$/)[2]
+				rescue Exception => e
+					self.first_name = ''
+					self.last_name = ''
+			end
 		end
+
+			self.subscriber = Subscriber.create
+			self.subscriber.plans << Plan.first
 	end
 
 	def self.authenticate(email, password)

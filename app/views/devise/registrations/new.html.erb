@@ -6,6 +6,7 @@ Registro
 		<h3>Registrate con nosotros</h3>
 	</div>
 	<div id="info">
+		<div class="well">Con el plan gratis puedes subir y firmar hasta 10 documentos libre de cargo.</div>
 		<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 			<%= devise_error_messages! %>
 			
@@ -16,7 +17,7 @@ Registro
 			<% f.label :last_name, 'Apellidos' %>
 			<% f.text_field :last_name %>
 			<%= f.label :id_number, 'RUT' %>
-			<%= f.text_field :id_number, autofocus: true %>
+			<%= f.text_field :id_number, autofocus: true, :placeholder => "Ejemplo: XXXXXXXX-X" %>
 			<%= f.label :id_document_serial, 'Numero de serie de cedula' %>
 			<span class="field-tip">
 				<%= f.text_field :id_document_serial, 'data-title' => 'Se encuentra impreso en su cedula de identidad. Se solicita para evitar la suplantación de identidad.' %>
@@ -26,10 +27,8 @@ Registro
 			<%= f.email_field :email %>
 			<%= f.label :password, 'Contraseña' %>
 			<%= f.password_field :password, autocomplete: "off" %>
-			<% f.label :password_confirmation, 'Confirmar contraseña' %>
-			<% f.password_field :password_confirmation, autocomplete: "off" %>
-
-
+			Acepto las <%= link_to 'Condiciones de servicio', terms_path, target: '_blank', class: 'negro' %>
+			<%= f.check_box :terms %>
 
 		<%= f.submit "Registrarme", {id: 'submit'} %>
 		<% end %>

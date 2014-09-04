@@ -48,6 +48,9 @@ gem 'prawn'
 #gem 'openssl'
 gem 'nokogiri'
 
+gem 'eventmachine'
+gem 'em-resolv-replace'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

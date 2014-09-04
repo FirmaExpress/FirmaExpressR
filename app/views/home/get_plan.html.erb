@@ -1,0 +1,29 @@
+<% content_for :title do %>
+- Obtener un plan
+<% end %>
+<% content_for :style do %>
+<% stylesheet_link_tag "master.scss" %>
+<% stylesheet_link_tag "http://fonts.googleapis.com/css?family=PT+Sans:400,700" %>
+<% stylesheet_link_tag "http://fonts.googleapis.com/css?family=Oswald" %>
+<% end %>
+<div id="container">
+	<div id="headline">
+		<h3>Obtén un plan</h3>
+	</div>
+	<div id="info">
+		<h3>Solicitud de plan <%= @plan.name %></h3>
+		<%= form_tag({:controller => "home", :action => "get_plan_post" }, :method => "post") do %>
+	    	<%= label_tag "name", "Nombre" %>
+	   		<%= text_field_tag "name", "", :size => 5, :maxlenght => 5, :placeholder => "Nombre", :required => "required" %>
+
+	   		<%= label_tag "email", "Mail" %>
+	   		<%= text_field_tag "email", "", :size => 5, :maxlenght => 5, :placeholder => "Correo electrónico", :required => "required" %>
+
+	   		<%= hidden_field_tag "message", "Solicita plan #{@plan.name} a $#{@plan.price}." %>
+	   		<%= hidden_field_tag "plan_id", "#{@plan.id}" %>
+	   <br />
+	   	<%= submit_tag "Enviar", {id: 'submit'} %>
+		<% end %>
+	</div>
+</div>
+<%= render "layouts/footer" %>

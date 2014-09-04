@@ -1,3 +1,6 @@
+<% content_for :title do %>
+	- Perfil
+<% end %>
 <% content_for :js do %>
 <%= javascript_include_tag "angular.min.js" %>
 	<script type="text/javascript">
@@ -36,11 +39,11 @@
 <h3>Configuración del Perfil</h3>
 </div>
 <div id="biblioteca">
-<div id="itemactive"><a href="nuevodocumento.html"><h4>Mis Datos</h4></a></div>
-<div id="item"><a href="nuevodocumento.html"><h4>Estadísticas</h4></a></div>
+<div id="itemactive"><a href="#"><h4>Mis Datos</h4></a></div>
+<!--<div id="item"><a href="nuevodocumento.html"><h4>Estadísticas</h4></a></div>
 <div id="item"><a href="nuevodocumento.html"><h4>Preguntas Frecuentes</h4></a></div>
 <div id="item"><a href="nuevodocumento.html"><h4>Condiciones Legales</h4></a></div>
-<div id="item"><a href="nuevodocumento.html"><h4>Seguridad y Privacidad</h4></a></div>
+<div id="item"><a href="nuevodocumento.html"><h4>Seguridad y Privacidad</h4></a></div>-->
 </div>
 <div id="optionsdocumento"></div>
 <div id="perfil" ng-controller="ProfileController">
@@ -56,9 +59,7 @@
 	    </span>
 	    <span class="hiddable">
 	        <input type="text" ng-model="user.first_name"/>
-	    </span>
-	    <%= image_tag("iconoeditar.png", class: "hiddable show", size: "36x30", :align=> "right")%>
-	    <%= image_tag("iconoguardar.png", class: "hiddable", size: "36x30", "ng-click" => "updateprofile('first_name', user.first_name)", :align=> "right") %>    
+	    </span>    
     </p><br>
     <!--fin-->
     <p id="lastname">
@@ -68,8 +69,6 @@
 	    <span class="hiddable">
 	        <input type="text" ng-model="user.last_name"/>
 	    </span>
-	    <%= image_tag("iconoeditar.png", class: "hiddable show", size: "36x30", :align=> "right") %>
-	    <%= image_tag("iconoguardar.png", class: "hiddable", size: "36x30", "ng-click" => "updateprofile('last_name', user.last_name)", :align=> "right") %> 
 	</p><br>
     <!--fin-->
     <p id="email">
@@ -79,23 +78,20 @@
 	    <span class="hiddable">
 	        <input type="text" ng-model="user.email"/>
 	    </span>
-		<%= image_tag("iconoeditar.png", class: "hiddable show", size: "36x30", :align=> "right") %>
-	    <%= image_tag("iconoguardar.png", class: "hiddable", size: "36x30", "ng-click" => "updateprofile('email', user.email)", :align=> "right") %> <br>
+		<%= image_tag("icono_editar.png", class: "hiddable show", :align=> "right", :alt=>"Modificar") %>
+	    <%= image_tag("icono_guardar.png", class: "hiddable", "ng-click" => "updateprofile('email', user.email)", :align=> "right") %> <br>
+	</p><br>
+	<p id="plan">
+		<span>Plan: <%= current_user.subscriber.plans.last.name %></span>
 	</p>
 	<br>
-	<h5>Firmas</h5>
-	<p>Nº de Firmas: 100</p>
-	<br>
 	<h5>Documentos</h5>
-	<p>Nº de Documentos: 100</p>
+	<p>Máximo: <%= current_user.subscriber.plans.last.documents %></p>
+	<p>Nº de Documentos: <%= Participant.where(user: current_user, role_id: 1).count %></p>
 	<br>
 	<h5>Datos de Usuario</h5>
-	<p>Usuario desde: 01/01/2014</p>
+	<p>Usuario desde: <%= current_user.created_at.to_formatted_s(:db) %></p>
 	<br>
-	<h5>Otros Datos</h5>
-	<p>Dato: Valor</p>
-	<p>Dato: Valor</p>
-	<p>Dato: Valor</p>
 </div>
 <div id="perfilestadisticas">
 <h5>Estadísticas de Actividad</h5>

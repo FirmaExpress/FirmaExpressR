@@ -1,5 +1,13 @@
 class UserMailer < ActionMailer::Base
 
+  def billing_info_email(name, email, plan)
+    @url = 'http://firmaexpress.com/contact'
+    @name = name
+    @email = email
+    @plan = plan
+    mail(to: email, subject: "Solicitud de plan #{plan.name}")
+  end
+
   def invitation_email(user, document)
     @url = if user.id_number
       'http://firmaexpress.com/documents/' + document.id.to_s
@@ -16,7 +24,15 @@ class UserMailer < ActionMailer::Base
   	@name = name
   	@email = email
   	@message = message
-  	mail(to: "firmaexpress2014@gmail.com, claudevandort@gmail.com, patricioalfredo18@gmail.com, danielveram@gmail.com", subject: 'Consulta sobre firmaexpress')
+  	mail(to: "contacto@firmaexpress.com", subject: 'Consulta sobre firmaexpress')
+  end
+
+  def get_plan_email (name, email, message, plan)
+    @url = 'http://firmaexpress.com/contact'
+    @name = name
+    @email = email
+    @message = message
+    mail(to: "contacto@firmaexpress.com", subject: "Solicitud de plan #{plan.name}")
   end
 
   def free_user_invitation_email(user, invitee_email, invitation)
