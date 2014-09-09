@@ -74,6 +74,7 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
+    paypal-recurring (1.1.0)
     pdf-core (0.2.5)
     pg (0.17.1)
     polyglot (0.3.4)
@@ -145,6 +146,7 @@ DEPENDENCIES
   jquery-rails
   nokogiri
   paperclip (~> 4.1)
+  paypal-recurring
   pg
   prawn
   rails (= 4.0.4)

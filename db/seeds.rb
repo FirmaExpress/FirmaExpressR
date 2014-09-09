@@ -1,19 +1,19 @@
-Role.all.each(&:destroy)
-UserType.all.each(&:destroy)
-User.all.each(&:destroy)
-Participant.all.each(&:destroy)
-Document.all.each(&:destroy)
-SignSecurityLevel.all.each(&:destroy)
-SignSecurityMethod.all.each(&:destroy)
-SignSecurityLevelMethod.all.each(&:destroy)
-UsedSignSecurityMethod.all.each(&:destroy)
-Sign.all.each(&:destroy)
-OrganizationUser.all.each(&:destroy)
-Organization.all.each(&:destroy)
-Subscriber.all.each(&:destroy)
-Subscription.all.each(&:destroy)
-Plan.all.each(&:destroy)
-Invoice.all.each(&:destroy)
+Role.destroy_all; Role.reset_pk_sequence
+UserType.destroy_all; UserType.reset_pk_sequence
+User.destroy_all; User.reset_pk_sequence
+Participant.destroy_all; Participant.reset_pk_sequence
+Document.destroy_all; Document.reset_pk_sequence
+SignSecurityLevel.destroy_all; SignSecurityLevel.reset_pk_sequence
+SignSecurityMethod.destroy_all; SignSecurityMethod.reset_pk_sequence
+SignSecurityLevelMethod.destroy_all; SignSecurityLevelMethod.reset_pk_sequence
+UsedSignSecurityMethod.destroy_all; UsedSignSecurityMethod.reset_pk_sequence
+Sign.destroy_all; Sign.reset_pk_sequence
+OrganizationUser.destroy_all; OrganizationUser.reset_pk_sequence
+Organization.destroy_all; Organization.reset_pk_sequence
+Subscriber.destroy_all; Subscriber.reset_pk_sequence
+Subscription.destroy_all; Subscription.reset_pk_sequence
+Plan.destroy_all; Plan.reset_pk_sequence
+Invoice.destroy_all; Invoice.reset_pk_sequence
 
 Role.create([{ name: 'Dueño' }, { name: 'Invitado' }])
 
@@ -29,12 +29,12 @@ nombre = SignSecurityMethod.create name: 'Nombre'
 SignSecurityLevel.create level: 1, name: 'Nivel 1', description: 'Verificación simple', sign_security_methods: [check]
 SignSecurityLevel.create level: 2, name: 'Nivel 2', description: 'V. simple y nombre', sign_security_methods: [check, nombre]
 
-Plan.create name: 'Gratis', documents: 10, templates: false, statistics: false, admin_panel: false, api: false, price: 0
-Plan.create name: 'Persona', documents: 300, templates: true, statistics: true, admin_panel: false, api: false, price: 3000
-Plan.create name: 'Small Bussines', documents: 1500, templates: true, statistics: true, admin_panel: true, api: false, price: 12500
-Plan.create name: 'IT Small Bussines', documents: 1500, templates: true, statistics: true, admin_panel: true, api: true, price: 22500
-Plan.create name: 'Corporate', documents: 4500, templates: true, statistics: true, admin_panel: true, api: false, price: 30000
-Plan.create name: 'IT Corporate', documents: 4500, templates: true, statistics: true, admin_panel: true, api: true, price: 40000
+Plan.create name: 'Gratis', documents: 10, templates: false, statistics: false, admin_panel: false, api: false, price: 0, price_usd: 0
+Plan.create name: 'Persona', documents: 300, templates: true, statistics: true, admin_panel: false, api: false, price: 3000, price_usd: 6
+Plan.create name: 'Small Bussines', documents: 1500, templates: true, statistics: true, admin_panel: true, api: false, price: 12500, price_usd: 25
+Plan.create name: 'IT Small Bussines', documents: 1500, templates: true, statistics: true, admin_panel: true, api: true, price: 22500, price_usd: 45
+Plan.create name: 'Corporate', documents: 4500, templates: true, statistics: true, admin_panel: true, api: false, price: 30000, price_usd: 60
+Plan.create name: 'IT Corporate', documents: 4500, templates: true, statistics: true, admin_panel: true, api: true, price: 40000, price_usd: 80
 
 #claudio = User.create id_number: '17026575-0', id_document_serial: '100692111', email: 'claudevandort@gmail.com', password: '12345678', user_type: admin
 #claudio.subscriber = Subscriber.create

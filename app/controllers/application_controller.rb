@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 	protected
 
 	def configure_permitted_parameters
-		devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:avatar, :first_name, :last_name, :id_number, :email, :password, :password_confirmation, :invite_code, :id_document_serial) }
+		devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:avatar, :first_name, :last_name, :id_number, :email, :password, :password_confirmation, :invite_code, :id_document_serial, :plan_id, :paypal_customer_token, :paypal_payment_token) }
 	end
 
 	#helper_method :current_user
