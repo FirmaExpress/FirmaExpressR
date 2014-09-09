@@ -58,6 +58,8 @@ class User < ActiveRecord::Base
 	attr_accessor :id_document_serial
 	attr_accessor :terms
 	attr_accessor :plan_id
+	attr_accessor :paypal_customer_token
+	attr_accessor :paypal_payment_token
 	before_validation :set_user_id
 
 	validates :password,
@@ -112,7 +114,7 @@ class User < ActiveRecord::Base
 				self.last_name = ''
 			end
 		end
-		if self.plan_id.present?
+		if plan_id.present?
 			subscribe(plan_id)
 		else
 			subscribe(1)
@@ -122,6 +124,14 @@ class User < ActiveRecord::Base
 	def subscribe(plan_id)
 		self.subscriber = Subscriber.create if self.subscriber.nil?
 		self.subscriber.plans << Plan.find(plan_id) if plan_id == 1
+		if plan_id != 1 and paypal_customer_token.present?
+			subscription = Subscription.new(
+				paypal_customer_token: paypal_customer_token, 
+				paypal_payment_token: paypal_payment_token)
+			subscription.plan = Plan.find(plan_id)
+			subscription.save_with_payment
+			self.subscriber.subscriptions << subscription
+		end
 	end
 
 	def self.authenticate(email, password)

@@ -1,5 +1,5 @@
 FirmaExpressR::Application.routes.draw do
-  devise_for :users
+  devise_for :users#, controllers: { registrations:'devise/custom/registrations' }
   devise_scope :user do 
     match '/sessions/user', to: 'devise/sessions#create', via: :post
   end

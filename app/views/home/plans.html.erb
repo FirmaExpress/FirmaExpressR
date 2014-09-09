@@ -64,9 +64,9 @@
 						</tr>
 						<tr class="signUpRow">
 							
-							<td><%= link_to 'Contratar', new_subscription_path(plan_id: 2), class: 'signUpButton' %></td>
-							<td><%= link_to 'Contratar', new_subscription_path(plan_id: 3), class: 'signUpButton' %></td>
-							<td class="noBorder"><%= link_to 'Contratar', new_subscription_path(plan_id: 5), class: 'signUpButton' %></td>
+							<td><%= link_to 'Contratar', paypal_checkout_path(plan_id: 2), class: 'signUpButton' %></td>
+							<td><%= link_to 'Contratar', paypal_checkout_path(plan_id: 3), class: 'signUpButton' %></td>
+							<td class="noBorder"><%= link_to 'Contratar', paypal_checkout_path(plan_id: 5), class: 'signUpButton' %></td>
 						</tr>
 						<tr class="altRow">
 							<td class="celeste" colspan="3"><em>*Precios vigentes para el 2014.</em></td>

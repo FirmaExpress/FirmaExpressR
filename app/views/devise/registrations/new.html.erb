@@ -27,6 +27,11 @@ Registro
 			<%= f.email_field :email %>
 			<%= f.label :password, 'Contraseña' %>
 			<%= f.password_field :password, autocomplete: "off" %>
+			<% if params[:PayerID] %>
+			<%= f.hidden_field :plan_id, value: params[:plan_id] %>
+			<%= f.hidden_field :paypal_customer_token, value: params[:PayerID] %>
+			<%= f.hidden_field :paypal_payment_token, value: params[:token] %>
+			<% end %>
 			Acepto las <%= link_to 'Condiciones de servicio', terms_path, target: '_blank', class: 'negro' %>
 			<%= f.check_box :terms %>
 
