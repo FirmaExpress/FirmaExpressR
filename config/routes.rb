@@ -29,6 +29,8 @@ FirmaExpressR::Application.routes.draw do
   resources :sessions
   resources :documents
   resources :users
+  resources :subscriptions
+  get 'paypal/checkout', to: 'subscriptions#paypal_checkout'
   # You can have the root of your site routed with "root"
   #get "/login", to: "home#login" 
   get "/about_us", to: "home#aboutus"
