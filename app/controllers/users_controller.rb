@@ -96,7 +96,7 @@ class UsersController < ApplicationController
 		document_id = params[:d]
 		invitation_type = params[:t]
 		users = []
-		emails.split(',').each do |email|
+		emails.split(",").each do |email|
 			if invitation_type == 'participant'
 				user = User.where('"email" = \'' + email + '\'').first
 				unless user

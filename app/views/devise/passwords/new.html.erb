@@ -5,17 +5,16 @@ Login
 	<div id="headline">
 		<h3>¿Olvidaste tu password?</h3>
 	</div>
-	<div id="info">
+	<div id="acceso">
+	<p>Ingresa tu dirección de correo electrónico y te enviaremos un mail para realizar el cambio de tu password:</p></br>
 		<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
 	  		<%= devise_error_messages! %>
-			<%= f.label :Email %>
 	  		<%= f.email_field :email, autofocus: true %>
-			<%= f.submit "Send me reset password ", {id: 'submit'}%>
+			<%= f.submit "Restablecer contraseña ", {id: 'submit'}%>
 			<% # Ruta al controlador de devise para cambiar el redireccionamiento al log-in :  .rvm/gems/ruby-2.1.0/gems/devise-3.2.4/app/controllers/devise %>
 		<% end %>
 
 		<%= render "devise/shared/links" %>
-		<p class="datosextra">Ingresa tu Dirección de Correo electronico y te enviaremos un Email para realizar el cambio de tu Password.<br>
 	</div>
 </div>
 <%= render "layouts/footer" %>

@@ -200,51 +200,8 @@ font-weight: lighter!important;}
 #documento2 {position:relative;float:left;width:65%;display:block;clear:both;height:450px;border:1px solid #999;margin-left:300px;background-color:#707070; overflow:scroll;}
 #optionsdocumento {width:65%;position:relative; display:block; clear:both; margin-left:300px;float:left;margin-top:15px;}
 #optionsdocumento ul {width:100%;position:relative;display:block;margin:0 auto;}
-#optionsdocumento li {
-width:70px;
-position:relative;
-margin-left:10px;
-display:block;
-color:#FFF;
-font-family: 'Lato', sans-serif;
-float:right;
-height: 24px;
-padding:0 5px 3px 5px;
-vertical-align: middle;
-cursor: pointer;
-font-size: 11px;
-font-weight: bold;
-text-align: center;
-white-space: nowrap;
-line-height: 27px;
-border-radius: 2px;
-box-shadow: none;
-background-color: #3399ff;
-border: 1px solid #3079ED;
-margin-bottom:8px;
-}
-#btn-blue {
-width:70px;
-position:relative;
-margin-left:10px;
-display:inline-block;
-color:#FFF;
-font-family: 'Lato', sans-serif;
-height: 24px;
-padding:0 5px 3px 5px;
-vertical-align: middle;
-cursor: pointer;
-font-size: 11px;
-font-weight: bold;
-text-align: center;
-white-space: nowrap;
-line-height: 27px;
-border-radius: 2px;
-box-shadow: none;
-background-color: #3399ff;
-border: 1px solid #3079ED;
-margin-bottom:8px;
-}
+#optionsdocumento li {width:70px;position:relative;margin-left:10px;display:block;color:#FFF;font-family: 'Lato', sans-serif;float:right;height: 24px;padding:0 5px 3px 5px;vertical-align: middle;cursor: pointer;font-size: 11px;font-weight: bold;text-align: center;white-space: nowrap;line-height: 27px;border-radius: 2px;box-shadow: none;background-color: #3399ff;border: 1px solid #3079ED;margin-bottom:8px;}
+#btn-blue {width:70px;position:relative;margin-left:10px;display:inline-block;color:#FFF;font-family: 'Lato', sans-serif;height: 24px;padding:0 5px 3px 5px;vertical-align: middle;cursor: pointer;font-size: 11px;font-weight: bold;text-align: center;white-space: nowrap;line-height: 27px;border-radius: 2px;box-shadow: none;background-color: #3399ff;border: 1px solid #3079ED;margin-bottom:8px;}
 /* --------------Perfil-------------- */
 
 #perfil {position:relative;float:left;width:62%;display:block;clear:both;height:450px;border:1px solid #999;margin-top:45px;margin-left:370px;min-width:600px;font-family: 'Lato', sans-serif;color: #1b1b1b;font-weight:lighter;line-height:1.5;overflow:hidden;}
@@ -281,7 +238,7 @@ textarea {height:100px;}
 #info5 {background-image:url(img/background6.jpg);height:280px; background-size: cover; background-repeat:no-repeat;}
 #bio2 {border-bottom:1px solid #ccc;border-top:1px solid #ccc; height:350px;padding:15px 0;background-color:#FFF;width:100%;}
 #bio2 p {color:#1b1b1b;font-family: 'Lato', sans-serif; font-weight:lighter;font-size:14px;position:relative;margin-left:520px;width:400px;line-height:1.2;margin-top:10px;}
-#wrapbio img {position:absolute;margin-top:-180px;}
+#wrapbio img {position:absolute;margin-top:-210px;}
 #bio2 h3 {text-transform:uppercase;position:relative;margin-left:520px;font-size:28px;margin-top:30px;line-height:1.2;width:400px;font-family: 'Bree Serif', serif;}
 #wrapbio {width:100%;max-width:1000px;margin:5% auto;}
 
@@ -300,57 +257,13 @@ textarea {height:100px;}
 #box-table-a tr:hover td {background: none repeat scroll 0% 0% #D0DAFD;color: #339;}
 #invitaciones {width:100%;text-align:right;position:relative;display:block;height:30px;padding:5px 0;}
 #invitaciones .email {width:420px;height:19px;float:left;border:1px solid #C9C9C9;padding:5px 10px;}
-#invitar {width:70px;
-position:relative;
-margin-top:5px;
-margin-left:5px;
-display:block;
-color:#FFF;
-font-family: 'Lato', sans-serif;
-float:right;
-height: 25px;
-padding:0 5px 3px 5px;
-vertical-align: middle;
-cursor: pointer;
-font-size: 11px;
-font-weight: bold;
-text-align: center;
-white-space: nowrap;
-line-height: 27px;
-border-radius: 2px;
-box-shadow: none;
-background-color: #3399ff;
-border: 1px solid #3079ED;}
-#continuar {width:70px;
-position:relative;
-margin: 5px auto 0 auto;
-display:block;
-color:#FFF;
-font-family: 'Lato', sans-serif;
-height: 25px;
-padding:0 5px 3px 5px;
-vertical-align: middle;
-cursor: pointer;
-font-size: 11px;
-font-weight: bold;
-text-align: center;
-white-space: nowrap;
-line-height: 27px;
-border-radius: 2px;
-box-shadow: none;
-background-color: #3399ff;
-border: 1px solid #3079ED;}
+#invitar {width:70px;position:relative;margin-top:5px;margin-left:5px;display:block;color:#FFF;font-family: 'Lato', sans-serif;float:right;height: 25px;padding:0 5px 3px 5px;vertical-align: middle;cursor: pointer;font-size: 11px;font-weight: bold;text-align: center;white-space: nowrap;line-height: 27px;border-radius: 2px;box-shadow: none;background-color: #3399ff;border: 1px solid #3079ED;}
+#continuar {width:70px;position:relative;margin: 5px auto 0 auto;display:block;color:#FFF;font-family: 'Lato', sans-serif;height: 25px;padding:0 5px 3px 5px;vertical-align: middle;cursor: pointer;font-size: 11px;font-weight: bold;text-align: center;white-space: nowrap;line-height: 27px;border-radius: 2px;box-shadow: none;background-color: #3399ff;border: 1px solid #3079ED;}
 
 .negro{	color: #000; }
 
-.hiddable {
-    display: none;
-}
-.show {
-    display: inline-block;
-}
-
-
+.hiddable {display: none;}
+.show {display: inline-block;}
 
 
 /* --------------Mailing-------------- */
@@ -363,27 +276,11 @@ border: 1px solid #3079ED;}
 #mailcontainer p {color:#333;padding:0 15px;font-family: 'Lato', sans-serif;}
 #mailingfooter {max-width:500px;min-width:400px;margin:0 auto;}
 #mailingfooter p {color:#333;text-align:right;font-size:10px;color:#175892;font-family: 'Lato', sans-serif;}
-#mailcontainer a.signUpButton {
-    color: #FFF;
-    font-weight: bold;
-    padding: 8px 20px;
-    display: inline-block;
-    background-color: #39F;
-    border: 1px solid #39F;
-	font-family: 'Lato', sans-serif;
-	margin-top:25px;
-}
-#mailcontainer a.signUpButton:hover {
-    color: #175892;
-    border: 1px solid #175892;
-    background-color: #CCC;
-}
+#mailcontainer a.signUpButton {color: #FFF;font-weight: bold;padding: 8px 20px;display: inline-block;background-color: #39F;border: 1px solid #39F;font-family: 'Lato', sans-serif;margin-top:25px;}
+#mailcontainer a.signUpButton:hover {color: #175892;border: 1px solid #175892;background-color: #CCC;}
 
 /* Hover tooltips */
-.field-tip {
-    position:relative;
-    cursor:help;
-}
+.field-tip {position:relative;cursor:help;}
 .field-tip .tip-content {
 	font-size: 1.2em;
     position:absolute;
@@ -417,7 +314,4 @@ border: 1px solid #3079ED;}
     border:8px solid transparent;
     border-right-color:#333;
 }
-.field-tip:hover .tip-content {
-    right:-20px;
-    opacity:1;
-}
+.field-tip:hover .tip-content {right:-20px;opacity:1;}
