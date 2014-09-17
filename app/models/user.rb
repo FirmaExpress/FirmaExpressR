@@ -24,7 +24,7 @@ class IdNumberValidator < ActiveModel::Validator
 	end
   end
 end
-
+=begin
 class IdDocumentSerialValidator < ActiveModel::Validator
 	def validate(record)
 		OpenSSL::SSL.const_set(:VERIFY_PEER, OpenSSL::SSL::VERIFY_NONE)
@@ -36,6 +36,8 @@ class IdDocumentSerialValidator < ActiveModel::Validator
 		end
 	end
 end
+
+=end
 
 class User < ActiveRecord::Base
 	# Include default devise modules. Others available are:
@@ -55,7 +57,7 @@ class User < ActiveRecord::Base
 
 	#attr_accessor :password, :password_confirmation, :current_password
 	attr_accessor :invite_code
-	attr_accessor :id_document_serial
+	#attr_accessor :id_document_serial
 	attr_accessor :terms
 	attr_accessor :plan_id
 	attr_accessor :paypal_customer_token
@@ -84,8 +86,8 @@ class User < ActiveRecord::Base
 				uniqueness: true,
 				unless: Proc.new { |a| a.user_type_id == 4 }
 	validates_with IdNumberValidator,
-				unless: Proc.new { |a| a.user_type_id == 4 }
-	validates_with IdDocumentSerialValidator,
+				#unless: Proc.new { |a| a.user_type_id == 4 }
+	#validates_with IdDocumentSerialValidator,
 				unless: Proc.new { |a| a.user_type_id == 4 }
 	validates_acceptance_of :terms
 

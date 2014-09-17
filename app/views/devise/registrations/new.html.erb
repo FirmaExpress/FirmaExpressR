@@ -18,11 +18,6 @@ Registro
 			<% f.text_field :last_name %>
 			<%= f.label :id_number, 'RUT' %>
 			<%= f.text_field :id_number, autofocus: true, :placeholder => "Ejemplo: XXXXXXXX-X" %>
-			<%= f.label :id_document_serial, 'Numero de serie de cedula' %>
-			<span class="field-tip">
-				<%= f.text_field :id_document_serial, 'data-title' => 'Se encuentra impreso en su cedula de identidad. Se solicita para evitar la suplantación de identidad.' %>
-				<span class="tip-content">Se encuentra impreso en su cedula de identidad. <br /><br />Se solicita para evitar la suplantación de identidad.</span>
-			</span>
 			<%= f.label :email, 'E-mail' %>
 			<%= f.email_field :email %>
 			<%= f.label :password, 'Contraseña' %>
