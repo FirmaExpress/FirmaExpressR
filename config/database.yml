@@ -55,9 +55,9 @@ production:
 #
 development:
   adapter: postgresql
-  host: firma-express-development.co3dkfqvg7k1.us-east-1.rds.amazonaws.com
+  host: localhost
   encoding: unicode
-  database: firma_express_development
+  database: firmaexpress_development
   pool: 5
-  username: firma_express
+  username: firmaexpress
   password: F1rm43xpr3ss
