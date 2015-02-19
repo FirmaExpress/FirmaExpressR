@@ -1,0 +1,17 @@
+<% content_for :title do %>
+- Subscribirse a un plan
+<% end %>
+<% content_for :style do %>
+<% stylesheet_link_tag "master.scss" %>
+<% stylesheet_link_tag "http://fonts.googleapis.com/css?family=PT+Sans:400,700" %>
+<% stylesheet_link_tag "http://fonts.googleapis.com/css?family=Oswald" %>
+<% end %>
+<div id="container">
+	<div id="headline">
+		<h3>Tu subscripción</h3>
+	</div>
+	<div id="info">
+		<p>Te haz sibscrito al plan <strong><%= @subscription.plan.name %></strong> que incluye <strong><%= @subscription.plan.documents %> documentos</strong> por solo <strong><%= number_to_currency @subscription.plan.price_usd %></strong> al mes!</p>
+	</div>
+</div>
+<%= render "layouts/footer" %>

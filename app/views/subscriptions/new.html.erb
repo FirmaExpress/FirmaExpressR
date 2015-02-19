@@ -1,0 +1,28 @@
+<% content_for :title do %>
+- Subscribirse a un plan
+<% end %>
+<% content_for :style do %>
+<% stylesheet_link_tag "master.scss" %>
+<% stylesheet_link_tag "http://fonts.googleapis.com/css?family=PT+Sans:400,700" %>
+<% stylesheet_link_tag "http://fonts.googleapis.com/css?family=Oswald" %>
+<% end %>
+<div id="container">
+	<div id="headline">
+		<h3>Subscripción a plan <%= @plan.name %></h3>
+	</div>
+	<div id="info">
+		<% if @subscription.payment_provided? %>
+			<%= form_for @subscription do |f| %>
+				<%= f.text_field :email %>
+				<%= f.hidden_field :plan_id %>
+				<%= f.hidden_field :paypal_customer_token %>
+				<%= f.hidden_field :paypal_payment_token %>
+				<%= f.submit 'Subscribirse', { id: 'submit' } %>
+			<% end %>
+			El pago ha sido efectuado
+		<% else %>
+			<%= link_to image_tag('https://paypal.com/en_US/i/btn/btn_xpressCheckout.gif'), paypal_checkout_path(plan_id: @plan.id) %>
+		<% end %>
+	</div>
+</div>
+<%= render "layouts/footer" %>

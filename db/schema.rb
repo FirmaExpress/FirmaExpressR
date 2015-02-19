@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140830173126) do
+ActiveRecord::Schema.define(version: 20140905221217) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 20140830173126) do
     t.integer  "price"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "price_usd"
   end
 
   create_table "roles", force: true do |t|
@@ -128,6 +129,8 @@ ActiveRecord::Schema.define(version: 20140830173126) do
     t.datetime "updated_at"
     t.integer  "plan_id"
     t.integer  "subscriber_id"
+    t.string   "paypal_customer_token"
+    t.string   "paypal_recurring_profile_token"
   end
 
   add_index "subscriptions", ["plan_id"], name: "index_subscriptions_on_plan_id", using: :btree

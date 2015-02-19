@@ -24,7 +24,7 @@ class IdNumberValidator < ActiveModel::Validator
 	end
   end
 end
-
+=begin
 class IdDocumentSerialValidator < ActiveModel::Validator
 	def validate(record)
 		OpenSSL::SSL.const_set(:VERIFY_PEER, OpenSSL::SSL::VERIFY_NONE)
@@ -36,6 +36,8 @@ class IdDocumentSerialValidator < ActiveModel::Validator
 		end
 	end
 end
+
+=end
 
 class User < ActiveRecord::Base
 	# Include default devise modules. Others available are:
@@ -55,14 +57,17 @@ class User < ActiveRecord::Base
 
 	#attr_accessor :password, :password_confirmation, :current_password
 	attr_accessor :invite_code
-	attr_accessor :id_document_serial
-	before_validation :set_user_id
+	#attr_accessor :id_document_serial
 	attr_accessor :terms
+	attr_accessor :plan_id
+	attr_accessor :paypal_customer_token
+	attr_accessor :paypal_payment_token
+	before_validation :set_user_id
 
 	validates :password,
 				presence: true,
-				confirmation: true, 
-				on: :create
+				on: :create,
+				unless: Proc.new { |a| a.user_type_id == 4 }
 
 	validates :email,
 				presence: true,
@@ -70,20 +75,20 @@ class User < ActiveRecord::Base
 				format: { with: /[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+\.[a-zA-Z]{2,4}/, message: "Formato de correo no es válido" }
 	validates :first_name,
 				presence: true,
-				unless: Proc.new { |a| a.id_number.blank? }
+				unless: Proc.new { |a| a.user_type_id == 4 }
 	validates :last_name,
 				presence: true,
-				unless: Proc.new { |a| a.id_number.blank? }
+				unless: Proc.new { |a| a.user_type_id == 4 }
 	#validates :avatar,
 	#			presence: true
 	validates :id_number,
 				presence: true,
 				uniqueness: true,
-				unless: Proc.new { |a| a.id_number.blank? }
+				unless: Proc.new { |a| a.user_type_id == 4 }
 	validates_with IdNumberValidator,
-				unless: Proc.new { |a| a.id_number.blank? }
-	validates_with IdDocumentSerialValidator,
-				unless: Proc.new { |a| a.id_number.blank? }
+				#unless: Proc.new { |a| a.user_type_id == 4 }
+	#validates_with IdDocumentSerialValidator,
+				unless: Proc.new { |a| a.user_type_id == 4 }
 	validates_acceptance_of :terms
 
 =begin
@@ -99,22 +104,37 @@ class User < ActiveRecord::Base
 	def set_user_id
 
 		self.user_type_id = 2 if self.user_type_id.blank?
-		if user_type_id != 4
-			rut, dv = id_number.split("-")
+		unless self.user_type_id == 4
+			rut, dv = id_number.split('-')
 			rut = rut.delete "."
 			sii_page = Nokogiri::HTML(open("https://zeus.sii.cl/cvc_cgi/stc/getstc?RUT=#{rut}&DV=#{dv}&PRG=STC&OPC=NOR"))
 			begin
 				full_name = sii_page.css('html body center')[1].css('table')[0].css('tr')[0].css('td')[1].css('font').text.strip.titleize
 				self.first_name = full_name.match(/^([^ ]*\ [^ ]*)\ (.*)$/)[1]
 				self.last_name = full_name.match(/^([^ ]*\ [^ ]*)\ (.*)$/)[2]
-				rescue Exception => e
-					self.first_name = ''
-					self.last_name = ''
+			rescue Exception => e
+				self.first_name = ''
+				self.last_name = ''
 			end
 		end
+		if plan_id.present?
+			subscribe(plan_id)
+		else
+			subscribe(1)
+		end
+	end
 
-			self.subscriber = Subscriber.create
-			self.subscriber.plans << Plan.first
+	def subscribe(plan_id)
+		self.subscriber = Subscriber.create if self.subscriber.nil?
+		self.subscriber.plans << Plan.find(plan_id) if plan_id == 1
+		if plan_id != 1 and paypal_customer_token.present?
+			subscription = Subscription.new(
+				paypal_customer_token: paypal_customer_token, 
+				paypal_payment_token: paypal_payment_token)
+			subscription.plan = Plan.find(plan_id)
+			subscription.save_with_payment
+			self.subscriber.subscriptions << subscription
+		end
 	end
 
 	def self.authenticate(email, password)
