@@ -8,5 +8,5 @@ docker run -d --net="host" -v $PWD:/var/www/webapp:rw --name firmaexpress-rails-
 #docker run -d --net="host" -v $PWD:/var/www/webapp:rw --name firmaexpress-rails-cron-prod patriciojara/firmaexpress-rails:prod /bin/bash -l -c "service postfix restart; whenever --update-crontab; cron -f"
 #docker run -d --net="host" -v $PWD:/var/www/webapp:rw --name simplecases-rails-prod claudevandort/simplecases-rails:prod /bin/bash -l -c "rake assets:precompile RAILS_ENV=production; whenever --update-crontab"; /usr/sbin/apache2 -D FOREGROUND
 #docker run --net="host" -v $PWD:/var/www/webapp:rw --name simplecases-rails-prod-i -i -t claudevandort/simplecases-rails:prod /bin/bash -l
-#docker run --name simplecases-pg-dev -i -t claudevandort/simplecases-pg:dev /bin/bash
+#docker run --name simplecases-pg-dev -i -t claudevandort/simplecases-pg:dev /bin/bash -l
 #rake assets:clobber
