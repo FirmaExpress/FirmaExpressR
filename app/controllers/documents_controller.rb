@@ -116,6 +116,7 @@ class DocumentsController < ApplicationController
 				else
 					'Sin firmar'
 				end
+				pdf.image open("http://www.cubadebate.cu/wp-content/uploads/2011/11/firma-de-fidel-2-de-noviembre-de-2011.jpg"), height: 250, position: :center
 				pdf.text "#{p.first_name} #{p.last_name} - #{sign_state}", align: :center
 			end
 			pdf.image open("#{Rails.root}/app/assets/images/timbredocumentofirmado.png"), width: 300, height: 202, position: :center
