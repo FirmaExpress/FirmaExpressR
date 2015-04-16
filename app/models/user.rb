@@ -53,7 +53,9 @@ class User < ActiveRecord::Base
 	belongs_to :user_type
 
 	has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "uploads/user.jpg"
-	validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+	validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+	has_attached_file :sign_image, default_url: "uploads/sin-firma.jpg"
+	validates_attachment_content_type :sign_image, content_type: /\Aimage\/.*\Z/
 
 	#attr_accessor :password, :password_confirmation, :current_password
 	attr_accessor :invite_code

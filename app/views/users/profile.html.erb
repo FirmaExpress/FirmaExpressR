@@ -85,6 +85,14 @@
 		<span>Plan: <%= current_user.subscriber.plans.last.name %></span>
 	</p>
 	<br>
+	<h5>Firma</h5>
+	<p>Suba una imagen de su firma.</p>
+	<%= form_tag 'users/sign_image', multipart: true do |f| %>
+		<%= file_field_tag :sign_image, required: 'required' %>
+		<img src="<%= root_url + current_user.sign_image.url %>" height=100 />
+		<%= submit_tag "Subir", { id: 'submit' } %>
+	<% end %>
+	<br>
 	<h5>Documentos</h5>
 	<p>Máximo: <%= current_user.subscriber.plans.last.documents %></p>
 	<p>Nº de Documentos: <%= Participant.where(user: current_user, role_id: 1).count %></p>

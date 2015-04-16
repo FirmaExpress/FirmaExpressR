@@ -19,6 +19,11 @@ class UsersController < ApplicationController
 		redirect_to user_root_url
 	end
 
+	def sign_image
+		current_user.update(sign_image: params[:sign_image])
+		redirect_to user_root_url
+	end
+
 	def rut
 		rut = params[:rut].split('-')[0]
 		dv = params[:rut].split('-')[1].upcase

@@ -100,7 +100,7 @@ class DocumentsController < ApplicationController
 		participants = Document.joins('INNER JOIN "participants" ON "participants"."document_id" = "documents"."id" 
 				INNER JOIN "users" ON "users"."id" = "participants"."user_id" 
 				INNER JOIN "roles" ON "roles"."id" = "participants"."role_id" 
-				WHERE ("documents"."id" = ' + document.id.to_s + ')').select('"documents".*, "participants".*, "users".*, "roles".name as role')
+				WHERE ("documents"."id" = ' + document.id.to_s + ')').select('"documents".*, "participants".*, "users".id as uid, "users".*, "roles".name as role')
 		if document.to_sign == 0
 			document.agreed_at = Time.now
 			document.save
@@ -111,13 +111,10 @@ class DocumentsController < ApplicationController
 			pdf.text "folio: #{document.id}"#, align: :center
 			pdf.text "#{document.name}", align: :center, size: 20, styles: [:bold]
 			participants.each do |p|
-				sign_state = if participant.signed
-					'Firmado'
-				else
-					'Sin firmar'
-				end
-				pdf.image open("http://www.cubadebate.cu/wp-content/uploads/2011/11/firma-de-fidel-2-de-noviembre-de-2011.jpg"), height: 150, position: :center
-				pdf.text "#{p.first_name} #{p.last_name} - #{p.id_number}", align: :center
+				pdf.image open(root_url + User.find(p.uid).sign_image.url), height: 100, margin: 20, position: :center
+				pdf.text " "
+				pdf.text "#{p.first_name} #{p.last_name}", align: :center
+				pdf.text "#{p.id_number}", align: :center
 			end
 			pdf.image open("#{Rails.root}/app/assets/images/timbredocumentofirmado.png"), width: 300, height: 202, position: :center
 			pdf.image open("http://chart.apis.google.com/chart?chs=200x200&cht=qr&chl=http://#{request.host}/check_document/#{document.id}&choe=ISO-8859-1"), position: :center
