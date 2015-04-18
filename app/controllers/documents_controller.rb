@@ -107,6 +107,36 @@ class DocumentsController < ApplicationController
 			participants.each do |participant|
 				DocumentMailer.everybody_signed(document, participant).deliver
 			end
+			filename = "#{Rails.root}/public/#{document.path}"
+			pdf = Prawn::Document.new(template: filename)
+			pdf.go_to_page(pdf.page_count)
+			participants.each_with_index do |p, i|
+				extra = if p == participants.last and participants.count % 2 != 0
+					150
+				else
+					0
+				end
+				pdf.bounding_box([pdf.bounds.left + 50 +(210*i) + extra, pdf.bounds.bottom + 275], width: 200, margin: 20) {
+					pdf.image open(root_url + User.find(p.uid).sign_image.url), height: 100, margin: 20, position: :center
+					pdf.stroke do
+						pdf.horizontal_rule
+					end
+					pdf.text " "
+					pdf.text "#{p.first_name} #{p.last_name}", align: :center
+					pdf.text "#{p.id_number}", align: :center
+				}
+			end
+			pdf.bounding_box([pdf.bounds.left + 50 + 150 , pdf.bounds.bottom + 125], width: 100, margin: 20) {
+				pdf.image open("app/assets/images/timbredocumentofirmado.png"), height: 100, position: :center
+			}
+			pdf.bounding_box([pdf.bounds.left + 50 + 250 , pdf.bounds.bottom + 125], width: 100, margin: 20) {
+				pdf.image open("http://chart.apis.google.com/chart?chs=200x200&cht=qr&chl=http://#{request.host}/check_document/#{document.id}&choe=ISO-8859-1"), height: 100, position: :center
+			}
+			pdf.bounding_box([pdf.bounds.left + 50 + 100, pdf.bounds.bottom + 20], width: 300, margin: 20) {
+				pdf.text "Sellado: #{document.agreed_at}", align: :center
+			}
+			pdf.render_file "#{Rails.root}/public/#{document.path}_signed"
+=begin
 			pdf = Prawn::Document.new
 			pdf.text "folio: #{document.id}"#, align: :center
 			pdf.text "#{document.name}", align: :center, size: 20, styles: [:bold]
@@ -123,6 +153,7 @@ class DocumentsController < ApplicationController
 			pdf.render_file "#{Rails.root}/public/#{document.path}_sign"
 			options = "-q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite"
 			system "gs #{options} -sOutputFile='#{Rails.root}/public/#{document.path}_signed' '#{Rails.root}/public/#{document.path}' '#{Rails.root}/public/#{document.path}_sign'"
+=end
 		else
 			DocumentMailer.signed_by(owner, signer, document).deliver
 		end

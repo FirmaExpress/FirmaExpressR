@@ -1,8 +1,8 @@
 FROM ubuntu:12.04
-ENV REFRESHED_AT 2015-15-04 15:52
+ENV REFRESHED_AT 2015-17-04 11:58
 
 RUN apt-get update
-RUN apt-get install -y python-software-properties software-properties-common gnome-schedule postfix ghostscript
+RUN apt-get install -y python-software-properties software-properties-common gnome-schedule postfix
 RUN apt-add-repository ppa:chris-lea/node.js
 RUN apt-get update
 RUN apt-get install -y curl nano nodejs build-essential libcurl4-openssl-dev

@@ -9,6 +9,7 @@
 
 # Ignore uploaded user files
 /public/uploads/users
+/public/system
 
 # Ignore the default SQLite database.
 /db/*.sqlite3

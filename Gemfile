@@ -42,7 +42,7 @@ gem 'devise'
 gem "paperclip", "~> 4.1"
 #gem 'paperclip', github: 'thoughtbot/paperclip'
 
-gem 'prawn'
+gem 'prawn','1.0.0.rc1'
 
 #gem 'open-uri'
 #gem 'openssl'

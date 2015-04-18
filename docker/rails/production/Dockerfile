@@ -1,8 +1,8 @@
 FROM ubuntu:12.04
-ENV REFRESHED_AT 2015-15-04 15:52
+ENV REFRESHED_AT 2015-18-04 10:49
 
 RUN apt-get update
-RUN apt-get install -y python-software-properties software-properties-common gnome-schedule postfix ghostscript
+RUN apt-get install -y python-software-properties software-properties-common gnome-schedule postfix
 RUN apt-add-repository ppa:chris-lea/node.js
 RUN apt-get update
 RUN apt-get install -y curl nano nodejs build-essential libcurl4-openssl-dev
@@ -37,7 +37,7 @@ RUN echo "</IfModule>" >> /etc/apache2/apache2.conf
 
 RUN rm -R /var/www/*
 RUN a2enmod rewrite
-COPY ssl/firmaexpress.com.conf /etc/apache2/sites-available/firmaexpress.com.conf
+COPY firmaexpress.com.conf /etc/apache2/sites-available/firmaexpress.com.conf
 COPY ssl/myserver.key /etc/apache2/ssl/myserver.key
 COPY ssl/firmaexpress_com.crt /etc/apache2/ssl/firmaexpress_com.crt
 COPY ssl/firmaexpress_com.ca-bundle /etc/apache2/ssl/firmaexpress_com.ca-bundle
