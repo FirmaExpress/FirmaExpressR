@@ -112,8 +112,8 @@ class User < ActiveRecord::Base
 			begin
 				#full_name = sii_page.css('html body center')[1].css('table')[0].css('tr')[0].css('td')[1].css('font').text.strip.titleize
 				full_name = JSON.parse(open("https://siichile.herokuapp.com/consulta?rut=#{rut}-#{dv}").read())['razon_social']
-				self.first_name = full_name.match(/^([^ ]*\ [^ ]*)\ (.*)$/)[1]
-				self.last_name = full_name.match(/^([^ ]*\ [^ ]*)\ (.*)$/)[2]
+				self.first_name = full_name.match(/^([^ ]*\ [^ ]*)\ (.*)$/)[1].titleize
+				self.last_name = full_name.match(/^([^ ]*\ [^ ]*)\ (.*)$/)[2].titleize
 			rescue Exception => e
 				self.first_name = ''
 				self.last_name = ''
